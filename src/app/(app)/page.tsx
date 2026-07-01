@@ -215,7 +215,7 @@ export default async function HomePage() {
                   “
                 </span>
                 <p className="text-xl md:text-2xl lg:text-3xl font-serif italic text-petrol-100 dark:text-neutral-100 leading-relaxed relative z-10">
-                  "At SDCI, we believe that sustainable development is not a distant ideal, but a series of deliberate, evidence-informed decisions. By bridging the gap between scientific research and local realities, we empower communities and guide policy towards lasting, structural impact."
+                  "Every statistic tells a story. Every policy affects a life. Our responsibility is to ensure neither is ignored."
                 </p>
               </div>
               <div className="pt-4 border-t border-neutral-250/20 dark:border-petrol-850/60 max-w-xs">
