@@ -139,7 +139,7 @@ export default async function PodcastDetailPage({ params }: PodcastDetailPagePro
                 <div className="bg-red-50/50 dark:bg-red-950/10 border border-red-200/50 dark:border-red-900/40 p-6 rounded-none flex flex-col sm:flex-row items-center justify-between gap-4 mt-8">
                   <div className="space-y-1 text-left">
                     <h4 className="text-xs font-bold font-sans text-red-700 dark:text-red-400 uppercase tracking-wider">Watch this conversation</h4>
-                    <p className="text-xs text-neutral-600 dark:text-neutral-450 leading-normal">
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-normal">
                       Watch the complete video recording of this podcast episode on YouTube.
                     </p>
                   </div>

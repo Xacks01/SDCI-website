@@ -141,7 +141,7 @@ export default function ProgrammesPage() {
       {/* 1. Page Header (Hero style) */}
       <section className="relative bg-petrol-50 dark:bg-petrol-950/20 text-petrol-950 dark:text-white py-24 px-6 text-center overflow-hidden border-b border-neutral-200 dark:border-petrol-900 transition-colors duration-300">
         <div className="relative max-w-4xl mx-auto space-y-4 z-10">
-          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-850 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-405 bg-transparent w-fit mx-auto font-sans">
+          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-850 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit mx-auto font-sans">
             OUR PROGRAMMES
           </span>
           <h1 className="text-4xl md:text-6xl font-bold font-serif tracking-tight text-petrol-950 dark:text-white">
@@ -273,7 +273,7 @@ export default function ProgrammesPage() {
       {/* 4. Commission Us Form section */}
       <section id="commission" className="bg-white dark:bg-transparent py-24 px-6 transition-colors duration-300">
         <div className="max-w-3xl mx-auto text-center space-y-6 mb-16">
-          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-450 bg-transparent w-fit mx-auto">
+          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit mx-auto">
             Commission us
           </span>
           <h2 className="text-3xl md:text-5xl font-bold font-serif text-petrol-950 dark:text-white">Request a Consultation</h2>

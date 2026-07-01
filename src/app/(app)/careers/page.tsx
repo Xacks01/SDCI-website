@@ -28,13 +28,13 @@ export default async function CareersPage() {
       {/* 1. Page Header */}
       <section className="relative bg-petrol-50 dark:bg-petrol-950/20 text-petrol-950 dark:text-white py-20 px-6 text-center overflow-hidden border-b border-neutral-200 dark:border-petrol-900 transition-colors duration-300">
         <div className="relative max-w-4xl mx-auto space-y-4 z-10">
-          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-850 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-450 bg-transparent w-fit mx-auto font-sans">
+          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-850 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit mx-auto font-sans">
             JOIN OUR TEAM
           </span>
           <h1 className="text-4xl md:text-5xl font-bold font-serif tracking-tight text-petrol-950 dark:text-white">
             Careers at SDCI
           </h1>
-          <p className="text-neutral-600 dark:text-neutral-350 text-sm md:text-base max-w-xl mx-auto leading-relaxed font-sans">
+          <p className="text-neutral-600 dark:text-neutral-300 text-sm md:text-base max-w-xl mx-auto leading-relaxed font-sans">
             We are built by people who believe better decisions come from better evidence. If that is you &mdash; researcher, writer, designer, analyst, content maker, or convener &mdash; join us.
           </p>
         </div>
@@ -161,14 +161,14 @@ export default async function CareersPage() {
       {/* 4. Internships (Lean & Inclusive) */}
       <section className="bg-neutral-50/50 dark:bg-petrol-900/10 py-16 px-6 border-b border-neutral-200 dark:border-petrol-900/60 transition-colors duration-300">
         <div className="max-w-4xl mx-auto text-center space-y-4">
-          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-455 bg-transparent w-fit mx-auto font-sans">
+          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit mx-auto font-sans">
             EARLY CAREER
           </span>
           <h2 className="text-3xl font-bold font-serif text-petrol-950 dark:text-white">Paid Internships</h2>
           <p className="text-neutral-600 dark:text-neutral-350 text-sm leading-relaxed max-w-xl mx-auto font-sans">
             We offer 6-month, structured paid internships for early-career professionals across research, design, communications, and multimedia production. You will be paired with a mentor and work directly on active public campaigns.
           </p>
-          <div className="pt-2 text-xs text-neutral-500 dark:text-neutral-450 font-sans">
+          <div className="pt-2 text-xs text-neutral-500 dark:text-neutral-400 font-sans">
             To apply, select your primary area of interest in the talent pool form below.
           </div>
         </div>
@@ -177,7 +177,7 @@ export default async function CareersPage() {
       {/* 5. Submit Your CV (Talent Pool) */}
       <section id="talent-pool" className="py-20 px-6 bg-white dark:bg-transparent transition-colors duration-300">
         <div className="max-w-2xl mx-auto text-center space-y-3 mb-10">
-          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-455 bg-transparent w-fit mx-auto">
+          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit mx-auto">
             TALENT POOL
           </span>
           <h2 className="text-3xl font-bold font-serif text-petrol-950 dark:text-white">Submit your CV</h2>

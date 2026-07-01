@@ -18,6 +18,7 @@ export const PodcastPlayer: React.FC<PodcastPlayerProps> = ({
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.8);
   const [isMuted, setIsMuted] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -29,19 +30,52 @@ export const PodcastPlayer: React.FC<PodcastPlayerProps> = ({
     if (!audio) return;
 
     const onTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const onDurationChange = () => setDuration(audio.duration);
+    const onDurationChange = () => {
+      if (audio.duration && !isNaN(audio.duration)) {
+        setDuration(audio.duration);
+      }
+    };
+    const onLoadedMetadata = () => {
+      if (audio.duration && !isNaN(audio.duration)) {
+        setDuration(audio.duration);
+      }
+    };
     const onEnded = () => setIsPlaying(false);
 
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("durationchange", onDurationChange);
+    audio.addEventListener("loadedmetadata", onLoadedMetadata);
     audio.addEventListener("ended", onEnded);
+
+    // Check if metadata is already loaded
+    if (audio.duration && !isNaN(audio.duration)) {
+      setDuration(audio.duration);
+    }
 
     return () => {
       audio.removeEventListener("timeupdate", onTimeUpdate);
       audio.removeEventListener("durationchange", onDurationChange);
+      audio.removeEventListener("loadedmetadata", onLoadedMetadata);
       audio.removeEventListener("ended", onEnded);
     };
-  }, []);
+  }, [audioUrl]);
+
+  // Smoother progress bar movement by polling currentTime when playing
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isPlaying) {
+      interval = setInterval(() => {
+        if (audioRef.current) {
+          setCurrentTime(audioRef.current.currentTime);
+          const currentDur = audioRef.current.duration;
+          if (currentDur && !isNaN(currentDur) && duration !== currentDur) {
+            setDuration(currentDur);
+          }
+        }
+      }, 150);
+    }
+    return () => clearInterval(interval);
+  }, [isPlaying, duration]);
 
   // Handle play/pause action
   const togglePlay = () => {
@@ -54,6 +88,10 @@ export const PodcastPlayer: React.FC<PodcastPlayerProps> = ({
     } else {
       audio.play().catch((err) => console.log("Play failed:", err));
       setIsPlaying(true);
+      // Immediately set duration if available
+      if (audio.duration && !isNaN(audio.duration)) {
+        setDuration(audio.duration);
+      }
     }
   };
 
@@ -65,34 +103,71 @@ export const PodcastPlayer: React.FC<PodcastPlayerProps> = ({
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  // Handle progress bar seek clicking
-  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  // Handle progress bar seek and drag scrubbing
+  const handleProgressMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const audio = audioRef.current;
     const progress = progressRef.current;
-    if (!audio || !progress || duration === 0) return;
+    if (!audio || !progress) return;
 
-    const rect = progress.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const width = rect.width;
-    const percentage = clickX / width;
-    
-    audio.currentTime = percentage * duration;
+    const activeDuration = audio.duration || duration;
+    if (!activeDuration || isNaN(activeDuration)) return;
+
+    setIsDragging(true);
+
+    const updateTimeFromPosition = (clientX: number) => {
+      const rect = progress.getBoundingClientRect();
+      const clickX = clientX - rect.left;
+      const width = rect.width;
+      const percentage = Math.max(0, Math.min(1, clickX / width));
+      audio.currentTime = percentage * activeDuration;
+      setCurrentTime(audio.currentTime);
+    };
+
+    updateTimeFromPosition(e.clientX);
+
+    const handleMouseMove = (moveEvent: MouseEvent) => {
+      updateTimeFromPosition(moveEvent.clientX);
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
   };
 
-  // Handle volume bar clicking
-  const handleVolumeClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  // Handle volume bar seek and drag
+  const handleVolumeMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const audio = audioRef.current;
     const volumeBar = volumeRef.current;
     if (!audio || !volumeBar) return;
 
-    const rect = volumeBar.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const width = rect.width;
-    const percentage = Math.max(0, Math.min(1, clickX / width));
+    const updateVolumeFromPosition = (clientX: number) => {
+      const rect = volumeBar.getBoundingClientRect();
+      const clickX = clientX - rect.left;
+      const width = rect.width;
+      const percentage = Math.max(0, Math.min(1, clickX / width));
+      audio.volume = percentage;
+      setVolume(percentage);
+      setIsMuted(percentage === 0);
+    };
 
-    audio.volume = percentage;
-    setVolume(percentage);
-    setIsMuted(percentage === 0);
+    updateVolumeFromPosition(e.clientX);
+
+    const handleMouseMove = (moveEvent: MouseEvent) => {
+      updateVolumeFromPosition(moveEvent.clientX);
+    };
+
+    const handleMouseUp = () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
   };
 
   // Toggle Mute
@@ -109,7 +184,8 @@ export const PodcastPlayer: React.FC<PodcastPlayerProps> = ({
     }
   };
 
-  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
+  const activeDuration = duration || (audioRef.current ? audioRef.current.duration : 0) || 0;
+  const progressPercentage = activeDuration > 0 ? (currentTime / activeDuration) * 100 : 0;
   const currentVolumePercentage = isMuted ? 0 : volume * 100;
 
   return (
@@ -151,8 +227,8 @@ export const PodcastPlayer: React.FC<PodcastPlayerProps> = ({
         </span>
         <div
           ref={progressRef}
-          onClick={handleProgressClick}
-          className="flex-grow h-1 bg-neutral-200 dark:bg-petrol-800 relative cursor-pointer group py-1"
+          onMouseDown={handleProgressMouseDown}
+          className="flex-grow h-1 bg-neutral-200 dark:bg-petrol-800 relative cursor-pointer group py-1 select-none"
         >
           <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-1 bg-neutral-200 dark:bg-petrol-800">
             {/* Played timeline */}
@@ -162,7 +238,7 @@ export const PodcastPlayer: React.FC<PodcastPlayerProps> = ({
             />
             {/* Knob */}
             <div
-              className="absolute top-1/2 w-3 h-3 bg-neutral-900 dark:bg-white border border-white dark:border-petrol-900 rounded-full -translate-x-1/2 -translate-y-1/2 shadow-xs opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+              className={`absolute top-1/2 w-3 h-3 bg-neutral-900 dark:bg-white border border-white dark:border-petrol-900 rounded-full -translate-x-1/2 -translate-y-1/2 shadow-xs transition-opacity duration-150 ${isDragging ? 'opacity-100 scale-110' : 'opacity-0 group-hover:opacity-100'}`}
               style={{ left: `${progressPercentage}%` }}
             />
           </div>
@@ -191,8 +267,8 @@ export const PodcastPlayer: React.FC<PodcastPlayerProps> = ({
         </button>
         <div
           ref={volumeRef}
-          onClick={handleVolumeClick}
-          className="w-16 h-1 bg-neutral-200 dark:bg-petrol-800 relative cursor-pointer py-1 group"
+          onMouseDown={handleVolumeMouseDown}
+          className="w-16 h-1 bg-neutral-200 dark:bg-petrol-800 relative cursor-pointer py-1 group select-none"
         >
           <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-1 bg-neutral-200 dark:bg-petrol-800">
             <div

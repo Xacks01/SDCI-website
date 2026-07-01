@@ -29,7 +29,11 @@ export const Header: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0 animate-fade-in">
-            <img src="/assets/logo.png" alt="SDCI Logo" className="h-10 w-auto dark:brightness-110" />
+            <img 
+              src={theme === "dark" ? "/assets/sdci-logo-variant.png" : "/assets/logo.png"} 
+              alt="SDCI Logo" 
+              className="h-10 w-auto" 
+            />
           </Link>
 
           {/* Desktop Navigation */}

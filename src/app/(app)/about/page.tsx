@@ -193,7 +193,7 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
             ABOUT SDCI
           </span>
           <h1 className="text-4xl md:text-6xl font-bold font-serif tracking-tight text-petrol-950 dark:text-white">About Us</h1>
-          <div className="flex items-center justify-center space-x-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-450">
+          <div className="flex items-center justify-center space-x-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
             <Link href="/" className="hover:text-petrol-950 dark:hover:text-white transition-colors">Home</Link>
             <span>/</span>
             <span className="text-petrol-950 dark:text-white font-bold">About Us</span>
