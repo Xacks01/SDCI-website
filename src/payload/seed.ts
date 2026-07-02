@@ -205,7 +205,7 @@ export async function seed(payload: Payload) {
   const ceo = await payload.create({
     collection: "team",
     data: {
-      name: "Prof. [CEO Name]",
+      name: "Sulaiman Ahmad Fanty",
       role: "Chief Executive Officer",
       department: "exec",
       order: 2,

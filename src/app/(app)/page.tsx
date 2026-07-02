@@ -70,7 +70,7 @@ export default async function HomePage() {
     (t.role && t.role.toLowerCase().includes("ceo")) || 
     (t.role && t.role.toLowerCase().includes("chief executive officer"))
   );
-  const ceoName = ceoMember ? ceoMember.name : "Prof. [CEO Name]";
+  const ceoName = ceoMember ? ceoMember.name : "Sulaiman Ahmad Fanty";
   const ceoRole = ceoMember ? ceoMember.role : "Chief Executive Officer";
 
   const guestsList =
