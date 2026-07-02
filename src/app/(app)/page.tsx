@@ -66,9 +66,8 @@ export default async function HomePage() {
 
   const team = teamResult.docs;
   const ceoMember = team.find((t: any) => 
-    t.department === "exec" || 
-    (t.role && t.role.toLowerCase().includes("ceo")) || 
-    (t.role && t.role.toLowerCase().includes("chief executive officer"))
+    (t.role && t.role.toLowerCase().includes("chief executive officer")) ||
+    (t.role && t.role.toLowerCase().includes("ceo"))
   );
   const ceoName = ceoMember ? ceoMember.name : "Sulaiman Ahmad Fanty";
   const ceoRole = ceoMember ? ceoMember.role : "Chief Executive Officer";
