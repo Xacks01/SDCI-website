@@ -55,7 +55,7 @@ export default buildConfig({
         pool: {
           connectionString: databaseUri,
         },
-        push: true,
+        push: false,
       })
     : sqliteAdapter({
         client: {
