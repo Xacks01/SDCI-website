@@ -1,11 +1,15 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Tag } from "@/components/ui/Tag";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { CommissionForm } from "@/components/shared/CommissionForm";
+import { ComingSoonModal } from "@/components/shared/ComingSoonModal";
 import Link from "next/link";
 
 export default function ProgrammesPage() {
+  const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
   const flagshipProgrammes = [
     {
       title: "SDCI Policy Fellowship",
@@ -221,11 +225,13 @@ export default function ProgrammesPage() {
 
               {/* Action Button */}
               <div className="pt-8">
-                <Link href={prog.ctaUrl}>
-                  <Button variant="dark-green" className="w-full text-xs uppercase tracking-wider py-3.5">
-                    {prog.ctaLabel}
-                  </Button>
-                </Link>
+                <Button 
+                  variant="dark-green" 
+                  className="w-full text-xs uppercase tracking-wider py-3.5"
+                  onClick={() => setIsComingSoonOpen(true)}
+                >
+                  {prog.ctaLabel}
+                </Button>
               </div>
             </Card>
           ))}
@@ -287,10 +293,18 @@ export default function ProgrammesPage() {
         <div className="max-w-xl mx-auto text-center pt-10 text-sm text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
           <p className="font-semibold text-petrol-950 dark:text-white text-base">Prefer direct email?</p>
           <p className="mt-1">
-            Send your brief to <span className="font-bold text-green-800 dark:text-green-400">partnerships@sdci.org.ng</span> with your goal, the deliverables you want, and your timeline, and we will come back to you with a scope.
+            Send your brief to <span className="font-bold text-green-800 dark:text-green-400">partnerships@sdcinitiative.com</span> with your goal, the deliverables you want, and your timeline, and we will come back to you with a scope.
           </p>
         </div>
       </section>
+
+      {/* Coming Soon Modal */}
+      <ComingSoonModal
+        isOpen={isComingSoonOpen}
+        onClose={() => setIsComingSoonOpen(false)}
+        title="Programme Coming Soon"
+        description="We are currently laying the administrative, operational, and funding frameworks for our flagship initiatives. Subscribe to our newsletter at the bottom of the page to receive immediate updates when applications open."
+      />
     </div>
   );
 }

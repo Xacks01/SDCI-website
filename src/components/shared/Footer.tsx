@@ -40,7 +40,6 @@ export const Footer: React.FC = () => {
         { label: "The Three Roles", url: "/about#three-roles" },
         { label: "Leadership Team", url: "/about#leadership" },
         { label: "Independence & Funding", url: "/about#independence" },
-        { label: "Annual Reports", url: "/about#annual-reports" },
         { label: "Contact Us", url: "/contact" },
       ],
     },

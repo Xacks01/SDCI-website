@@ -30,7 +30,7 @@ export const Header: React.FC = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0 animate-fade-in">
             <img 
-              src={theme === "dark" ? "/assets/sdci-logo-variant.png" : "/assets/logo.png"} 
+              src={theme === "dark" ? "/assets/SDCI-wht.png" : "/assets/logo.png"} 
               alt="SDCI Logo" 
               className="h-10 w-auto" 
             />

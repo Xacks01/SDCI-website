@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Input, Textarea } from "@/components/ui/Input";
 import { Accordion } from "@/components/ui/Accordion";
+import { ComingSoonModal } from "@/components/shared/ComingSoonModal";
 
 interface GetInvolvedClientProps {
   tiers: any[];
@@ -13,6 +14,7 @@ interface GetInvolvedClientProps {
 
 export const GetInvolvedClient: React.FC<GetInvolvedClientProps> = ({ tiers }) => {
   const [currency, setCurrency] = useState<"NGN" | "USD">("NGN");
+  const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
 
   // Donation state
   const [donateAmount, setDonateAmount] = useState("");
@@ -40,22 +42,7 @@ export const GetInvolvedClient: React.FC<GetInvolvedClientProps> = ({ tiers }) =
   };
 
   const handleCheckout = (tierName: string, price: number) => {
-    if (price === 0) {
-      setPaymentMsg(`Thank you! You have joined the ${tierName} tier for free.`);
-      return;
-    }
-
-    setPaymentMsg(`Opening Paystack checkout for ${tierName} tier...`);
-    
-    // Trigger Sandbox Paystack Checkout
-    try {
-      initializePaystack("member@example.com", price, (response) => {
-        setPaymentMsg(`Payment successful! Reference: ${response.reference}. You are now subscribed to ${tierName}.`);
-      });
-    } catch (err) {
-      console.error(err);
-      setPaymentMsg("Checkout error. Ensure scripts are fully loaded.");
-    }
+    setIsComingSoonOpen(true);
   };
 
   const handleDonate = (e: React.FormEvent) => {
@@ -187,7 +174,7 @@ export const GetInvolvedClient: React.FC<GetInvolvedClientProps> = ({ tiers }) =
               </ul>
             </div>
             <div className="pt-4">
-              <a href="mailto:partnerships@sdci.org.ng">
+              <a href="mailto:partnerships@sdcinitiative.com">
                 <Button variant="primary">Start a conversation</Button>
               </a>
             </div>
@@ -196,7 +183,7 @@ export const GetInvolvedClient: React.FC<GetInvolvedClientProps> = ({ tiers }) =
           <div className="bg-petrol-50/50 dark:bg-petrol-900/10 p-8 rounded-none border border-neutral-200 dark:border-petrol-800 space-y-6">
             <h3 className="text-lg font-bold font-serif text-petrol-950 dark:text-white">Partnership Inquiries</h3>
             <p className="text-sm text-neutral-700 dark:text-neutral-400 leading-relaxed">
-              Send your request details to our Partnerships & Funding team at <span className="font-bold text-green-800 dark:text-green-500">partnerships@sdci.org.ng</span> and we will respond with timelines and details.
+              Send your request details to our Partnerships & Funding team at <span className="font-bold text-green-800 dark:text-green-500">partnerships@sdcinitiative.com</span> and we will respond with timelines and details.
             </p>
           </div>
         </section>
@@ -228,6 +215,14 @@ export const GetInvolvedClient: React.FC<GetInvolvedClientProps> = ({ tiers }) =
 
 
       </div>
+
+      {/* Coming Soon Modal */}
+      <ComingSoonModal
+        isOpen={isComingSoonOpen}
+        onClose={() => setIsComingSoonOpen(false)}
+        title="Membership Coming Soon"
+        description="Our membership subscription portal and member network infrastructure are currently under active development. Subscribe to our newsletter at the bottom of the page to be notified when membership tiers go live."
+      />
     </>
   );
 };

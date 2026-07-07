@@ -28,6 +28,8 @@ export const Team: CollectionConfig = {
         { label: "Partnerships & Funding", value: "partnerships" },
         { label: "Stakeholder Engagement & Programs", value: "stakeholder" },
         { label: "HR & Operations", value: "hr-ops" },
+        { label: "Legal & Compliance", value: "legal" },
+        { label: "Media Production", value: "media-production" },
       ],
     },
     {

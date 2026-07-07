@@ -42,7 +42,7 @@ export default buildConfig({
     autoLogin:
       process.env.NODE_ENV === "development"
         ? {
-            email: "admin@sdci.org.ng",
+            email: "admin@sdcinitiative.com",
             password: "adminpassword",
             prefillOnly: true,
           }

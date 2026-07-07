@@ -7,17 +7,17 @@ export default function ContactPage() {
   const contactDetails = [
     {
       role: "General Enquiries",
-      email: "info@sdci.org.ng",
+      email: "info@sdcinitiative.com",
       desc: "For general questions, comments, or program inquiries.",
     },
     {
       role: "Media Enquiries",
-      email: "media@sdci.org.ng",
+      email: "media@sdcinitiative.com",
       desc: "For journalists looking for comments, research citations, or podcast guest details.",
     },
     {
       role: "Partnerships & Funding",
-      email: "partnerships@sdci.org.ng",
+      email: "partnerships@sdcinitiative.com",
       desc: "For foundations, corporate organizations, and agencies looking to commission work or collaborate.",
     },
   ];

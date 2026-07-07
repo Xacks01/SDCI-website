@@ -96,7 +96,7 @@ PAYLOAD_SECRET=sdci_default_super_secret_key_12345
 
 4. **CMS Admin Panel**:
    Access the editor workspace at [http://localhost:3000/admin](http://localhost:3000/admin).
-   - **Default Dev Login**: `admin@sdci.org.ng`
+   - **Default Dev Login**: `admin@sdcinitiative.com`
    - **Default Dev Password**: `adminpassword`
 
 ---

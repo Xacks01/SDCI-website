@@ -8,6 +8,7 @@ import { Tag } from "@/components/ui/Tag";
 import { HeroSlider } from "@/components/shared/HeroSlider";
 import { Accordion } from "@/components/ui/Accordion";
 import { getMediaUrl } from "@/lib/utils";
+import { FeaturedPodcastPlayer } from "@/components/shared/FeaturedPodcastPlayer";
 import { Users, Shield, Share2, FileText, Mail, Heart, Info, Scale, Coins, HeartHandshake, GraduationCap, Leaf } from "lucide-react";
 
 export const revalidate = 60; // Revalidate every 60 seconds
@@ -55,7 +56,50 @@ export default async function HomePage() {
 
   const featuredPub = publicationsResult.docs[0];
   const featuredPodcast = podcastResult.docs[0];
-  const upcomingEvents = eventsResult.docs;
+  
+  const mockEvents = [
+    {
+      id: "launch-event",
+      title: "SDCI Launch & National Policy Dialogue",
+      type: "Launch",
+      format: "Conference",
+      date: "",
+      dateDisplay: "2026",
+      location: "Bauchi, Nigeria & Online",
+      image: { url: "/assets/event-launch.jpg" },
+      description: "Marking our official institutional launch. Join policy makers, civil society leaders, and development experts to chart a data-driven path for sub-national growth and transparency.",
+      registrationURL: "/get-involved#partner",
+      isUpcoming: true,
+    },
+    {
+      id: "fiscal-forum",
+      title: "Sub-national Revenue & Fiscal Forum",
+      type: "Dialogue",
+      format: "Roundtable",
+      date: "",
+      dateDisplay: "2026",
+      location: "Virtual / Zoom",
+      image: { url: "/assets/event-fiscal.jpg" },
+      description: "An expert panel discussing state-level revenue mobilization strategies, municipal budget transparency, and local economic resilience planning.",
+      registrationURL: "/get-involved#partner",
+      isUpcoming: true,
+    },
+    {
+      id: "annual-summit",
+      title: "Annual Sustainable Development Summit",
+      type: "Summit",
+      format: "Summit",
+      date: "",
+      dateDisplay: "2027",
+      location: "Abuja, Nigeria",
+      image: { url: "/assets/event-summit.jpg" },
+      description: "Our flagship annual convening bringing together national and international stakeholders to review policy alignment, accountability metrics, and local impact.",
+      registrationURL: "/get-involved#partner",
+      isUpcoming: true,
+    }
+  ];
+
+  const upcomingEvents: any[] = mockEvents;
   const faqs = faqsResult.docs;
 
   const faqItems = faqs.map((faq: any) => ({
@@ -249,9 +293,9 @@ export default async function HomePage() {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Card 1: Governance & accountability */}
-            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-green-600/30 transition-all duration-300 group">
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400">
+                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">
                   <Scale className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold font-serif text-petrol-950 dark:text-white">
@@ -266,16 +310,16 @@ export default async function HomePage() {
                   Aligned SDGs
                 </span>
                 <div className="flex flex-wrap gap-2.5">
-                  <img src="/assets/SDGs/16.png" alt="SDG 16" className="h-12 w-auto dark:brightness-90" />
-                  <img src="/assets/SDGs/17.png" alt="SDG 17" className="h-12 w-auto dark:brightness-90" />
+                  <img src="/assets/SDGs/16.png" alt="SDG 16" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/assets/SDGs/17.png" alt="SDG 17" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
                 </div>
               </div>
             </div>
 
             {/* Card 2: Public finance & the economy */}
-            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-green-600/30 transition-all duration-300 group">
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400">
+                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">
                   <Coins className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold font-serif text-petrol-950 dark:text-white">
@@ -290,17 +334,17 @@ export default async function HomePage() {
                   Aligned SDGs
                 </span>
                 <div className="flex flex-wrap gap-2.5">
-                  <img src="/assets/SDGs/8.png" alt="SDG 8" className="h-12 w-auto dark:brightness-90" />
-                  <img src="/assets/SDGs/1.png" alt="SDG 1" className="h-12 w-auto dark:brightness-90" />
-                  <img src="/assets/SDGs/9.png" alt="SDG 9" className="h-12 w-auto dark:brightness-90" />
+                  <img src="/assets/SDGs/8.png" alt="SDG 8" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/assets/SDGs/1.png" alt="SDG 1" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/assets/SDGs/9.png" alt="SDG 9" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
                 </div>
               </div>
             </div>
 
             {/* Card 3: Social development & inequality */}
-            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-green-600/30 transition-all duration-300 group">
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400">
+                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">
                   <HeartHandshake className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold font-serif text-petrol-950 dark:text-white">
@@ -315,16 +359,16 @@ export default async function HomePage() {
                   Aligned SDGs
                 </span>
                 <div className="flex flex-wrap gap-2.5">
-                  <img src="/assets/SDGs/10.png" alt="SDG 10" className="h-12 w-auto dark:brightness-90" />
-                  <img src="/assets/SDGs/5.png" alt="SDG 5" className="h-12 w-auto dark:brightness-90" />
+                  <img src="/assets/SDGs/10.png" alt="SDG 10" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/assets/SDGs/5.png" alt="SDG 5" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
                 </div>
               </div>
             </div>
 
             {/* Card 4: Health systems */}
-            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-green-600/30 transition-all duration-300 group">
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400">
+                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">
                   <Heart className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold font-serif text-petrol-950 dark:text-white">
@@ -339,15 +383,15 @@ export default async function HomePage() {
                   Aligned SDGs
                 </span>
                 <div className="flex flex-wrap gap-2.5">
-                  <img src="/assets/SDGs/3.png" alt="SDG 3" className="h-12 w-auto dark:brightness-90" />
+                  <img src="/assets/SDGs/3.png" alt="SDG 3" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
                 </div>
               </div>
             </div>
 
             {/* Card 5: Education systems */}
-            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-green-600/30 transition-all duration-300 group">
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400">
+                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">
                   <GraduationCap className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold font-serif text-petrol-950 dark:text-white">
@@ -362,15 +406,15 @@ export default async function HomePage() {
                   Aligned SDGs
                 </span>
                 <div className="flex flex-wrap gap-2.5">
-                  <img src="/assets/SDGs/4.png" alt="SDG 4" className="h-12 w-auto dark:brightness-90" />
+                  <img src="/assets/SDGs/4.png" alt="SDG 4" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
                 </div>
               </div>
             </div>
 
             {/* Card 6: Climate & natural resources */}
-            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none p-6 md:p-8 flex flex-col justify-between min-h-[320px] shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-green-600/30 transition-all duration-300 group">
               <div className="space-y-4">
-                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400">
+                <div className="w-12 h-12 rounded-none bg-green-50 dark:bg-petrol-900/60 flex items-center justify-center text-green-750 dark:text-green-400 group-hover:scale-110 transition-transform duration-300">
                   <Leaf className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold font-serif text-petrol-950 dark:text-white">
@@ -385,10 +429,10 @@ export default async function HomePage() {
                   Aligned SDGs
                 </span>
                 <div className="flex flex-wrap gap-2.5">
-                  <img src="/assets/SDGs/13.png" alt="SDG 13" className="h-12 w-auto dark:brightness-90" />
-                  <img src="/assets/SDGs/7.png" alt="SDG 7" className="h-12 w-auto dark:brightness-90" />
-                  <img src="/assets/SDGs/6.png" alt="SDG 6" className="h-12 w-auto dark:brightness-90" />
-                  <img src="/assets/SDGs/12.png" alt="SDG 12" className="h-12 w-auto dark:brightness-90" />
+                  <img src="/assets/SDGs/13.png" alt="SDG 13" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/assets/SDGs/7.png" alt="SDG 7" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/assets/SDGs/6.png" alt="SDG 6" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/assets/SDGs/12.png" alt="SDG 12" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
                 </div>
               </div>
             </div>
@@ -406,7 +450,16 @@ export default async function HomePage() {
                 {FORMAT_LABELS[featuredPub.format] || "Featured Publication"}
               </span>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold font-serif tracking-tight leading-[1.15] text-white uppercase">
-                {featuredPub.title}
+                {featuredPub.title.includes(":") ? (
+                  <>
+                    <span>{featuredPub.title.split(":")[0]}</span>
+                    <span className="block text-lg md:text-xl lg:text-2xl font-normal normal-case mt-2 text-petrol-200">
+                      {featuredPub.title.split(":")[1].trim()}
+                    </span>
+                  </>
+                ) : (
+                  featuredPub.title
+                )}
               </h2>
               <p className="text-petrol-100 text-sm md:text-base leading-relaxed">
                 {featuredPub.excerpt}
@@ -427,13 +480,15 @@ export default async function HomePage() {
           </div>
 
           {/* Right half: Publication Cover Image */}
-          <div 
-            className="w-full min-h-[350px] lg:h-full bg-cover bg-center" 
-            style={{ 
-              backgroundImage: `url('${(featuredPub.cover && typeof featuredPub.cover === "object" && featuredPub.cover.url) ? getMediaUrl(featuredPub.cover.url) : "/assets/hero-bg-sdci-1.jpeg"}')` 
-            }}
-            aria-label={featuredPub.title}
-          />
+          <div className="w-full min-h-[350px] lg:h-full overflow-hidden relative group">
+            <div 
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
+              style={{ 
+                backgroundImage: `url('${(featuredPub.cover && typeof featuredPub.cover === "object" && featuredPub.cover.url) ? getMediaUrl(featuredPub.cover.url) : "/assets/thumbnail-trap.png"}')` 
+              }}
+              aria-label={featuredPub.title}
+            />
+          </div>
         </section>
       ) : (
         <section className="w-full py-20 px-6 bg-white dark:bg-petrol-950/20">
@@ -465,51 +520,12 @@ export default async function HomePage() {
               </h2>
             </div>
 
-            {/* Centered Horizontal Card */}
-            <div className="bg-white dark:bg-petrol-950 border dark:border-petrol-900 text-petrol-950 dark:text-neutral-200 flex flex-col md:flex-row items-stretch shadow-xl rounded-none w-full overflow-hidden transition-colors duration-300">
-              {/* Left Edge: Thumbnail */}
-              <div className="w-full md:w-44 h-44 md:h-auto shrink-0 relative bg-neutral-100 dark:bg-petrol-900">
-                <img 
-                  src={coverUrl} 
-                  alt={featuredPodcast.title} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Main Content Area */}
-              <div className="flex-1 p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 text-left">
-                {/* Play Button (Circle Outline) */}
-                <div className="w-16 h-16 border-2 border-petrol-950 dark:border-neutral-300 rounded-full flex items-center justify-center text-petrol-950 dark:text-neutral-200 hover:bg-petrol-950 dark:hover:bg-white dark:hover:text-petrol-950 hover:text-white transition-colors cursor-pointer shrink-0 group/play">
-                  <svg className="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-
-                {/* Text Container */}
-                <div className="flex-grow space-y-3 w-full">
-                  {/* Top Row: Episode Metadata & Duration */}
-                  <div className="flex justify-between items-center text-xs font-bold text-neutral-400 dark:text-neutral-400 uppercase tracking-wider">
-                    <span>Episode {featuredPodcast.number}</span>
-                    <span className="font-semibold text-neutral-500 dark:text-neutral-400 normal-case">{featuredPodcast.duration || "42 min"}</span>
-                  </div>
-
-                  {/* Middle Row: Title */}
-                  <h3 className="text-xl font-bold font-serif text-petrol-950 dark:text-white hover:text-green-800 dark:hover:text-green-400 transition-colors leading-tight">
-                    <Link href={`/media?tab=podcast`}>{featuredPodcast.title}</Link>
-                  </h3>
-
-                  {/* Bottom Row: Guest Line & "See all episodes" Link */}
-                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pt-1">
-                    <p className="text-sm md:text-base text-neutral-700 dark:text-neutral-350 max-w-lg leading-relaxed">
-                      {guestsList ? `With ${guestsList}` : featuredPodcast.summary}
-                    </p>
-                    <Link href="/media?tab=podcast" className="text-sm font-bold text-petrol-950 dark:text-neutral-200 hover:text-green-800 dark:hover:text-green-400 transition-colors underline underline-offset-4 shrink-0 flex items-center gap-1">
-                      See all episodes &rarr;
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Featured Podcast Client Player */}
+            <FeaturedPodcastPlayer
+              featuredPodcast={featuredPodcast}
+              coverUrl={coverUrl}
+              guestsList={guestsList}
+            />
           </div>
         </section>
       ) : (
@@ -541,9 +557,9 @@ export default async function HomePage() {
         {upcomingEvents.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {upcomingEvents.map((evt, index) => {
-              const dateObj = new Date(evt.date);
-              const month = dateObj.toLocaleDateString("en-US", { month: "short" }).toUpperCase();
-              const day = dateObj.toLocaleDateString("en-US", { day: "2-digit" });
+              const dateObj = evt.date ? new Date(evt.date) : null;
+              const month = dateObj && !isNaN(dateObj.getTime()) ? dateObj.toLocaleDateString("en-US", { month: "short" }).toUpperCase() : "";
+              const day = dateObj && !isNaN(dateObj.getTime()) ? dateObj.toLocaleDateString("en-US", { day: "2-digit" }) : "";
               
               const formatLabel = evt.format === "in-person" ? "In-person" : evt.format === "hybrid" ? "Hybrid" : "Online";
               const formatLocation = !evt.location || evt.location.toLowerCase() === "online" ? formatLabel : `${formatLabel} · ${evt.location}`;
@@ -557,13 +573,13 @@ export default async function HomePage() {
                 : "/assets/hero-bg-sdci-3.jpeg";
 
               return (
-                <div key={evt.id} className="flex flex-col bg-white dark:bg-petrol-950/40 border border-neutral-200/80 dark:border-petrol-900 rounded-none overflow-hidden shadow-sm transition-colors duration-300">
+                <div key={evt.id} className="flex flex-col bg-white dark:bg-petrol-950/40 border border-neutral-200/80 dark:border-petrol-900 rounded-none overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-green-600/30 transition-all duration-300 group">
                   {/* Top: Thumbnail */}
-                  <div className="h-44 w-full relative bg-neutral-100 dark:bg-petrol-900 shrink-0">
+                  <div className="h-44 w-full relative bg-neutral-100 dark:bg-petrol-900 shrink-0 overflow-hidden">
                     <img
                       src={imageUrl}
                       alt={evt.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                   {/* Bottom: Date & Content */}
@@ -571,10 +587,10 @@ export default async function HomePage() {
                     {/* Left: Date */}
                     <div className="flex flex-col items-center justify-center border-r border-neutral-200 dark:border-petrol-900 pr-6 mr-6 shrink-0 w-16">
                       <span className="text-[11px] font-bold tracking-wider text-neutral-400 dark:text-neutral-400 uppercase leading-none">
-                        {month}
+                        {evt.dateDisplay ? "YEAR" : month}
                       </span>
                       <span className="text-3xl font-bold font-sans tracking-tight text-neutral-800 dark:text-neutral-200 mt-2 leading-none">
-                        {day}
+                        {evt.dateDisplay || day}
                       </span>
                     </div>
                     {/* Right: Content */}

@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw passports and temporary files
+/Passports - SDCI
+/test_fetch.js
+/assets/Gemini_Generated_Image_*
+/assets/thumbnail-trap.png
+/assets/thumbnails.png
+

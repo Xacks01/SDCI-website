@@ -58,6 +58,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${ibmPlexSans.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/gkl4jfh.css" />

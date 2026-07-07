@@ -215,7 +215,7 @@ export async function seed(payload: Payload) {
   const leadResearch = await payload.create({
     collection: "team",
     data: {
-      name: "Dr. [Lead Researcher]",
+      name: "Muhammad Zakariya Ibrahim",
       role: "Department Lead, Research & Policy Advocacy",
       department: "research-policy",
       order: 3,
@@ -225,7 +225,7 @@ export async function seed(payload: Payload) {
   const analyst1 = await payload.create({
     collection: "team",
     data: {
-      name: "Mr. [Research Analyst I]",
+      name: "Naffa'a Mamman Musa",
       role: "Research Analyst I",
       department: "research-policy",
       order: 4,
@@ -245,7 +245,7 @@ export async function seed(payload: Payload) {
   const partnershipsLead = await payload.create({
     collection: "team",
     data: {
-      name: "Dr. [Partnerships Lead]",
+      name: "Shahid Sirajo Jahun",
       role: "Lead, Partnerships & Funding",
       department: "partnerships",
       order: 6,
@@ -255,10 +255,30 @@ export async function seed(payload: Payload) {
   const stakeholderLead = await payload.create({
     collection: "team",
     data: {
-      name: "Mrs. [Stakeholder Engagement Lead]",
+      name: "Ibrahim Murtala Muhammad",
       role: "Lead, Stakeholder Engagement & Programs",
       department: "stakeholder",
       order: 7,
+    },
+  });
+
+  const hrOpsLead = await payload.create({
+    collection: "team",
+    data: {
+      name: "Fatima Muhammad Abdullahi",
+      role: "Lead, Human Resources & Finance",
+      department: "hr-ops",
+      order: 8,
+    },
+  });
+
+  const mediaLead = await payload.create({
+    collection: "team",
+    data: {
+      name: "Abdulhakeem Ahmad",
+      role: "Media Production Officer",
+      department: "media-production",
+      order: 9,
     },
   });
 
@@ -395,8 +415,8 @@ export async function seed(payload: Payload) {
   await payload.create({
     collection: "publications",
     data: {
-      title: "Bauchi State Budget Performance & Resource Optimization Framework",
-      slug: "bauchi-state-budget-performance-2026",
+      title: "The Rentier Trap: Bauchi's Fiscal Model and Its Development Ceiling",
+      slug: "the-rentier-trap-bauchis-fiscal-model-and-its-development-ceiling",
       format: "brief",
       themes: [financeArea.id],
       excerpt: "An independent analysis of public finance structures, resource leaks, and capacity recommendations for Bauchi State MDAs.",
@@ -406,33 +426,7 @@ export async function seed(payload: Payload) {
     },
   });
 
-  await payload.create({
-    collection: "publications",
-    data: {
-      title: "Watchdog Report: Transparency in Local Government Finance Allocations",
-      slug: "watchdog-transparency-local-government-allocations",
-      format: "report",
-      themes: [governanceArea.id],
-      excerpt: "Deep petrol data structures mapping how local government financial allocations match citizen development targets in northeastern Nigeria.",
-      publishDate: new Date().toISOString(),
-      authors: [ceo.id, leadResearch.id],
-      gated: false,
-    },
-  });
 
-  await payload.create({
-    collection: "publications",
-    data: {
-      title: "Climate Mitigation and Agricultural Resilience Strategies in Northern Nigeria",
-      slug: "climate-mitigation-resilience-northern-nigeria",
-      format: "white-paper",
-      themes: [climateArea.id],
-      excerpt: "Our premium policy white paper detailing actionable water, soil, and energy reforms. Available to professional and institutional tiers.",
-      publishDate: new Date().toISOString(),
-      authors: [leadResearch.id, analyst2.id],
-      gated: true, // Gated!
-    },
-  });
 
   // 7. Seed Podcast
   payload.logger.info("Seeding podcast...");

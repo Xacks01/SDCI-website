@@ -74,7 +74,7 @@ export default function PrivacyPage() {
               5. Your Rights and Choices
             </h2>
             <p>
-              You have the right to opt-out of receiving our newsletter or marketing communications at any time by clicking the "unsubscribe" link in our emails. You may also request to access, update, or delete your personal information by contacting us at info@sdci.org.ng.
+              You have the right to opt-out of receiving our newsletter or marketing communications at any time by clicking the "unsubscribe" link in our emails. You may also request to access, update, or delete your personal information by contacting us at info@sdcinitiative.com.
             </p>
           </section>
 

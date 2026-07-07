@@ -19,15 +19,64 @@ export default async function EventsPage() {
     limit: 100,
   }).catch(() => ({ docs: [] }));
 
-  const allEvents = eventsResult.docs;
+  const cmsEvents = eventsResult.docs;
+
+  const mockEvents = [
+    {
+      id: "launch-event",
+      title: "SDCI Launch & National Policy Dialogue",
+      type: "Launch",
+      format: "Conference",
+      date: "",
+      dateDisplay: "2026",
+      location: "Bauchi, Nigeria & Online",
+      image: { url: "/assets/event-launch.jpg" },
+      description: "Marking our official institutional launch. Join policy makers, civil society leaders, and development experts to chart a data-driven path for sub-national growth and transparency.",
+      registrationURL: "/get-involved#partner",
+      isUpcoming: true,
+    },
+    {
+      id: "fiscal-forum",
+      title: "Sub-national Revenue & Fiscal Forum",
+      type: "Dialogue",
+      format: "Roundtable",
+      date: "",
+      dateDisplay: "2026",
+      location: "Virtual / Zoom",
+      image: { url: "/assets/event-fiscal.jpg" },
+      description: "An expert panel discussing state-level revenue mobilization strategies, municipal budget transparency, and local economic resilience planning.",
+      registrationURL: "/get-involved#partner",
+      isUpcoming: true,
+    },
+    {
+      id: "annual-summit",
+      title: "Annual Sustainable Development Summit",
+      type: "Summit",
+      format: "Summit",
+      date: "",
+      dateDisplay: "2027",
+      location: "Abuja, Nigeria",
+      image: { url: "/assets/event-summit.jpg" },
+      description: "Our flagship annual convening bringing together national and international stakeholders to review policy alignment, accountability metrics, and local impact.",
+      registrationURL: "/get-involved#partner",
+      isUpcoming: true,
+    }
+  ];
+
+  const allEvents: any[] = mockEvents;
   const now = new Date();
 
-  const upcomingEvents = allEvents.filter((e: any) => new Date(e.date) >= now);
-  const pastEvents = allEvents.filter((e: any) => new Date(e.date) < now);
+  const upcomingEvents = allEvents.filter((e: any) => {
+    if (e.isUpcoming !== undefined) return e.isUpcoming;
+    return new Date(e.date) >= now;
+  });
+  const pastEvents = allEvents.filter((e: any) => {
+    if (e.isUpcoming !== undefined) return !e.isUpcoming;
+    return new Date(e.date) < now;
+  });
 
   // Find featured event (e.g. conference or closest upcoming)
-  const featuredEvent =
-    upcomingEvents.find((e: any) => e.type === "conference") || upcomingEvents[0] || pastEvents[0];
+  const featuredEvent = upcomingEvents[0] || pastEvents[0];
 
   const featuredImgUrl = featuredEvent && featuredEvent.image && typeof featuredEvent.image === "object"
     ? getMediaUrl(featuredEvent.image.sizes?.card?.url || featuredEvent.image.sizes?.thumbnail?.url || featuredEvent.image.url)
@@ -87,7 +136,7 @@ export default async function EventsPage() {
               </h3>
               <div className="space-y-1.5 text-xs md:text-sm text-petrol-100 dark:text-petrol-200 font-medium font-sans">
                 <p className="flex items-center gap-1.5">
-                  <span className="text-lime-300">Date:</span> {new Date(featuredEvent.date).toLocaleDateString("en-NG", { dateStyle: "full" })}
+                  <span className="text-lime-300">Date:</span> {featuredEvent.dateDisplay || (featuredEvent.date ? new Date(featuredEvent.date).toLocaleDateString("en-NG", { dateStyle: "full" }) : "")}
                 </p>
                 <p className="flex items-center gap-1.5">
                   <span className="text-lime-300">Location:</span> {featuredEvent.location}
@@ -169,7 +218,7 @@ export default async function EventsPage() {
                         {evt.title}
                       </h3>
                       <p className="text-xs text-neutral-600 dark:text-neutral-400 font-medium font-sans">
-                        {new Date(evt.date).toLocaleDateString("en-NG", { dateStyle: "full" })} &middot; {evt.location}
+                        {evt.dateDisplay || (evt.date ? new Date(evt.date).toLocaleDateString("en-NG", { dateStyle: "full" }) : "")} &middot; {evt.location}
                       </p>
                     </div>
                     <div className="pt-4 border-t border-neutral-100 dark:border-petrol-800/60 flex items-center justify-between">
@@ -239,7 +288,7 @@ export default async function EventsPage() {
                       <span className="text-[10px] text-neutral-400 dark:text-neutral-400 uppercase font-bold tracking-wide font-sans">{evt.type}</span>
                       <h3 className="font-bold font-serif text-sm text-petrol-950 dark:text-white leading-snug line-clamp-2">{evt.title}</h3>
                       <p className="text-[11px] text-neutral-600 dark:text-neutral-400 font-medium font-sans">
-                        Held: {new Date(evt.date).toLocaleDateString("en-NG", { dateStyle: "medium" })}
+                        Held: {evt.dateDisplay || (evt.date ? new Date(evt.date).toLocaleDateString("en-NG", { dateStyle: "medium" }) : "")}
                       </p>
                     </div>
                     <div className="pt-3 border-t border-neutral-100 dark:border-petrol-800/60 flex items-center justify-between text-xs font-sans">
