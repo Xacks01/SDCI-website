@@ -23,6 +23,12 @@ export async function GET(request: Request) {
     return NextResponse.json({ success: true, message: "Database successfully seeded in production!" });
   } catch (error: any) {
     console.error("Production seeding failed:", error);
-    return NextResponse.json({ error: error.message || "Seeding failed" }, { status: 500 });
+    return NextResponse.json({ 
+      error: error.message || "Seeding failed",
+      detail: error.detail || null,
+      hint: error.hint || null,
+      code: error.code || null,
+      stack: error.stack || null
+    }, { status: 500 });
   }
 }
