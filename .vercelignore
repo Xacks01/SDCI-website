@@ -1,0 +1,11 @@
+# Ignore raw assets to stay under 100MB upload limit
+Passports - SDCI/
+Pictures - SDCI/
+assets/Why_Are_Babies___Mothers_Dying_In_Bauchi____The_Next_Question_by_SDCI(128k).m4a
+assets/SDCII.jpg
+assets/Gemini_Generated_Image_*
+assets/thumbnail-trap.png
+assets/thumbnails.png
+.next/
+node_modules/
+payload.db
