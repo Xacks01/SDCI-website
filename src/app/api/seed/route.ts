@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import { seed } from "@/payload/seed";
+import { pushDevSchema } from "@payloadcms/drizzle";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,12 @@ export async function GET(request: Request) {
 
     const payload = await getPayload({ config });
     
+    // Manually push schema in production for seeding to auto-create tables
+    if (process.env.NODE_ENV === "production") {
+      payload.logger.info("Production seeding: running manual schema push...");
+      await pushDevSchema(payload.db as any);
+    }
+
     // Seed the database
     await seed(payload);
 
