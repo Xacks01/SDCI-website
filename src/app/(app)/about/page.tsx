@@ -267,83 +267,68 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
 
   // 1. Stakeholder Engagement & Programs
   const stakeholderMembers = team.filter((t: any) => t.department === "stakeholder" || t.role.toLowerCase().includes("stakeholder"));
+  const stakeholderFallback = {
+    id: "stakeholder-lead",
+    name: "Ibrahim Murtala Muhammad",
+    role: "Lead, Stakeholder Engagement & Programs",
+    photo: { url: "/assets/passports/ibrahim-murtala-muhammad.jpeg" },
+    desc: "Facilitating community dialogues, stakeholder roundtables, and coordinating external program engagement.",
+  };
   const stakeholderTeam = stakeholderMembers.length > 0
-    ? stakeholderMembers.map((m: any) => enrichMember(m, {
-        name: "Ibrahim Murtala Muhammad",
-        role: "Lead, Stakeholder Engagement & Programs",
-        photo: { url: "/assets/passports/ibrahim-murtala-muhammad.jpeg" },
-      }))
-    : [{
-        id: "stakeholder-lead",
-        name: "Ibrahim Murtala Muhammad",
-        role: "Lead, Stakeholder Engagement & Programs",
-        photo: { url: "/assets/passports/ibrahim-murtala-muhammad.jpeg" },
-        desc: "Facilitating community dialogues, stakeholder roundtables, and coordinating external program engagement.",
-      }];
+    ? stakeholderMembers.map((m: any) => enrichMember(m, stakeholderFallback))
+    : [stakeholderFallback];
 
   // 2. Partnerships & Funding
   const partnershipsMembers = team.filter((t: any) => t.department === "partnerships" || t.role.toLowerCase().includes("partnership"));
+  const partnershipsFallback = {
+    id: "partnerships-lead",
+    name: "Shaheed Sirajo Jahun",
+    role: "Partnership and Funding Lead",
+    photo: { url: "/assets/passports/shahid-sirajo-jahun.jpeg" },
+    desc: "Shaheed Sirajo Jahun is the Partnership and Funding Lead at SDCI, where he drives strategic collaborations, resource mobilization, and institutional engagement to advance governance and sustainable development in Nigeria. With a multidisciplinary background across the private and non-profit sectors, Shaheed leverages technology, innovation, and entrepreneurship to empower youth, build sustainable systems, and connect underserved communities with opportunities.",
+  };
   const partnershipsTeam = partnershipsMembers.length > 0
-    ? partnershipsMembers.map((m: any) => enrichMember(m, {
-        name: "Shaheed Sirajo Jahun",
-        role: "Partnership and Funding Lead",
-        photo: { url: "/assets/passports/shahid-sirajo-jahun.jpeg" },
-      }))
-    : [{
-        id: "partnerships-lead",
-        name: "Shaheed Sirajo Jahun",
-        role: "Partnership and Funding Lead",
-        photo: { url: "/assets/passports/shahid-sirajo-jahun.jpeg" },
-        desc: "Shaheed Sirajo Jahun is the Partnership and Funding Lead at SDCI, where he drives strategic collaborations, resource mobilization, and institutional engagement to advance governance and sustainable development in Nigeria. With a background in petroleum engineering and a data-driven approach to his work, he builds and manages relationships and partnerships centered on funding and accountability, while leveraging technology and innovation to connect underserved communities with opportunities.",
-      }];
+    ? partnershipsMembers.map((m: any) => enrichMember(m, partnershipsFallback))
+    : [partnershipsFallback];
 
   // 3. HR & Operations
   const hrFinanceMembers = team.filter((t: any) => t.department === "hr-ops" || t.department === "hr-finance" || t.role.toLowerCase().includes("hr") || t.role.toLowerCase().includes("finance"));
+  const hrFinanceFallback = {
+    id: "hr-finance-lead",
+    name: "Fatima Muhammad Abdullahi",
+    role: "Human Resources, Administration and Finance Officer",
+    photo: { url: "/assets/passports/fatima-muhammad-abdullahi.jpeg" },
+    desc: "Fatima Muhammad Abdullahi serves as the Human Resources, Administration and Finance Officer at the Sustainable Development Conversations Initiative (SDCI). In this role, she is responsible for strengthening the organization's internal systems through human resource management, administrative coordination, financial documentation, and the development of policies and operational procedures that promote accountability, transparency, and institutional effectiveness.\n\nFatima is passionate about organizational development and good governance, with a strong interest in building efficient systems that support sustainable growth and effective programme delivery. She has experience in data analysis, administrative management, and process improvement, and is committed to applying evidence-based approaches to enhance organizational performance.\n\nShe holds a degree in Human Anatomy and is dedicated to contributing to sustainable development through sound administration, strategic planning, and continuous learning.",
+  };
   const hrFinanceTeam = hrFinanceMembers.length > 0
-    ? hrFinanceMembers.map((m: any) => enrichMember(m, {
-        name: "Fatima Muhammad Abdullahi",
-        role: "Human Resources, Administration and Finance Officer",
-        photo: { url: "/assets/passports/fatima-muhammad-abdullahi.jpeg" },
-      }))
-    : [{
-        id: "hr-finance-lead",
-        name: "Fatima Muhammad Abdullahi",
-        role: "Human Resources, Administration and Finance Officer",
-        photo: { url: "/assets/passports/fatima-muhammad-abdullahi.jpeg" },
-        desc: "Fatima Muhammad Abdullahi serves as the Human Resources, Administration and Finance Officer at the Sustainable Development Conversations Initiative (SDCI). In this role, she is responsible for strengthening the organization's internal systems through human resource management, administrative coordination, financial documentation, and the development of policies and operational procedures that promote accountability, transparency, and institutional effectiveness.\n\nFatima is passionate about organizational development and good governance, with a strong interest in building efficient systems that support sustainable growth and effective programme delivery. She has experience in data analysis, administrative management, and process improvement, and is committed to applying evidence-based approaches to enhance organizational performance.\n\nShe holds a degree in Human Anatomy and is dedicated to contributing to sustainable development through sound administration, strategic planning, and continuous learning.",
-      }];
+    ? hrFinanceMembers.map((m: any) => enrichMember(m, hrFinanceFallback))
+    : [hrFinanceFallback];
 
   // 4. Legal & Compliance
   const legalMembers = team.filter((t: any) => t.department === "legal" || t.role.toLowerCase().includes("legal"));
+  const legalFallback = {
+    id: "legal-advisor",
+    name: "Mahmood Adamu Imam",
+    role: "Legal Advisor & Compliance Counsel",
+    photo: { url: "/assets/passports/mahmood-adamu-imam.jpeg" },
+    desc: "Mahmood Adamu Imam is a trained lawyer with a background in Corporate Law, Data Protection, and Tech Law advocacy. At the Sustainable Development Conversations Initiative (SDCI), he serves as Legal Advisor and Compliance Counsel, advising on institutional compliance, reviewing contracts, and managing legal risk in line with statutory regulations. He brings a strong grounding in legal drafting and regulatory practice to help SDCI operate on solid legal footing as it pursues its policy and advocacy work.",
+  };
   const legalTeam = legalMembers.length > 0
-    ? legalMembers.map((m: any) => enrichMember(m, {
-        name: "Mahmood Adamu Imam",
-        role: "Legal Advisor & Compliance Counsel",
-        photo: { url: "/assets/passports/mahmood-adamu-imam.jpeg" },
-      }))
-    : [{
-        id: "legal-advisor",
-        name: "Mahmood Adamu Imam",
-        role: "Legal Advisor & Compliance Counsel",
-        photo: { url: "/assets/passports/mahmood-adamu-imam.jpeg" },
-        desc: "Mahmood Adamu Imam is a trained lawyer with a background in Corporate Law, Data Protection, and Tech Law advocacy. At the Sustainable Development Conversations Initiative (SDCI), he serves as Legal Advisor and Compliance Counsel, advising on institutional compliance, reviewing contracts, and managing legal risk in line with statutory regulations. He brings a strong grounding in legal drafting and regulatory practice to help SDCI operate on solid legal footing as it pursues its policy and advocacy work.",
-      }];
+    ? legalMembers.map((m: any) => enrichMember(m, legalFallback))
+    : [legalFallback];
 
   // 5. Media Production
   const mediaMembers = team.filter((t: any) => t.department === "media-production" || t.role.toLowerCase().includes("media production"));
+  const mediaFallback = {
+    id: "media-production-officer",
+    name: "Abdulhakeem Ahmad",
+    role: "Media Production Officer",
+    photo: { url: "/assets/passports/abdulhakeem-ahmad.jpeg" },
+    desc: "Abdulhakeem Ahmad is the Media Production Officer at SDCI, bringing years of experience in photography, cinematography, drone operations, and video editing. He holds a B.Tech in Industrial Design from Abubakar Tafawa Belewa University, Bauchi, and a Master Class Certificate in Drone Piloting and Video Editing from SK Media Enterprise, and is the founder of Keemos Visual, a creative media brand offering photography, cinematography, and post-production services.\nAt SDCI, he produces visual content that documents the organization's work and communicates its impact, using storytelling to inform, inspire, and drive positive change.",
+  };
   const mediaTeam = mediaMembers.length > 0
-    ? mediaMembers.map((m: any) => enrichMember(m, {
-        name: "Abdulhakeem Ahmad",
-        role: "Media Production Officer",
-        photo: { url: "/assets/passports/abdulhakeem-ahmad.jpeg" },
-      }))
-    : [{
-        id: "media-production-officer",
-        name: "Abdulhakeem Ahmad",
-        role: "Media Production Officer",
-        photo: { url: "/assets/passports/abdulhakeem-ahmad.jpeg" },
-        desc: "Abdulhakeem Ahmad is the Media Production Officer at SDCI, bringing years of experience in photography, cinematography, drone operations, and video editing. He holds a B.Tech in Industrial Design from Abubakar Tafawa Belewa University, Bauchi, and a Master Class Certificate in Drone Piloting and Video Editing from SK Media Enterprise, and is the founder of Keemos Visual, a creative media brand offering photography, cinematography, and post-production services.\nAt SDCI, he produces visual content that documents the organization's work and communicates its impact, using storytelling to inform, inspire, and drive positive change.",
-      }];
+    ? mediaMembers.map((m: any) => enrichMember(m, mediaFallback))
+    : [mediaFallback];
 
   // Find active profile details for modal overlay
   let activeProfile: any = null;

@@ -7,7 +7,7 @@ export default function ContactPage() {
   const contactDetails = [
     {
       role: "General Enquiries",
-      email: "info@sdcinitiative.com",
+      email: "office@sdcinitiative.com",
       desc: "For general questions, comments, or program inquiries.",
     },
     {
@@ -70,9 +70,6 @@ export default function ContactPage() {
             </p>
             <p className="text-sm text-neutral-700 dark:text-neutral-400 leading-relaxed">
               [Office Address Location Detail], Bauchi, Bauchi State, Nigeria.
-            </p>
-            <p className="text-sm text-neutral-700 dark:text-neutral-400 leading-relaxed">
-              Branch: Lekki Phase 1, Lagos, Nigeria.
             </p>
           </div>
         </div>

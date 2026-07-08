@@ -245,8 +245,8 @@ export async function seed(payload: Payload) {
   const partnershipsLead = await payload.create({
     collection: "team",
     data: {
-      name: "Shahid Sirajo Jahun",
-      role: "Lead, Partnerships & Funding",
+      name: "Shaheed Sirajo Jahun",
+      role: "Partnership and Funding Lead",
       department: "partnerships",
       order: 6,
     },
