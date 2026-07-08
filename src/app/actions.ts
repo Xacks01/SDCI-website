@@ -209,7 +209,7 @@ export async function cvSubmissionAction(data: {
         name: data.name,
         email: data.email,
         message: `Area of Interest: ${data.interest}`,
-        cvFile: data.cvFileId,
+        cvFile: data.cvFileId ? Number(data.cvFileId) : null,
       },
     });
 

@@ -33,6 +33,9 @@ import { Navigation } from "./payload/globals/Navigation";
 import { Footer } from "./payload/globals/Footer";
 import { ImpactStats } from "./payload/globals/ImpactStats";
 
+// Import custom styles for Admin UI
+import "./payload/styles/admin.css";
+
 const databaseUri = process.env.DATABASE_URI || "file:./payload.db";
 const isPostgres = databaseUri.startsWith("postgres://") || databaseUri.startsWith("postgresql://");
 
@@ -47,6 +50,15 @@ export default buildConfig({
             prefillOnly: true,
           }
         : false,
+    components: {
+      graphics: {
+        Logo: "@/payload/components/Logo",
+        Icon: "@/payload/components/Icon",
+      },
+    },
+    meta: {
+      titleSuffix: "- SDCI Admin",
+    },
   },
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || "sdci_default_super_secret_key_12345",

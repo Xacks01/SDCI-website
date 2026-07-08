@@ -1,0 +1,109 @@
+/* Custom SDCI branding and accessibility overrides for Payload Admin */
+
+:root {
+  /* Brand color variables (Light Mode) */
+  --sdci-petrol-50: #f0f6f7;
+  --sdci-petrol-100: #d6e8ea;
+  --sdci-petrol-500: #114f5c; /* Primary Petrol */
+  --sdci-petrol-600: #0d3f4a;
+  --sdci-petrol-700: #082830;
+  --sdci-petrol-950: #061d24;
+  
+  --sdci-accent-green: #15803d;
+  --sdci-accent-green-hover: #166534;
+}
+
+/* Light/Dark Toggle for Admin Logo Component */
+html.dark .sdci-admin-logo .logo-light {
+  display: none !important;
+}
+html.dark .sdci-admin-logo .logo-dark {
+  display: block !important;
+}
+
+/* Sidebar navigation modifications for premium look */
+.app-header {
+  border-right: 1px solid rgba(17, 79, 92, 0.1) !important;
+  background-color: var(--sdci-petrol-50) !important;
+}
+
+html.dark .app-header {
+  border-right: 1px solid rgba(214, 232, 234, 0.08) !important;
+  background-color: var(--sdci-petrol-950) !important;
+}
+
+/* Accessibility: Visible Focus Rings on all interactive elements */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--sdci-petrol-500) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(17, 79, 92, 0.15) !important;
+}
+
+html.dark input:focus-visible,
+html.dark select:focus-visible,
+html.dark textarea:focus-visible,
+html.dark button:focus-visible,
+html.dark a:focus-visible {
+  outline: 3px solid var(--sdci-petrol-100) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(214, 232, 234, 0.1) !important;
+}
+
+/* Active Nav Links styling in Sidebar */
+.nav__link:hover {
+  background-color: rgba(17, 79, 92, 0.06) !important;
+}
+
+html.dark .nav__link:hover {
+  background-color: rgba(214, 232, 234, 0.04) !important;
+}
+
+.nav__link.active {
+  color: var(--sdci-petrol-500) !important;
+  font-weight: 700 !important;
+  background-color: rgba(17, 79, 92, 0.08) !important;
+}
+
+html.dark .nav__link.active {
+  color: var(--sdci-petrol-100) !important;
+  background-color: rgba(214, 232, 234, 0.06) !important;
+}
+
+/* Buttons color scheme overrides to match branding */
+.btn--style-primary {
+  background-color: var(--sdci-petrol-500) !important;
+  border-color: var(--sdci-petrol-500) !important;
+  color: #ffffff !important;
+}
+
+.btn--style-primary:hover {
+  background-color: var(--sdci-petrol-600) !important;
+  border-color: var(--sdci-petrol-600) !important;
+}
+
+html.dark .btn--style-primary {
+  background-color: var(--sdci-petrol-100) !important;
+  border-color: var(--sdci-petrol-100) !important;
+  color: var(--sdci-petrol-950) !important;
+  font-weight: 600 !important;
+}
+
+html.dark .btn--style-primary:hover {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Enhancing general card layouts readability */
+.card {
+  border: 1px solid rgba(17, 79, 92, 0.08) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+}
+
+html.dark .card {
+  border: 1px solid rgba(214, 232, 234, 0.05) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2) !important;
+}
