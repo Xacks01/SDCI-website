@@ -434,6 +434,46 @@ export default async function HomePage() {
                   <img src="/assets/SDGs/6.png" alt="SDG 6" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
                   <img src="/assets/SDGs/12.png" alt="SDG 12" className="h-12 w-auto dark:brightness-90 transition-transform duration-300 group-hover:scale-105" />
                 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      {/* 2.5. Video Showcase Section */}
+      <section className="bg-petrol-50/50 dark:bg-petrol-900/10 border-t border-b border-neutral-200/40 dark:border-petrol-900/60 py-24 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Column: Heading and info */}
+            <div className="lg:col-span-5 space-y-6 text-left">
+              <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-850 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit">
+                Featured Video
+              </span>
+              <h2 className="text-3xl md:text-5xl font-extrabold font-serif text-petrol-950 dark:text-white tracking-tight leading-[1.15]">
+                Evidence in Motion: A Glimpse of SDCI
+              </h2>
+              <p className="text-neutral-800 dark:text-neutral-350 text-sm md:text-base leading-relaxed">
+                Watch our introductory feature to see how we translate complex research into local dialogues, policy audits, and community partnerships that drive actual development.
+              </p>
+              <div className="pt-2">
+                <a href="https://youtu.be/ZJ36zfyhjOI" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="border-petrol-950 dark:border-white text-petrol-950 dark:text-white hover:bg-petrol-950 hover:text-white dark:hover:bg-white dark:hover:text-petrol-950 font-bold px-6 py-2.5 rounded-none text-xs uppercase tracking-wider transition-colors cursor-pointer select-none">
+                    Watch on YouTube &rarr;
+                  </Button>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Column: Responsive Video player */}
+            <div className="lg:col-span-7">
+              <div className="relative aspect-video w-full bg-neutral-100 dark:bg-petrol-900/20 border border-neutral-200/50 dark:border-petrol-800/60 shadow-lg rounded-none overflow-hidden">
+                <iframe
+                  src="https://www.youtube.com/embed/ZJ36zfyhjOI"
+                  title="Evidence in Motion: A Glimpse of SDCI"
+                  className="absolute inset-0 w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
             </div>
           </div>
