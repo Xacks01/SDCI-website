@@ -180,7 +180,15 @@ export default async function PodcastDetailPage({ params }: PodcastDetailPagePro
             {ep.guests && ep.guests.length > 0 && (
               <div className="space-y-6">
                 {ep.guests.map((g: any) => {
-                  const photoUrl = g.photo && typeof g.photo === "object" && g.photo.url ? g.photo.url : null;
+                  let photoUrl = g.photo && typeof g.photo === "object" && g.photo.url ? g.photo.url : null;
+                  if (!photoUrl) {
+                    const name = (g.name || "").toLowerCase();
+                    if (name.includes("ibrahim")) {
+                      photoUrl = "/assets/passports/ibrahim.jpeg";
+                    } else if (name.includes("awwal")) {
+                      photoUrl = "/assets/passports/awwal.jpeg";
+                    }
+                  }
                   return (
                     <div key={g.id} className="space-y-2 text-left">
                       {photoUrl ? (
