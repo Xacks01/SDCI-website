@@ -139,7 +139,7 @@ export default async function PodcastDetailPage({ params }: PodcastDetailPagePro
                               {g.name.toLowerCase().includes("awwal") 
                                 ? "Awwal Dahiru is the IT Lead at CHAMPS (Child Health and Mortality Prevention Surveillance) Bauchi, where he leverages technology, data infrastructure, and digital health frameworks to track, analyze, and prevent under-five and maternal mortality."
                                 : g.name.toLowerCase().includes("murtala") || g.name.toLowerCase().includes("ibrahim")
-                                ? "Ibrahim Murtala is an experienced moderator and host of SDCI's podcasts, convening leading policy conversations on development, governance, and structural reforms in Nigeria."
+                                ? "Ibrahim Murtala is the Lead for Stakeholder Engagement & Programs and an experienced moderator/host of SDCI's podcasts, convening leading policy conversations on development, governance, and structural reforms in Nigeria."
                                 : bioText || "SDCI Contributor and expert analyst."}
                             </p>
                           </div>
@@ -213,13 +213,10 @@ export default async function PodcastDetailPage({ params }: PodcastDetailPagePro
                         </div>
                       ) : (
                         <div className="aspect-square w-full bg-neutral-100 dark:bg-petrol-900/20 flex flex-col items-center justify-center text-center p-6 border border-neutral-200/50 dark:border-petrol-800/50 rounded-none">
-                          <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-400">Guest Photo &middot; 1:1</span>
+                          <span className="text-xs font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-400">No Photo</span>
                           <span className="text-xs mt-1 text-neutral-500 dark:text-neutral-400 font-semibold">{g.name}</span>
                         </div>
                       )}
-                      <p className="text-[10px] text-neutral-400 dark:text-neutral-400 font-bold uppercase tracking-wider">
-                        Guest Photo &middot; 1:1
-                      </p>
                     </div>
                   );
                 })}
