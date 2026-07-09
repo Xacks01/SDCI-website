@@ -113,20 +113,36 @@ export default async function PodcastDetailPage({ params }: PodcastDetailPagePro
                 {/* Guest & Moderator backgrounds */}
                 {ep.guests && ep.guests.length > 0 && (
                   <div className="mt-8 space-y-6 pt-6 border-t border-neutral-100 dark:border-petrol-800/60">
-                    <h4 className="text-xs font-bold font-sans text-petrol-950 dark:text-white uppercase tracking-wider">Guest & Host Biography</h4>
+                    <h4 className="text-xs font-bold font-sans text-petrol-950 dark:text-white uppercase tracking-wider font-semibold">Guest & Host Biography</h4>
                     {ep.guests.map((g: any) => {
                       // Serialize bio if it's a lexical object, or fallback to role and description
                       const bioText = g.bio ? (typeof g.bio === "string" ? g.bio : JSON.stringify(g.bio)) : "";
+                      let guestPhotoUrl = g.photo && typeof g.photo === "object" && g.photo.url ? g.photo.url : null;
+                      if (!guestPhotoUrl) {
+                        const name = (g.name || "").toLowerCase();
+                        if (name.includes("ibrahim")) {
+                          guestPhotoUrl = "/assets/passports/ibrahim.jpeg";
+                        } else if (name.includes("awwal")) {
+                          guestPhotoUrl = "/assets/passports/awwal.jpeg";
+                        }
+                      }
                       return (
-                        <div key={g.id} className="space-y-1">
-                          <p className="font-bold text-xs text-neutral-900 dark:text-white">{g.name} &mdash; <span className="text-green-700 dark:text-green-400 text-xs font-semibold">{g.role}</span></p>
-                          <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed italic">
-                            {g.name.toLowerCase().includes("awwal") 
-                              ? "Awwal Dahiru is the IT Lead at CHAMPS (Child Health and Mortality Prevention Surveillance) Bauchi, where he leverages technology, data infrastructure, and digital health frameworks to track, analyze, and prevent under-five and maternal mortality."
-                              : g.name.toLowerCase().includes("murtala") || g.name.toLowerCase().includes("ibrahim")
-                              ? "Ibrahim Murtala is an experienced moderator and host of SDCI's podcasts, convening leading policy conversations on development, governance, and structural reforms in Nigeria."
-                              : bioText || "SDCI Contributor and expert analyst."}
-                          </p>
+                        <div key={g.id} className="flex items-start gap-4">
+                          {guestPhotoUrl && (
+                            <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 bg-neutral-100 dark:bg-petrol-900/20 overflow-hidden border border-neutral-200 dark:border-petrol-800 rounded-none">
+                              <img src={guestPhotoUrl} alt={g.name} className="w-full h-full object-cover" />
+                            </div>
+                          )}
+                          <div className="space-y-1">
+                            <p className="font-bold text-xs text-neutral-900 dark:text-white">{g.name} &mdash; <span className="text-green-700 dark:text-green-400 text-xs font-semibold">{g.role}</span></p>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed italic">
+                              {g.name.toLowerCase().includes("awwal") 
+                                ? "Awwal Dahiru is the IT Lead at CHAMPS (Child Health and Mortality Prevention Surveillance) Bauchi, where he leverages technology, data infrastructure, and digital health frameworks to track, analyze, and prevent under-five and maternal mortality."
+                                : g.name.toLowerCase().includes("murtala") || g.name.toLowerCase().includes("ibrahim")
+                                ? "Ibrahim Murtala is an experienced moderator and host of SDCI's podcasts, convening leading policy conversations on development, governance, and structural reforms in Nigeria."
+                                : bioText || "SDCI Contributor and expert analyst."}
+                            </p>
+                          </div>
                         </div>
                       );
                     })}
