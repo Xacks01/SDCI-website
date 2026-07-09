@@ -118,7 +118,7 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
     {
       id: "board-1",
       name: "Mr. Olusegun Adeniyi",
-      role: "Chairman, Board of Directors",
+      role: "Member, Board of Directors",
       department: "board",
       desc: "Mr. Olusegun Adeniyi is a veteran Nigerian journalist, born 6 November 1965 in Ile-Ife. He chairs the editorial board of ThisDay newspapers and was presidential spokesman (Special Adviser on Media and Publicity) to the late President Umaru Musa Yar’Adua from 2007 until Yar’Adua’s death in 2010. He writes ThisDay’s weekly column, “The Verdict,” and has authored several books on Nigerian politics.",
     },

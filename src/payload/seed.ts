@@ -192,11 +192,11 @@ export async function seed(payload: Payload) {
 
   // 4. Seed Team Members (Leadership Bench)
   payload.logger.info("Seeding team members...");
-  const boardChair = await payload.create({
+  const boardMember1 = await payload.create({
     collection: "team",
     data: {
-      name: "Dr. [Board Chair Name]",
-      role: "Chairman, Board of Directors",
+      name: "Mr. [Board Member Name]",
+      role: "Member, Board of Directors",
       department: "board",
       order: 1,
     },
