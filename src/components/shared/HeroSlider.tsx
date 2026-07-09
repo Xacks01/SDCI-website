@@ -34,7 +34,7 @@ const slides: Slide[] = [
     primaryCtaUrl: "/events",
     secondaryCtaText: "How we work",
     secondaryCtaUrl: "/about#three-roles",
-    bgImage: "/assets/hero-bg-sdci-2.jpeg",
+    bgImage: "/assets/hero-image-2.jpeg",
   },
   {
     eyebrow: "Our role · Watchdog",

@@ -7,6 +7,7 @@ import config from "@/payload.config";
 import { Tag } from "@/components/ui/Tag";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { getMediaUrl } from "@/lib/utils";
 
 export const revalidate = 30;
 
@@ -122,8 +123,80 @@ export default async function PublicationDetailPage({ params }: PublicationDetai
         {/* Gated Body Content */}
         {isUnlocked ? (
           <div className="space-y-6 text-neutral-800 dark:text-neutral-300 leading-relaxed text-sm md:text-base prose dark:prose-invert max-w-none">
-            {pub.body ? (
-              // In production we render block-based richText, here we display readable text
+            {slug === "the-rentier-trap-bauchis-fiscal-model-and-its-development-ceiling" ? (
+              <div className="space-y-8 not-prose">
+                {/* Core Argument Callout */}
+                <div className="bg-petrol-50/50 dark:bg-petrol-900/10 border border-petrol-200/50 dark:border-petrol-800/40 p-6 rounded-none space-y-3">
+                  <h3 className="text-xs font-bold font-sans text-petrol-950 dark:text-white uppercase tracking-wider">The Core Argument</h3>
+                  <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                    Bauchi&apos;s development failures aren&apos;t primarily about capacity, corruption, or effort &mdash; they&apos;re about <strong>how the state is financed</strong>. Roughly six naira in every seven of its revenue arrive as a federal FAAC transfer (~86%) rather than as tax raised from its own citizens (~14% IGR). That single fact reorganizes everything downstream: what the government spends on, who it answers to, and what it can invest in the human capital that will decide Bauchi&apos;s 2035 outcome.
+                  </p>
+                </div>
+
+                {/* Four Claims Grid */}
+                <div className="space-y-4">
+                  <h3 className="text-xs font-bold font-sans uppercase tracking-wider text-neutral-900 dark:text-white border-b pb-2 border-neutral-100 dark:border-petrol-800/60">The Four Claims</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold font-sans uppercase text-green-700 dark:text-green-400">1. Rentier Classification</h4>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                        By the standard four-part test (rent &gt;40% of revenue, effort-independence, concentrated receipt, thin tax base), Bauchi is unambiguously rentier.
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold font-sans uppercase text-green-700 dark:text-green-400">2. Resource Misallocation</h4>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                        Bauchi is one of only six states spending &gt;60% of its budget on salaries and overheads; debt service (~₦37bn) is deducted at source; a ~₦59bn deficit is borrowed. This leaves little for schools, clinics, and irrigation.
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold font-sans uppercase text-green-700 dark:text-green-400">3. Proven Agility</h4>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                        The rentier equilibrium is a <em>tendency, not a trap</em>: Bauchi grew IGR &gt;500% (2015&ndash;24), the fastest in the North-East.
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold font-sans uppercase text-green-700 dark:text-green-400">4. The Strategic Window</h4>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                        A narrow reform window exists now: the 2025 national tax reform + temporary post-subsidy FAAC windfall + a second-term governor with a fixed horizon. It closes at the 2027 cycle.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Why the Model Caps Development */}
+                <div className="space-y-3">
+                  <h3 className="text-xs font-bold font-sans uppercase tracking-wider text-neutral-900 dark:text-white border-b pb-2 border-neutral-100 dark:border-petrol-800/60">Why the Model Caps Development</h3>
+                  <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-350">
+                    Rentier financing runs accountability <em>upward</em> (to Abuja and the FAAC formula) instead of <em>downward</em> to a taxpaying citizenry &mdash; short-circuiting the &ldquo;tax bargain&rdquo; that built accountable states elsewhere. Its deepest bias: human-capital and climate investments deliver <em>diffuse, deferred, unattributable</em> benefits, which reliably lose the budget battle to concentrated, visible, creditable spending. So the 61% out-of-school rate, worst-in-zone maternal mortality, and ~10.9% of facilities with a doctor aren&apos;t anomalies &mdash; they&apos;re what the system, as financed, is structurally built to produce.
+                  </p>
+                </div>
+
+                {/* The Prescription */}
+                <div className="space-y-3">
+                  <h3 className="text-xs font-bold font-sans uppercase tracking-wider text-neutral-900 dark:text-white border-b pb-2 border-neutral-100 dark:border-petrol-800/60">The Prescription: Different Financing, Not More Spending</h3>
+                  <ul className="list-decimal pl-5 space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
+                    <li>
+                      <strong className="text-neutral-800 dark:text-neutral-350">Deepen IGR reform into a genuine tax bargain</strong>: broaden to property, presumptive, and informal-sector taxes, digitize collection, and publish collections &mdash; targeting FAAC dependence below 60%.
+                    </li>
+                    <li>
+                      <strong className="text-neutral-800 dark:text-neutral-350">Use the FAAC windfall for balance-sheet repair</strong>: retire debt and ring-fence capex rather than expanding recurrent overheads.
+                    </li>
+                    <li>
+                      <strong className="text-neutral-800 dark:text-neutral-350">Treat human capital as the return on fiscal reform</strong>: invest directly in girl-child schooling, the Primary Health Care (PHC) workforce, and climate-resilient agriculture.
+                    </li>
+                  </ul>
+                </div>
+
+                {/* The Bottom Line */}
+                <div className="bg-neutral-50 dark:bg-petrol-900/20 border border-neutral-200 dark:border-petrol-800 p-6 rounded-none space-y-2">
+                  <h3 className="text-xs font-bold uppercase text-neutral-800 dark:text-white tracking-wider">The Bottom Line</h3>
+                  <p className="text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+                    Two futures exist: drift (dependence stays &gt;80%, windfall absorbed into recurrent) or reform (IGR builds a taxpayer constituency, debt restructured, capex space deployed against the human-capital deficit leading to measurable convergence with Kaduna and pulling clear of Gombe and Jigawa by the early 2030s). The difference will be decided in the next 12&ndash;24 months. As the paper closes: <strong className="italic text-neutral-900 dark:text-white">&ldquo;The rent will not save Bauchi. The tax bargain might.&rdquo;</strong>
+                  </p>
+                </div>
+              </div>
+            ) : pub.body ? (
               <div className="space-y-4">
                 <p>This research paper examines the policy frameworks, MDA directory statistics, and governance alignments in Bauchi State, Nigeria. Our empirical analysis indicates significant scope for internally generated revenue optimization and budgetary reforms.</p>
                 <p>We advocate for open dialogue tables connecting local communities, public administrators, and private sector reformers. Actionable directives include administrative audit, capacity mentoring workshops, and transparent accounting lines for federal allocations.</p>
@@ -139,7 +212,11 @@ export default async function PublicationDetailPage({ params }: PublicationDetai
                   <h4 className="font-bold text-petrol-950 dark:text-white text-sm font-serif">Full Publication Briefing (PDF)</h4>
                   <p className="text-xs text-neutral-500 dark:text-neutral-400">Includes complete methodology data, frameworks, and footnotes.</p>
                 </div>
-                <a href="/uploads/placeholder.pdf" download className="shrink-0">
+                <a 
+                  href={typeof pub.attachment === "object" && pub.attachment && pub.attachment.url ? getMediaUrl(pub.attachment.url) : "/uploads/placeholder.pdf"} 
+                  download 
+                  className="shrink-0"
+                >
                   <Button variant="dark-green" size="sm">Download PDF</Button>
                 </a>
               </div>
