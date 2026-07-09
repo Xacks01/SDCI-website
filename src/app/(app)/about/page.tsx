@@ -389,12 +389,17 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
                 By bringing public administrators, private enterprises, and community stakeholders to the same table, we transform complex data and research findings into actionable policies that improve institutional accountability and sustainable growth.
               </p>
             </div>
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap gap-4">
               <Link href="/contact">
                 <button className="bg-petrol-950 dark:bg-white hover:bg-petrol-800 dark:hover:bg-neutral-200 text-white dark:text-petrol-950 font-bold px-8 py-3.5 rounded-none text-xs uppercase tracking-wider transition-colors shadow-lg cursor-pointer">
                   Contact Us
                 </button>
               </Link>
+              <a href="/assets/SDCI-strategic-plan-2026-2031.pdf" target="_blank" rel="noopener noreferrer">
+                <button className="border border-petrol-950 dark:border-white hover:bg-neutral-50 dark:hover:bg-petrol-900/10 text-petrol-950 dark:text-white font-bold px-8 py-3.5 rounded-none text-xs uppercase tracking-wider transition-colors shadow-lg cursor-pointer">
+                  Strategic Plan (PDF)
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -900,7 +905,26 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
         </div>
       </section>
 
-
+      {/* 7. Strategic Plan */}
+      <section id="strategic-plan" className="max-w-4xl mx-auto py-24 px-6 border-b border-neutral-200 dark:border-petrol-900/60 space-y-6 flex flex-col items-center">
+        <span className="text-green-700 text-xs font-extrabold uppercase tracking-widest font-sans">
+          STRATEGY
+        </span>
+        <h2 className="text-3xl font-bold font-serif text-center text-petrol-950 dark:text-white mt-3">Our Five-Year Strategic Plan</h2>
+        <p className="text-neutral-600 dark:text-neutral-350 text-sm md:text-base leading-relaxed text-center max-w-2xl">
+          SDCI’s roadmap for the years 2026 to 2031 outlines our strategic priorities, research expansion goals, and institutional development plans to advance evidence-based governance and sustainable growth across Nigeria.
+        </p>
+        <div className="pt-2">
+          <a href="/assets/SDCI-strategic-plan-2026-2031.pdf" target="_blank" rel="noopener noreferrer">
+            <button className="bg-petrol-950 dark:bg-white hover:bg-petrol-800 dark:hover:bg-neutral-200 text-white dark:text-petrol-950 font-bold px-8 py-3.5 rounded-none text-xs uppercase tracking-wider transition-colors shadow-lg cursor-pointer flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              Read the Strategic Plan (PDF)
+            </button>
+          </a>
+        </div>
+      </section>
 
       {/* Interactive Modal Overlay for Active Profile */}
       {activeProfile && (
