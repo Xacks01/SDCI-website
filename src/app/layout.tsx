@@ -14,6 +14,13 @@ const ibmPlexSans = IBM_Plex_Sans({
 export const metadata: Metadata = {
   title: "SDCI - Sustainable Development Conversations Initiative",
   description: "Evidence, in conversation. An independent think tank shaping better decisions on sustainable development in Nigeria and across Africa.",
+  icons: {
+    icon: [
+      { url: "/sdci-favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/sdci-favicon.svg",
+    apple: "/sdci-favicon.svg",
+  },
 };
 
 // Check and seed the database on initial start (skip during production build phase)
@@ -61,6 +68,8 @@ export default function RootLayout({
     >
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/gkl4jfh.css" />
+        <link rel="icon" type="image/svg+xml" href="/sdci-favicon.svg" />
+        <link rel="apple-touch-icon" href="/sdci-favicon.svg" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-full flex flex-col bg-petrol-50 dark:bg-petrol-950 text-petrol-950 dark:text-neutral-100 font-sans">
