@@ -204,22 +204,7 @@ export default async function PodcastDetailPage({ params }: PodcastDetailPagePro
           </div>
         </div>
 
-        {/* Transcript Box (SEO & accessibility) */}
-        {ep.transcript && (
-          <div className="space-y-4 pt-10 border-t border-neutral-100 dark:border-petrol-800/60 text-left">
-            <h3 className="text-lg font-bold font-serif text-petrol-950 dark:text-white">Episode Transcript</h3>
-            <div className="p-6 bg-neutral-50 dark:bg-petrol-900/20 rounded-none border border-neutral-200 dark:border-petrol-800 max-h-[300px] overflow-y-auto space-y-4 font-sans text-xs md:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              {/* Lexical transcript or default formatting */}
-              <div>
-                <p className="font-bold text-petrol-950 dark:text-white">[00:02] Moderator:</p>
-                <p className="pl-4 mb-2">Welcome to The Next Question. Today we are sitting down with members of SDCI Executive leadership to debate public finance structures, Internally Generated Revenue capacity, and budget transparent allocations in northeastern Nigeria.</p>
-                
-                <p className="font-bold text-petrol-950 dark:text-white">[01:15] Guest:</p>
-                <p className="pl-4 mb-2">Thank you for having me. When we talk about evidence in conversation, we must look squarely at the numbers. Budget prioritization is the baseline indicator for developmental intent...</p>
-              </div>
-            </div>
-          </div>
-        )}
+
       </article>
     </div>
   );

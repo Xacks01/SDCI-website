@@ -72,13 +72,7 @@ export const PodcastEpisodes: CollectionConfig = {
         },
       ],
     },
-    {
-      name: "transcript",
-      type: "richText",
-      admin: {
-        description: "Full transcript for SEO and accessibility.",
-      },
-    },
+
     {
       name: "publishDate",
       type: "date",
