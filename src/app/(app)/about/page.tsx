@@ -600,13 +600,13 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
                 
-                {/* Pillar 1: Stakeholder Engagement & Programs */}
+                {/* Pillar 1: HR & Operations */}
                 <div className="space-y-4">
                   <h4 className="text-sm font-bold uppercase tracking-wider text-green-700 dark:text-green-400 border-b border-neutral-200 dark:border-petrol-900 pb-2 font-sans">
-                    Stakeholder Engagement
+                    HR & Operations
                   </h4>
                   <div className="space-y-4">
-                    {stakeholderTeam.map((t: any, index: number) => {
+                    {hrFinanceTeam.map((t: any, index: number) => {
                       const hasPhoto = t.photo && typeof t.photo === "object" && t.photo.url;
                       return (
                         <div key={t.id || index} className="flex flex-col group space-y-4 h-full rounded-none bg-transparent">
@@ -710,13 +710,13 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
                   </div>
                 </div>
 
-                {/* Pillar 3: HR & Operations */}
+                {/* Pillar 3: Stakeholder Engagement & Programs */}
                 <div className="space-y-4">
                   <h4 className="text-sm font-bold uppercase tracking-wider text-green-700 dark:text-green-400 border-b border-neutral-200 dark:border-petrol-900 pb-2 font-sans">
-                    HR & Operations
+                    Stakeholder Engagement
                   </h4>
                   <div className="space-y-4">
-                    {hrFinanceTeam.map((t: any, index: number) => {
+                    {stakeholderTeam.map((t: any, index: number) => {
                       const hasPhoto = t.photo && typeof t.photo === "object" && t.photo.url;
                       return (
                         <div key={t.id || index} className="flex flex-col group space-y-4 h-full rounded-none bg-transparent">
