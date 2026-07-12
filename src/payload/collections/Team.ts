@@ -25,7 +25,7 @@ export const Team: CollectionConfig = {
         { label: "Board of Directors", value: "board" },
         { label: "Executive Leadership", value: "exec" },
         { label: "Research & Policy Advocacy", value: "research-policy" },
-        { label: "Partnerships & Funding", value: "partnerships" },
+        { label: "Partnership & Funding", value: "partnerships" },
         { label: "Stakeholder Engagement & Programs", value: "stakeholder" },
         { label: "HR & Operations", value: "hr-ops" },
         { label: "Legal & Compliance", value: "legal" },

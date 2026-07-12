@@ -99,7 +99,7 @@ export const ContactForm: React.FC = () => {
           options={[
             { label: "General Enquiries", value: "general" },
             { label: "Media & Press Enquiries", value: "media" },
-            { label: "Partnerships & Funding", value: "partnerships" },
+            { label: "Partnership & Funding", value: "partnerships" },
             { label: "Research Collaborations", value: "research" },
           ]}
           value={formData.reason}

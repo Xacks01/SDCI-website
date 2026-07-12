@@ -278,7 +278,7 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
     ? stakeholderMembers.map((m: any) => enrichMember(m, stakeholderFallback))
     : [stakeholderFallback];
 
-  // 2. Partnerships & Funding
+  // 2. Partnership & Funding
   const partnershipsMembers = team.filter((t: any) => t.department === "partnerships" || t.role.toLowerCase().includes("partnership"));
   const partnershipsFallback = {
     id: "partnerships-lead",
@@ -655,10 +655,10 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
                   </div>
                 </div>
 
-                {/* Pillar 2: Partnerships & Funding */}
+                {/* Pillar 2: Partnership & Funding */}
                 <div className="space-y-4">
                   <h4 className="text-sm font-bold uppercase tracking-wider text-green-700 dark:text-green-400 border-b border-neutral-200 dark:border-petrol-900 pb-2 font-sans">
-                    Partnerships & Funding
+                    Partnership & Funding
                   </h4>
                   <div className="space-y-4">
                     {partnershipsTeam.map((t: any, index: number) => {
@@ -964,7 +964,7 @@ export default async function AboutPage({ searchParams }: AboutPageProps) {
                       : activeProfile.department === "stakeholder"
                       ? "Stakeholder Engagement & Programs"
                       : activeProfile.department === "partnerships"
-                      ? "Partnerships & Funding"
+                      ? "Partnership & Funding"
                       : (activeProfile.department === "hr-ops" || activeProfile.department === "hr-finance")
                       ? "HR & Operations"
                       : activeProfile.department === "legal"

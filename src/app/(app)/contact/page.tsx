@@ -16,8 +16,8 @@ export default function ContactPage() {
       desc: "For journalists looking for comments, research citations, or podcast guest details.",
     },
     {
-      role: "Partnerships & Funding",
-      email: "partnerships@sdcinitiative.com",
+      role: "Partnership & Funding",
+      email: "partnership@sdcinitiative.com",
       desc: "For foundations, corporate organizations, and agencies looking to commission work or collaborate.",
     },
   ];

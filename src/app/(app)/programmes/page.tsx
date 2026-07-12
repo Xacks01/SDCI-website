@@ -293,7 +293,7 @@ export default function ProgrammesPage() {
         <div className="max-w-xl mx-auto text-center pt-10 text-sm text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
           <p className="font-semibold text-petrol-950 dark:text-white text-base">Prefer direct email?</p>
           <p className="mt-1">
-            Send your brief to <span className="font-bold text-green-800 dark:text-green-400">partnerships@sdcinitiative.com</span> with your goal, the deliverables you want, and your timeline, and we will come back to you with a scope.
+            Send your brief to <span className="font-bold text-green-800 dark:text-green-400">partnership@sdcinitiative.com</span> with your goal, the deliverables you want, and your timeline, and we will come back to you with a scope.
           </p>
         </div>
       </section>

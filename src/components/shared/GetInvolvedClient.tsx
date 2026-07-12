@@ -174,7 +174,7 @@ export const GetInvolvedClient: React.FC<GetInvolvedClientProps> = ({ tiers }) =
               </ul>
             </div>
             <div className="pt-4">
-              <a href="mailto:partnerships@sdcinitiative.com">
+              <a href="mailto:partnership@sdcinitiative.com">
                 <Button variant="primary">Start a conversation</Button>
               </a>
             </div>
@@ -183,7 +183,7 @@ export const GetInvolvedClient: React.FC<GetInvolvedClientProps> = ({ tiers }) =
           <div className="bg-petrol-50/50 dark:bg-petrol-900/10 p-8 rounded-none border border-neutral-200 dark:border-petrol-800 space-y-6">
             <h3 className="text-lg font-bold font-serif text-petrol-950 dark:text-white">Partnership Inquiries</h3>
             <p className="text-sm text-neutral-700 dark:text-neutral-400 leading-relaxed">
-              Send your request details to our Partnerships & Funding team at <span className="font-bold text-green-800 dark:text-green-500">partnerships@sdcinitiative.com</span> and we will respond with timelines and details.
+              Send your request details to our Partnership & Funding team at <span className="font-bold text-green-800 dark:text-green-500">partnership@sdcinitiative.com</span> and we will respond with timelines and details.
             </p>
           </div>
         </section>
