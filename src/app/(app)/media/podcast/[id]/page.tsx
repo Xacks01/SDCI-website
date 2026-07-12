@@ -121,7 +121,7 @@ export default async function PodcastDetailPage({ params }: PodcastDetailPagePro
                       if (!guestPhotoUrl) {
                         const name = (g.name || "").toLowerCase();
                         if (name.includes("ibrahim")) {
-                          guestPhotoUrl = "/assets/passports/ibrahim.jpeg";
+                          guestPhotoUrl = "/assets/passports/ibrahim-murtala-muhammad.jpeg";
                         } else if (name.includes("awwal")) {
                           guestPhotoUrl = "/assets/passports/awwal.jpeg";
                         }
@@ -139,7 +139,7 @@ export default async function PodcastDetailPage({ params }: PodcastDetailPagePro
                               {g.name.toLowerCase().includes("awwal") 
                                 ? "Awwal Dahiru is the IT Lead at CHAMPS (Child Health and Mortality Prevention Surveillance) Bauchi, where he leverages technology, data infrastructure, and digital health frameworks to track, analyze, and prevent under-five and maternal mortality."
                                 : g.name.toLowerCase().includes("murtala") || g.name.toLowerCase().includes("ibrahim")
-                                ? "Ibrahim Murtala is the Lead for Stakeholder Engagement & Programs and an experienced moderator/host of SDCI's podcasts, convening leading policy conversations on development, governance, and structural reforms in Nigeria."
+                                ? "Ibrahim Murtala Muhammad is a stakeholder engagement and programs professional with experience building strategic partnerships, leading multi-stakeholder initiatives, and driving programs that advance innovation, youth development, and sustainable development. He has successfully coordinated engagements across government institutions, development partners, the private sector, academia, and civil society to foster collaboration and deliver measurable impact."
                                 : bioText || "SDCI Contributor and expert analyst."}
                             </p>
                           </div>
@@ -200,7 +200,7 @@ export default async function PodcastDetailPage({ params }: PodcastDetailPagePro
                   if (!photoUrl) {
                     const name = (g.name || "").toLowerCase();
                     if (name.includes("ibrahim")) {
-                      photoUrl = "/assets/passports/ibrahim.jpeg";
+                      photoUrl = "/assets/passports/ibrahim-murtala-muhammad.jpeg";
                     } else if (name.includes("awwal")) {
                       photoUrl = "/assets/passports/awwal.jpeg";
                     }
