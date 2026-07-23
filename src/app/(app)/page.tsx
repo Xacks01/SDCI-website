@@ -135,8 +135,10 @@ We look forward to welcoming you.`,
   const coverUrl = hasCover ? getMediaUrl((featuredPodcast.cover as any).url) : "/assets/hero-bg-sdci-4.jpeg";
 
   // Find the primary launch event
-  const activeEvents = eventsResult.docs.length > 0 ? eventsResult.docs : mockEvents;
-  const mainEvent = activeEvents[0];
+  const cmsLaunchEvent = eventsResult.docs.find((doc: any) => 
+    doc.title?.toLowerCase().includes("sdci official launch") || doc.title?.toLowerCase().includes("sdci launch")
+  );
+  const mainEvent = cmsLaunchEvent || mockEvents[0];
   const mainEventLumaId = mainEvent ? getLumaEventId(mainEvent.registrationURL) : null;
   const mainEventImageUrl = mainEvent && mainEvent.image && typeof mainEvent.image === "object" && (mainEvent.image as any).url
     ? getMediaUrl((mainEvent.image as any).url)
