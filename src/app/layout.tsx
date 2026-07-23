@@ -3,6 +3,7 @@ import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { getPayload } from "payload";
 import config from "@/payload.config";
+import { LumaInit } from "@/components/shared/LumaInit";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-ibm-sans",
@@ -74,6 +75,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-petrol-50 dark:bg-petrol-950 text-petrol-950 dark:text-neutral-100 font-sans">
         {children}
+        <LumaInit />
       </body>
     </html>
   );

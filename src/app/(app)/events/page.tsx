@@ -9,6 +9,19 @@ import { getMediaUrl } from "@/lib/utils";
 
 export const revalidate = 60;
 
+const getLumaEventId = (url: string | null | undefined): string | null => {
+  if (!url) return null;
+  const isLuma = url.includes("lu.ma/") || url.includes("luma.com/");
+  if (!isLuma) return null;
+  const parts = url.split("/");
+  const lastPart = parts[parts.length - 1];
+  if (lastPart.startsWith("evt-")) {
+    return lastPart;
+  }
+  const evtPart = parts.find(p => p.startsWith("evt-"));
+  return evtPart || lastPart;
+};
+
 export default async function EventsPage() {
   const payload = await getPayload({ config });
 
@@ -27,12 +40,12 @@ export default async function EventsPage() {
       title: "SDCI Launch & National Policy Dialogue",
       type: "Launch",
       format: "Conference",
-      date: "",
-      dateDisplay: "2026",
+      date: "2026-08-15",
+      dateDisplay: "",
       location: "Bauchi, Nigeria & Online",
       image: { url: "/assets/event-launch.jpg" },
       description: "Marking our official institutional launch. Join policy makers, civil society leaders, and development experts to chart a data-driven path for sub-national growth and transparency.",
-      registrationURL: "/get-involved#partner",
+      registrationURL: "https://luma.com/event/evt-N83vmSARXUOlJVE",
       isUpcoming: true,
     },
     {
@@ -40,8 +53,8 @@ export default async function EventsPage() {
       title: "Sub-national Revenue & Fiscal Forum",
       type: "Dialogue",
       format: "Roundtable",
-      date: "",
-      dateDisplay: "2026",
+      date: "2026-09-18",
+      dateDisplay: "",
       location: "Virtual / Zoom",
       image: { url: "/assets/event-fiscal.jpg" },
       description: "An expert panel discussing state-level revenue mobilization strategies, municipal budget transparency, and local economic resilience planning.",
@@ -53,8 +66,8 @@ export default async function EventsPage() {
       title: "Annual Sustainable Development Summit",
       type: "Summit",
       format: "Summit",
-      date: "",
-      dateDisplay: "2027",
+      date: "2027-02-12",
+      dateDisplay: "",
       location: "Abuja, Nigeria",
       image: { url: "/assets/event-summit.jpg" },
       description: "Our flagship annual convening bringing together national and international stakeholders to review policy alignment, accountability metrics, and local impact.",
@@ -150,9 +163,23 @@ export default async function EventsPage() {
             {/* CTA buttons */}
             <div className="lg:col-span-3 p-8 md:p-10 flex flex-col gap-4 justify-center bg-petrol-900/30 dark:bg-petrol-900/10 border-l border-petrol-900/40 dark:border-petrol-800/40">
               {featuredEvent.registrationURL ? (
-                <a href={featuredEvent.registrationURL} target="_blank" rel="noreferrer" className="w-full">
-                  <Button variant="primary" className="w-full font-bold text-xs uppercase py-3 rounded-none">Register to Attend</Button>
-                </a>
+                (() => {
+                  const lumaId = getLumaEventId(featuredEvent.registrationURL);
+                  return lumaId ? (
+                    <Button
+                      variant="primary"
+                      className="w-full font-bold text-xs uppercase py-3 rounded-none"
+                      data-luma-action="checkout"
+                      data-luma-event-id={lumaId}
+                    >
+                      Register to Attend
+                    </Button>
+                  ) : (
+                    <a href={featuredEvent.registrationURL} target="_blank" rel="noreferrer" className="w-full">
+                      <Button variant="primary" className="w-full font-bold text-xs uppercase py-3 rounded-none">Register to Attend</Button>
+                    </a>
+                  );
+                })()
               ) : (
                 <Button variant="primary" className="w-full font-bold text-xs uppercase py-3 rounded-none" disabled>Free Access</Button>
               )}
@@ -223,9 +250,24 @@ export default async function EventsPage() {
                     </div>
                     <div className="pt-4 border-t border-neutral-100 dark:border-petrol-800/60 flex items-center justify-between">
                       {evt.registrationURL ? (
-                        <a href={evt.registrationURL} target="_blank" rel="noreferrer">
-                          <Button variant="primary" size="sm" className="text-xs">Register to Attend</Button>
-                        </a>
+                        (() => {
+                          const lumaId = getLumaEventId(evt.registrationURL);
+                          return lumaId ? (
+                            <Button
+                              variant="primary"
+                              size="sm"
+                              className="text-xs"
+                              data-luma-action="checkout"
+                              data-luma-event-id={lumaId}
+                            >
+                              Register to Attend
+                            </Button>
+                          ) : (
+                            <a href={evt.registrationURL} target="_blank" rel="noreferrer">
+                              <Button variant="primary" size="sm" className="text-xs">Register to Attend</Button>
+                            </a>
+                          );
+                        })()
                       ) : (
                         <Button variant="outline" size="sm" className="text-xs" disabled>Register Free</Button>
                       )}
