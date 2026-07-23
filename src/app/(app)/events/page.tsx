@@ -37,14 +37,24 @@ export default async function EventsPage() {
   const mockEvents = [
     {
       id: "launch-event",
-      title: "SDCI Launch Event",
+      title: "SDCI Official Launch",
       type: "Launch",
       format: "Conference",
       date: "2026-08-15",
       dateDisplay: "",
       location: "Bauchi State Government House",
       image: { url: "/assets/event-launch.jpg" },
-      description: "Marking our official institutional launch. Join policy makers, civil society leaders, and development experts to chart a data-driven path for sub-national growth and transparency.",
+      description: `Join us as the Sustainable Development Conversations Initiative (SDCI) officially launches its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
+
+The event will feature an inaugural address, a panel discussion with distinguished speakers, and the official ribbon-cutting ceremony, bringing together policymakers, development partners, civil society organizations, academia, the private sector, youth leaders, and engaged citizens.
+
+This launch marks the beginning of a platform dedicated to making public policy more accessible, encouraging meaningful dialogue, and building partnerships that drive sustainable development and democratic governance.
+
+Whether you are a public servant, development practitioner, researcher, student, entrepreneur, or an active citizen, we invite you to be part of this milestone as we shape a future where informed citizens and responsive institutions work together for lasting impact.
+
+Attendance is free, but registration is required.
+
+We look forward to welcoming you.`,
       registrationURL: "https://luma.com/event/evt-N83vmSARXUOlJVE",
       isUpcoming: true,
     }
@@ -129,8 +139,8 @@ export default async function EventsPage() {
                   <span className="text-lime-300">Location:</span> {featuredEvent.location}
                 </p>
               </div>
-              <p className="text-xs md:text-sm text-petrol-200 dark:text-petrol-300 leading-relaxed line-clamp-3 font-sans">
-                Join policy analysts, private administrators, and community leaders to evaluate budgetary allocations, economic growth resilience, and accountability goals.
+              <p className="text-xs md:text-sm text-petrol-200 dark:text-petrol-300 leading-relaxed font-sans whitespace-pre-line">
+                {featuredEvent.description}
               </p>
             </div>
             
