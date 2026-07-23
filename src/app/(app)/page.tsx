@@ -9,7 +9,7 @@ import { HeroSlider } from "@/components/shared/HeroSlider";
 import { Accordion } from "@/components/ui/Accordion";
 import { getMediaUrl } from "@/lib/utils";
 import { FeaturedPodcastPlayer } from "@/components/shared/FeaturedPodcastPlayer";
-import { Users, Shield, Share2, FileText, Mail, Heart, Info, Scale, Coins, HeartHandshake, GraduationCap, Leaf } from "lucide-react";
+import { Users, Shield, Share2, FileText, Mail, Heart, Info, Scale, Coins, HeartHandshake, GraduationCap, Leaf, Calendar, MapPin } from "lucide-react";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -75,7 +75,7 @@ export default async function HomePage() {
       id: "launch-event",
       title: "SDCI Official Launch",
       type: "Launch",
-      format: "in-person",
+      format: "hybrid",
       date: "2026-08-15",
       dateDisplay: "",
       location: "Bauchi State Government House",
@@ -477,7 +477,7 @@ We look forward to welcoming you.`,
                     Inaugural Event
                   </span>
                   <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-petrol-200">
-                    {mainEvent.format === "online" ? "Online / Virtual" : mainEvent.format === "in-person" ? "In-Person" : "Hybrid"} · {mainEventLocation}
+                    {mainEvent.format === "online" ? "Online / Virtual" : mainEvent.format === "in-person" ? "In-Person" : "In-Person & Online"} · {mainEventLocation}
                   </span>
                 </div>
                 
@@ -491,14 +491,14 @@ We look forward to welcoming you.`,
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-petrol-200 py-2">
                   <div className="flex items-start gap-2.5">
-                    <span className="text-lime-300 font-bold uppercase tracking-wider block text-[11px] mt-0.5">When:</span>
+                    <Calendar className="w-4 h-4 text-lime-300 shrink-0 mt-0.5" />
                     <div>
                       <p className="font-semibold text-white">{mainEventDateFormatted}</p>
                       <p className="text-[12px] opacity-80">{mainEventTimeFormatted}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2.5">
-                    <span className="text-lime-300 font-bold uppercase tracking-wider block text-[11px] mt-0.5">Where:</span>
+                    <MapPin className="w-4 h-4 text-lime-300 shrink-0 mt-0.5" />
                     <div>
                       <p className="font-semibold text-white">{mainEventLocation}</p>
                       <p className="text-[12px] opacity-80">Ahmadu Bello Way, Yelwa</p>

@@ -6,6 +6,7 @@ import { Tag } from "@/components/ui/Tag";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { getMediaUrl } from "@/lib/utils";
+import { Calendar, MapPin, Globe, Users } from "lucide-react";
 
 export const revalidate = 60;
 
@@ -39,7 +40,7 @@ export default async function EventsPage() {
       id: "launch-event",
       title: "SDCI Official Launch",
       type: "Launch",
-      format: "in-person",
+      format: "hybrid",
       date: "2026-08-15",
       dateDisplay: "",
       location: "Bauchi State Government House",
@@ -126,17 +127,22 @@ We look forward to welcoming you.`,
             <div className="lg:col-span-5 p-8 md:p-10 space-y-6 flex flex-col justify-center">
               <div className="flex items-center space-x-2">
                 <Tag variant="lime">{featuredEvent.type}</Tag>
-                <span className="text-xs text-lime-300 font-semibold uppercase tracking-wider">{featuredEvent.format}</span>
+                <span className="text-xs text-lime-300 font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                  {featuredEvent.format === "online" ? <Globe className="w-3 h-3" /> : <Users className="w-3 h-3" />}
+                  {featuredEvent.format === "online" ? "Online" : featuredEvent.format === "in-person" ? "In-Person" : "Hybrid"}
+                </span>
               </div>
               <h3 className="text-2xl md:text-3xl font-bold font-serif text-white leading-snug">
                 {featuredEvent.title}
               </h3>
-              <div className="space-y-1.5 text-xs md:text-sm text-petrol-100 dark:text-petrol-200 font-medium font-sans">
-                <p className="flex items-center gap-1.5">
-                  <span className="text-lime-300">Date:</span> {featuredEvent.dateDisplay || (featuredEvent.date ? new Date(featuredEvent.date).toLocaleDateString("en-NG", { dateStyle: "full" }) : "")}
+              <div className="space-y-2 text-xs md:text-sm text-petrol-100 dark:text-petrol-200 font-medium font-sans">
+                <p className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-lime-300 shrink-0" />
+                  <span>{featuredEvent.dateDisplay || (featuredEvent.date ? new Date(featuredEvent.date).toLocaleDateString("en-NG", { dateStyle: "full" }) : "")}</span>
                 </p>
-                <p className="flex items-center gap-1.5">
-                  <span className="text-lime-300">Location:</span> {featuredEvent.location}
+                <p className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-lime-300 shrink-0" />
+                  <span>{featuredEvent.location}</span>
                 </p>
               </div>
               <p className="text-xs md:text-sm text-petrol-200 dark:text-petrol-300 leading-relaxed font-sans whitespace-pre-line">
