@@ -73,41 +73,15 @@ export default async function HomePage() {
   const mockEvents = [
     {
       id: "launch-event",
-      title: "SDCI Launch & National Policy Dialogue",
+      title: "SDCI Launch Event",
       type: "Launch",
       format: "Conference",
       date: "2026-08-15",
       dateDisplay: "",
-      location: "Bauchi, Nigeria & Online",
+      location: "Bauchi State Government House",
       image: { url: "/assets/event-launch.jpg" },
       description: "Marking our official institutional launch. Join policy makers, civil society leaders, and development experts to chart a data-driven path for sub-national growth and transparency.",
       registrationURL: "https://luma.com/event/evt-N83vmSARXUOlJVE",
-      isUpcoming: true,
-    },
-    {
-      id: "fiscal-forum",
-      title: "Sub-national Revenue & Fiscal Forum",
-      type: "Dialogue",
-      format: "Roundtable",
-      date: "2026-09-18",
-      dateDisplay: "",
-      location: "Virtual / Zoom",
-      image: { url: "/assets/event-fiscal.jpg" },
-      description: "An expert panel discussing state-level revenue mobilization strategies, municipal budget transparency, and local economic resilience planning.",
-      registrationURL: "/get-involved#partner",
-      isUpcoming: true,
-    },
-    {
-      id: "annual-summit",
-      title: "Annual Sustainable Development Summit",
-      type: "Summit",
-      format: "Summit",
-      date: "2027-02-12",
-      dateDisplay: "",
-      location: "Abuja, Nigeria",
-      image: { url: "/assets/event-summit.jpg" },
-      description: "Our flagship annual convening bringing together national and international stakeholders to review policy alignment, accountability metrics, and local impact.",
-      registrationURL: "/get-involved#partner",
       isUpcoming: true,
     }
   ];
@@ -150,10 +124,125 @@ export default async function HomePage() {
     (featuredPodcast.cover as any).url;
   const coverUrl = hasCover ? getMediaUrl((featuredPodcast.cover as any).url) : "/assets/hero-bg-sdci-4.jpeg";
 
+  // Find the primary launch event
+  const activeEvents = eventsResult.docs.length > 0 ? eventsResult.docs : mockEvents;
+  const mainEvent = activeEvents[0];
+  const mainEventLumaId = mainEvent ? getLumaEventId(mainEvent.registrationURL) : null;
+  const mainEventImageUrl = mainEvent && mainEvent.image && typeof mainEvent.image === "object" && (mainEvent.image as any).url
+    ? getMediaUrl((mainEvent.image as any).url)
+    : "/assets/event-launch.jpg";
+
+  const mainEventDescription = mainEvent 
+    ? (typeof mainEvent.description === "string" 
+        ? mainEvent.description 
+        : "Marking our official institutional launch. Join policy makers, civil society leaders, and development experts to chart a data-driven path for sub-national growth and transparency.")
+    : "";
+
+  const mainEventDateObj = mainEvent && mainEvent.date ? new Date(mainEvent.date) : null;
+  const mainEventDateFormatted = mainEventDateObj && !isNaN(mainEventDateObj.getTime())
+    ? mainEventDateObj.toLocaleDateString("en-US", { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+    : "Saturday, August 15, 2026";
+  const mainEventTimeFormatted = "9:00 AM - 10:30 AM (GMT+1)";
+  
+  const mainEventLocation = mainEvent ? mainEvent.location : "Bauchi State Government House";
+
   return (
     <div className="font-sans text-petrol-950 dark:text-neutral-200 bg-petrol-50/10 dark:bg-transparent transition-colors duration-300">
       {/* 1. Hero Slider Section */}
       <HeroSlider />
+
+      {/* 1.5. SDCI Launch Event Spotlight Section */}
+      {mainEvent && (
+        <section className="max-w-7xl mx-auto pt-16 pb-6 px-6 md:px-8">
+          <div className="relative overflow-hidden bg-gradient-to-br from-petrol-950 via-petrol-900 to-green-950 border border-petrol-800 text-white rounded-none p-8 md:p-12 shadow-xl group">
+            {/* Decorative background grid/gradients */}
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+            <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-lime-500/10 blur-[120px] pointer-events-none" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+              {/* Left: Content */}
+              <div className="lg:col-span-7 space-y-6">
+                <div className="flex flex-wrap gap-2 items-center">
+                  <span className="inline-flex items-center px-3 py-1 rounded-none border border-lime-400/30 text-[10px] font-bold uppercase tracking-wider text-lime-300 bg-lime-400/10">
+                    Inaugural Event
+                  </span>
+                  <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-petrol-200">
+                    {mainEvent.format === "online" ? "Online / Virtual" : mainEvent.format === "in-person" ? "In-Person" : "Hybrid"} · {mainEventLocation}
+                  </span>
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl font-extrabold font-serif tracking-tight leading-tight text-white">
+                  {mainEvent.title}
+                </h2>
+                
+                <p className="text-petrol-100/90 text-sm md:text-base leading-relaxed max-w-2xl font-sans">
+                  {mainEventDescription}
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-petrol-200 py-2">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-lime-300 font-bold uppercase tracking-wider block text-[11px] mt-0.5">When:</span>
+                    <div>
+                      <p className="font-semibold text-white">{mainEventDateFormatted}</p>
+                      <p className="text-[12px] opacity-80">{mainEventTimeFormatted}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-lime-300 font-bold uppercase tracking-wider block text-[11px] mt-0.5">Where:</span>
+                    <div>
+                      <p className="font-semibold text-white">{mainEventLocation}</p>
+                      <p className="text-[12px] opacity-80">Ahmadu Bello Way, Yelwa</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="pt-2 flex flex-wrap gap-4">
+                  {mainEvent.registrationURL ? (
+                    mainEventLumaId ? (
+                      <button
+                        className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg"
+                        data-luma-action="checkout"
+                        data-luma-event-id={mainEventLumaId}
+                      >
+                        Register to Attend
+                      </button>
+                    ) : (
+                      <a href={mainEvent.registrationURL} target="_blank" rel="noreferrer">
+                        <button className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg">
+                          Register to Attend
+                        </button>
+                      </a>
+                    )
+                  ) : (
+                    <button className="border border-neutral-700 bg-transparent text-neutral-500 font-sans font-bold text-xs uppercase px-8 py-3.5 rounded-none cursor-not-allowed" disabled>
+                      Registration Closed
+                    </button>
+                  )}
+                  <Link href="/events">
+                    <button className="border border-white/20 hover:border-white text-white hover:bg-white/10 font-sans font-bold text-xs uppercase px-6 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider">
+                      View Event Details
+                    </button>
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Right: Cover Visual */}
+              <div className="lg:col-span-5 relative w-full aspect-[4/3] lg:aspect-square bg-petrol-950/80 border border-white/10 overflow-hidden group shadow-lg">
+                <img
+                  src={mainEventImageUrl}
+                  alt={mainEvent.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-petrol-950/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 bg-petrol-950/80 backdrop-blur-md border border-white/10 p-4 text-xs">
+                  <p className="text-white font-bold mb-0.5">{mainEvent.title}</p>
+                  <p className="text-lime-300">August 15, 2026 · Bauchi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 2. The Four Ways Section */}
       <section className="max-w-7xl mx-auto py-24 px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -573,112 +662,6 @@ export default async function HomePage() {
           </div>
         </section>
       )}
-
-
-
-      {/* 6. Upcoming Conversations (What's Next) */}
-      <section className="max-w-7xl mx-auto py-20 px-6">
-        <div className="flex flex-row items-end justify-between mb-12">
-          <div className="space-y-3 flex flex-col items-start">
-            <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit">
-              Calendar
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold font-serif tracking-tight text-neutral-950 dark:text-white">
-              What's next
-            </h2>
-          </div>
-          <Link href="/events" className="text-sm font-semibold text-neutral-800 dark:text-neutral-300 hover:text-neutral-600 dark:hover:text-white transition-colors flex items-center gap-1 shrink-0">
-            View all events &rarr;
-          </Link>
-        </div>
-
-        {upcomingEvents.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {upcomingEvents.map((evt, index) => {
-              const dateObj = evt.date ? new Date(evt.date) : null;
-              const month = dateObj && !isNaN(dateObj.getTime()) ? dateObj.toLocaleDateString("en-US", { month: "short" }).toUpperCase() : "";
-              const day = dateObj && !isNaN(dateObj.getTime()) ? dateObj.toLocaleDateString("en-US", { day: "2-digit" }) : "";
-              
-              const formatLabel = evt.format === "in-person" ? "In-person" : evt.format === "hybrid" ? "Hybrid" : "Online";
-              const formatLocation = !evt.location || evt.location.toLowerCase() === "online" ? formatLabel : `${formatLabel} · ${evt.location}`;
-
-              const imageUrl = evt.image && typeof evt.image === "object" && (evt.image as any).url
-                ? getMediaUrl((evt.image as any).url)
-                : index === 0
-                ? "/assets/hero-bg-sdci-1.jpeg"
-                : index === 1
-                ? "/assets/hero-bg-sdci-2.jpeg"
-                : "/assets/hero-bg-sdci-3.jpeg";
-
-              return (
-                <div key={evt.id} className="flex flex-col bg-white dark:bg-petrol-950/40 border border-neutral-200/80 dark:border-petrol-900 rounded-none overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-green-600/30 transition-all duration-300 group">
-                  {/* Top: Thumbnail */}
-                  <div className="h-44 w-full relative bg-neutral-100 dark:bg-petrol-900 shrink-0 overflow-hidden">
-                    <img
-                      src={imageUrl}
-                      alt={evt.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  {/* Bottom: Date & Content */}
-                  <div className="flex items-stretch p-6 flex-1">
-                    {/* Left: Date */}
-                    <div className="flex flex-col items-center justify-center border-r border-neutral-200 dark:border-petrol-900 pr-6 mr-6 shrink-0 w-16">
-                      <span className="text-[11px] font-bold tracking-wider text-neutral-400 dark:text-neutral-400 uppercase leading-none">
-                        {evt.dateDisplay ? "YEAR" : month}
-                      </span>
-                      <span className="text-3xl font-bold font-sans tracking-tight text-neutral-800 dark:text-neutral-200 mt-2 leading-none">
-                        {evt.dateDisplay || day}
-                      </span>
-                    </div>
-                    {/* Right: Content */}
-                    <div className="flex flex-col flex-1 justify-between min-h-[120px]">
-                      <div className="space-y-2">
-                        <h3 className="text-[15px] font-bold font-serif text-petrol-950 dark:text-white leading-snug">
-                          {evt.title}
-                        </h3>
-                        <p className="text-xs text-neutral-700 dark:text-neutral-350 font-medium">
-                          {formatLocation}
-                        </p>
-                      </div>
-                      <div className="pt-4">
-                        {evt.registrationURL ? (
-                          (() => {
-                            const lumaId = getLumaEventId(evt.registrationURL);
-                            return lumaId ? (
-                              <button
-                                className="border border-petrol-950 dark:border-white bg-petrol-950 dark:bg-white text-white dark:text-petrol-950 text-[11px] font-bold hover:bg-petrol-800 dark:hover:bg-neutral-200 px-4 py-1.5 transition-colors rounded-none cursor-pointer"
-                                data-luma-action="checkout"
-                                data-luma-event-id={lumaId}
-                              >
-                                Register
-                              </button>
-                            ) : (
-                              <a href={evt.registrationURL} target="_blank" rel="noreferrer">
-                                <button className="border border-petrol-950 dark:border-white bg-petrol-950 dark:bg-white text-white dark:text-petrol-950 text-[11px] font-bold hover:bg-petrol-800 dark:hover:bg-neutral-200 px-4 py-1.5 transition-colors rounded-none cursor-pointer">
-                                  Register
-                                </button>
-                              </a>
-                            );
-                          })()
-                        ) : (
-                          <button className="border border-neutral-300 dark:border-petrol-850 bg-transparent text-neutral-400 dark:text-neutral-400 text-[11px] font-bold px-4 py-1.5 rounded-none cursor-not-allowed" disabled>
-                            Register
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="py-12 border border-neutral-200 dark:border-petrol-900 rounded-none text-center bg-white dark:bg-petrol-950/40 text-neutral-500 dark:text-neutral-400">
-            No upcoming events scheduled at this moment. Join our newsletter to receive invitations to our seminars.
-          </div>
-        )}
-      </section>
 
       {/* 7. Advisory & Commission Hero Section */}
       <section 
