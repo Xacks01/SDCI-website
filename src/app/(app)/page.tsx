@@ -22,6 +22,7 @@ const FORMAT_LABELS: Record<string, string> = {
 
 const getLumaEventId = (url: string | null | undefined): string | null => {
   if (!url) return null;
+  if (url.includes("jevfaqo0")) return "evt-N83vmSARXUOIJVE";
   const isLuma = url.includes("lu.ma/") || url.includes("luma.com/");
   if (!isLuma) return null;
   const parts = url.split("/");
@@ -30,7 +31,7 @@ const getLumaEventId = (url: string | null | undefined): string | null => {
     return lastPart;
   }
   const evtPart = parts.find(p => p.startsWith("evt-"));
-  return evtPart || lastPart;
+  return evtPart || "evt-N83vmSARXUOIJVE";
 };
 
 export default async function HomePage() {
@@ -91,7 +92,7 @@ Whether you are a public servant, development practitioner, researcher, student,
 Attendance is free, but registration is required.
 
 We look forward to welcoming you.`,
-      registrationURL: "https://lu.ma/event/evt-N83vmSARXUOIJVE",
+      registrationURL: "https://lu.ma/jevfaqo0",
       isUpcoming: true,
     }
   ];
@@ -508,7 +509,7 @@ We look forward to welcoming you.`,
                       href={mainEventRegistrationURL}
                       target="_blank"
                       rel="noreferrer"
-                      className="luma-checkout--button inline-block"
+                      className="inline-block"
                       data-luma-action="checkout"
                       data-luma-event-id={mainEventLumaId}
                     >
