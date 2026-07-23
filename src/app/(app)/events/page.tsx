@@ -40,10 +40,10 @@ export default async function EventsPage() {
       id: "launch-event",
       title: "SDCI Official Launch",
       type: "Launch",
-      format: "hybrid",
+      format: "in-person",
       date: "2026-08-15",
       dateDisplay: "",
-      location: "Bauchi State Government House",
+      location: "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)",
       image: { url: "/assets/event-launch.jpg" },
       description: `Join us as the Sustainable Development Conversations Initiative (SDCI) officially launches its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
 
@@ -56,7 +56,7 @@ Whether you are a public servant, development practitioner, researcher, student,
 Attendance is free, but registration is required.
 
 We look forward to welcoming you.`,
-      registrationURL: "https://luma.com/event/evt-N83vmSARXUOlJVE",
+      registrationURL: "https://lu.ma/event/evt-N83vmSARXUOIJVE",
       isUpcoming: true,
     }
   ];
@@ -101,9 +101,9 @@ We look forward to welcoming you.`,
           <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit mb-6">
             Featured Event
           </span>
-          <Card variant="petrol" padding="none" className="overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 bg-petrol-950 border border-petrol-800 rounded-none">
+          <Card variant="default" padding="none" className="overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none shadow-md">
             {/* Featured Image */}
-            <div className="lg:col-span-4 relative aspect-[16/10] lg:aspect-auto lg:h-full min-h-[250px] bg-neutral-900 border-r border-petrol-800/40">
+            <div className="lg:col-span-6 relative aspect-[4/3] lg:aspect-auto lg:h-full min-h-[350px] bg-neutral-900 border-r border-neutral-100 dark:border-petrol-900/40">
               {featuredImgUrl ? (
                 <img
                   src={featuredImgUrl}
@@ -123,67 +123,72 @@ We look forward to welcoming you.`,
               )}
             </div>
 
-            {/* Details */}
-            <div className="lg:col-span-5 p-8 md:p-10 space-y-6 flex flex-col justify-center">
+            {/* Details & CTA (Combined in 50% split) */}
+            <div className="lg:col-span-6 p-8 md:p-12 space-y-6 flex flex-col justify-center bg-white dark:bg-transparent">
               <div className="flex items-center space-x-2">
                 <Tag variant="lime">{featuredEvent.type}</Tag>
-                <span className="text-xs text-lime-300 font-semibold uppercase tracking-wider flex items-center gap-1.5">
-                  {featuredEvent.format === "online" ? <Globe className="w-3 h-3" /> : <Users className="w-3 h-3" />}
+                <span className="text-xs text-neutral-500 dark:text-neutral-400 font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                  {featuredEvent.format === "online" ? <Globe className="w-3 h-3 text-neutral-400" /> : <Users className="w-3 h-3 text-neutral-400" />}
                   {featuredEvent.format === "online" ? "Online" : featuredEvent.format === "in-person" ? "In-Person" : "Hybrid"}
                 </span>
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold font-serif text-white leading-snug">
+              <h3 className="text-2xl md:text-4xl font-extrabold font-serif text-petrol-950 dark:text-white leading-tight uppercase tracking-tight">
                 {featuredEvent.title}
               </h3>
-              <div className="space-y-2 text-xs md:text-sm text-petrol-100 dark:text-petrol-200 font-medium font-sans">
+              <div className="space-y-2 text-xs md:text-sm text-neutral-600 dark:text-neutral-400 font-medium font-sans">
                 <p className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-lime-300 shrink-0" />
+                  <Calendar className="w-4 h-4 text-green-750 dark:text-lime-300 shrink-0" />
                   <span>{featuredEvent.dateDisplay || (featuredEvent.date ? new Date(featuredEvent.date).toLocaleDateString("en-NG", { dateStyle: "full" }) : "")}</span>
                 </p>
                 <p className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-lime-300 shrink-0" />
+                  <MapPin className="w-4 h-4 text-green-750 dark:text-lime-300 shrink-0" />
                   <span>{featuredEvent.location}</span>
                 </p>
               </div>
-              <p className="text-xs md:text-sm text-petrol-200 dark:text-petrol-300 leading-relaxed font-sans whitespace-pre-line">
+              <p className="text-xs md:text-sm text-neutral-700 dark:text-neutral-350 leading-relaxed font-sans whitespace-pre-line">
                 {featuredEvent.description}
               </p>
-            </div>
-            
-            {/* CTA buttons */}
-            <div className="lg:col-span-3 p-8 md:p-10 flex flex-col gap-4 justify-center bg-petrol-900/30 dark:bg-petrol-900/10 border-l border-petrol-900/40 dark:border-petrol-800/40">
-              {featuredEvent.registrationURL ? (
-                (() => {
-                  const lumaId = getLumaEventId(featuredEvent.registrationURL);
-                  return lumaId ? (
-                    <a
-                      href={featuredEvent.registrationURL}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="w-full"
-                      data-luma-action="checkout"
-                      data-luma-event-id={lumaId}
-                    >
-                      <Button
-                        variant="primary"
-                        className="w-full font-bold text-xs uppercase py-3 rounded-none"
-                      >
-                        Register to Attend
-                      </Button>
-                    </a>
-                  ) : (
-                    <a href={featuredEvent.registrationURL} target="_blank" rel="noreferrer" className="w-full">
-                      <Button variant="primary" className="w-full font-bold text-xs uppercase py-3 rounded-none">Register to Attend</Button>
-                    </a>
-                  );
-                })()
-              ) : (
-                <Button variant="primary" className="w-full font-bold text-xs uppercase py-3 rounded-none" disabled>Free Access</Button>
-              )}
               
-              <Link href="/get-involved#partner" className="w-full">
-                <Button variant="accent" className="w-full text-xs uppercase py-3 rounded-none">Become a Sponsor</Button>
-              </Link>
+              <div className="pt-4 flex flex-wrap gap-4">
+                {featuredEvent.registrationURL ? (
+                  (() => {
+                    const lumaId = getLumaEventId(featuredEvent.registrationURL);
+                    return lumaId ? (
+                      <a
+                        href={featuredEvent.registrationURL}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-luma-action="checkout"
+                        data-luma-event-id={lumaId}
+                      >
+                        <Button
+                          variant="primary"
+                          className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-petrol-950 hover:bg-petrol-900 text-white dark:bg-lime-400 dark:text-petrol-950 dark:hover:bg-lime-300"
+                        >
+                          Register to Attend
+                        </Button>
+                      </a>
+                    ) : (
+                      <a href={featuredEvent.registrationURL} target="_blank" rel="noreferrer">
+                        <Button
+                          variant="primary"
+                          className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-petrol-950 hover:bg-petrol-900 text-white dark:bg-lime-400 dark:text-petrol-950 dark:hover:bg-lime-300"
+                        >
+                          Register to Attend
+                        </Button>
+                      </a>
+                    );
+                  })()
+                ) : (
+                  <Button variant="primary" className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider" disabled>Free Access</Button>
+                )}
+                
+                <Link href="/get-involved#partner">
+                  <Button variant="outline" className="text-xs font-bold uppercase px-6 py-3.5 rounded-none border-neutral-300 dark:border-petrol-800 hover:bg-neutral-50 dark:hover:bg-petrol-900/40 text-neutral-800 dark:text-neutral-200">
+                    Become a Sponsor
+                  </Button>
+                </Link>
+              </div>
             </div>
           </Card>
         </section>

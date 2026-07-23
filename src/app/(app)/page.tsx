@@ -75,7 +75,7 @@ export default async function HomePage() {
       id: "launch-event",
       title: "SDCI Official Launch",
       type: "Launch",
-      format: "hybrid",
+      format: "in-person",
       date: "2026-08-15",
       dateDisplay: "",
       location: "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)",
