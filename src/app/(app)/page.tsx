@@ -9,7 +9,7 @@ import { HeroSlider } from "@/components/shared/HeroSlider";
 import { Accordion } from "@/components/ui/Accordion";
 import { getMediaUrl } from "@/lib/utils";
 import { FeaturedPodcastPlayer } from "@/components/shared/FeaturedPodcastPlayer";
-import { Users, Shield, Share2, FileText, Mail, Heart, Info, Scale, Coins, HeartHandshake, GraduationCap, Leaf, Calendar, MapPin } from "lucide-react";
+import { Users, Shield, Share2, FileText, Mail, Heart, Info, Scale, Coins, HeartHandshake, GraduationCap, Leaf, Calendar, MapPin, Globe } from "lucide-react";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -469,99 +469,88 @@ We look forward to welcoming you.`,
       </div>
     </section>
 
-      {/* 1.5. SDCI Launch Event Spotlight Section (Moved below Focus Areas) */}
+      {/* 1.5. SDCI Launch Event Spotlight Section */}
       {mainEvent && (
-        <section className="max-w-7xl mx-auto pt-8 pb-16 px-6 md:px-8">
-          <div className="relative overflow-hidden bg-gradient-to-br from-petrol-950 via-petrol-900 to-green-950 border border-petrol-800 text-white rounded-none p-8 md:p-12 shadow-xl group">
-            {/* Decorative background grid/gradients */}
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-            <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-lime-500/10 blur-[120px] pointer-events-none" />
-            
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-              {/* Left: Content */}
-              <div className="lg:col-span-7 space-y-6">
-                <div className="flex flex-wrap gap-2 items-center">
-                  <span className="inline-flex items-center px-3 py-1 rounded-none border border-lime-400/30 text-[10px] font-bold uppercase tracking-wider text-lime-300 bg-lime-400/10">
-                    Inaugural Event
-                  </span>
-                  <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-petrol-200">
-                    {mainEvent.format === "online" ? "Online / Virtual" : mainEvent.format === "in-person" ? "In-Person" : "In-Person & Online"} · {mainEventLocation}
-                  </span>
-                </div>
-                
-                <h2 className="text-3xl md:text-5xl font-extrabold font-serif tracking-tight leading-tight text-white">
-                  {mainEvent.title}
-                </h2>
-                
-                <p className="text-petrol-100/90 text-sm md:text-base leading-relaxed max-w-2xl font-sans whitespace-pre-line">
-                  {mainEventDescription}
+        <section className="max-w-7xl mx-auto py-12 px-6 md:px-8">
+          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit mb-6 font-sans">
+            Featured Event
+          </span>
+          <Card variant="default" padding="none" className="overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none shadow-md">
+            {/* Featured Image */}
+            <div className="lg:col-span-6 relative aspect-[4/3] lg:aspect-auto lg:h-full min-h-[350px] bg-neutral-900 border-r border-neutral-100 dark:border-petrol-900/40">
+              <img
+                src={mainEventImageUrl}
+                alt={mainEvent.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Details & CTA (Combined in 50% split) */}
+            <div className="lg:col-span-6 p-8 md:p-12 space-y-6 flex flex-col justify-center bg-white dark:bg-transparent">
+              <div className="flex items-center space-x-2">
+                <Tag variant="lime">{mainEvent.type}</Tag>
+                <span className="text-xs text-neutral-500 dark:text-neutral-400 font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                  {mainEvent.format === "online" ? <Globe className="w-3 h-3 text-neutral-400" /> : <Users className="w-3 h-3 text-neutral-400" />}
+                  {mainEvent.format === "online" ? "Online" : mainEvent.format === "in-person" ? "In-Person" : "Hybrid"}
+                </span>
+              </div>
+              <h3 className="text-2xl md:text-4xl font-extrabold font-serif text-petrol-950 dark:text-white leading-tight uppercase tracking-tight">
+                {mainEvent.title}
+              </h3>
+              <div className="space-y-2 text-xs md:text-sm text-neutral-600 dark:text-neutral-400 font-medium font-sans">
+                <p className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-green-750 dark:text-lime-300 shrink-0" />
+                  <span>{mainEventDateFormatted} &middot; {mainEventTimeFormatted}</span>
                 </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-petrol-200 py-2">
-                  <div className="flex items-start gap-2.5">
-                    <Calendar className="w-4 h-4 text-lime-300 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-semibold text-white">{mainEventDateFormatted}</p>
-                      <p className="text-[12px] opacity-80">{mainEventTimeFormatted}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <MapPin className="w-4 h-4 text-lime-300 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-semibold text-white">{displayLocationTitle}</p>
-                      <p className="text-[12px] opacity-80">{displayLocationSubtitle}</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="pt-2 flex flex-wrap gap-4">
-                  {mainEvent.registrationURL ? (
-                    mainEventLumaId ? (
-                      <a
-                        href={mainEvent.registrationURL}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg inline-flex items-center justify-center animate-pulse hover:animate-none"
-                        data-luma-action="checkout"
-                        data-luma-event-id={mainEventLumaId}
+                <p className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-green-750 dark:text-lime-300 shrink-0 mt-0.5" />
+                  <span>{displayLocationTitle} &ndash; {displayLocationSubtitle}</span>
+                </p>
+              </div>
+              <p className="text-xs md:text-sm text-neutral-700 dark:text-neutral-350 leading-relaxed font-sans whitespace-pre-line">
+                {mainEventDescription}
+              </p>
+              
+              <div className="pt-4 flex flex-wrap gap-4">
+                {mainEvent.registrationURL ? (
+                  mainEventLumaId ? (
+                    <a
+                      href={mainEvent.registrationURL}
+                      target="_blank"
+                      rel="noreferrer"
+                      data-luma-action="checkout"
+                      data-luma-event-id={mainEventLumaId}
+                    >
+                      <Button
+                        variant="primary"
+                        className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-petrol-950 hover:bg-petrol-900 text-white dark:bg-lime-400 dark:text-petrol-950 dark:hover:bg-lime-300"
                       >
                         Register to Attend
-                      </a>
-                    ) : (
-                      <a href={mainEvent.registrationURL} target="_blank" rel="noreferrer">
-                        <button className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg">
-                          Register to Attend
-                        </button>
-                      </a>
-                    )
+                      </Button>
+                    </a>
                   ) : (
-                    <button className="border border-neutral-700 bg-transparent text-neutral-500 font-sans font-bold text-xs uppercase px-8 py-3.5 rounded-none cursor-not-allowed" disabled>
-                      Registration Closed
-                    </button>
-                  )}
-                  <Link href="/events">
-                    <button className="border border-white/20 hover:border-white text-white hover:bg-white/10 font-sans font-bold text-xs uppercase px-6 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider">
-                      View Event Details
-                    </button>
-                  </Link>
-                </div>
-              </div>
-              
-              {/* Right: Cover Visual */}
-              <div className="lg:col-span-5 relative w-full aspect-[4/3] lg:aspect-square bg-petrol-950/80 border border-white/10 overflow-hidden group shadow-lg">
-                <img
-                  src={mainEventImageUrl}
-                  alt={mainEvent.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-petrol-950/60 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-4 left-4 right-4 bg-petrol-950/80 backdrop-blur-md border border-white/10 p-4 text-xs">
-                  <p className="text-white font-bold mb-0.5">{mainEvent.title}</p>
-                  <p className="text-lime-300">August 15, 2026 · Bauchi</p>
-                </div>
+                    <a href={mainEvent.registrationURL} target="_blank" rel="noreferrer">
+                      <Button
+                        variant="primary"
+                        className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-petrol-950 hover:bg-petrol-900 text-white dark:bg-lime-400 dark:text-petrol-950 dark:hover:bg-lime-300"
+                      >
+                        Register to Attend
+                      </Button>
+                    </a>
+                  )
+                ) : (
+                  <Button variant="primary" className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider" disabled>
+                    Registration Closed
+                  </Button>
+                )}
+                <Link href="/events">
+                  <Button variant="outline" className="text-xs font-bold uppercase px-6 py-3.5 rounded-none border-neutral-300 dark:border-petrol-800 hover:bg-neutral-50 dark:hover:bg-petrol-900/40 text-neutral-800 dark:text-neutral-200">
+                    View Event Details
+                  </Button>
+                </Link>
               </div>
             </div>
-          </div>
+          </Card>
         </section>
       )}
 
