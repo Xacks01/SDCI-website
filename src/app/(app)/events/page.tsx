@@ -150,14 +150,21 @@ We look forward to welcoming you.`,
                 (() => {
                   const lumaId = getLumaEventId(featuredEvent.registrationURL);
                   return lumaId ? (
-                    <Button
-                      variant="primary"
-                      className="w-full font-bold text-xs uppercase py-3 rounded-none"
+                    <a
+                      href={featuredEvent.registrationURL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full"
                       data-luma-action="checkout"
                       data-luma-event-id={lumaId}
                     >
-                      Register to Attend
-                    </Button>
+                      <Button
+                        variant="primary"
+                        className="w-full font-bold text-xs uppercase py-3 rounded-none"
+                      >
+                        Register to Attend
+                      </Button>
+                    </a>
                   ) : (
                     <a href={featuredEvent.registrationURL} target="_blank" rel="noreferrer" className="w-full">
                       <Button variant="primary" className="w-full font-bold text-xs uppercase py-3 rounded-none">Register to Attend</Button>
@@ -237,15 +244,21 @@ We look forward to welcoming you.`,
                         (() => {
                           const lumaId = getLumaEventId(evt.registrationURL);
                           return lumaId ? (
-                            <Button
-                              variant="primary"
-                              size="sm"
-                              className="text-xs"
+                            <a
+                              href={evt.registrationURL}
+                              target="_blank"
+                              rel="noreferrer"
                               data-luma-action="checkout"
                               data-luma-event-id={lumaId}
                             >
-                              Register to Attend
-                            </Button>
+                              <Button
+                                variant="primary"
+                                size="sm"
+                                className="text-xs"
+                              >
+                                Register to Attend
+                              </Button>
+                            </a>
                           ) : (
                             <a href={evt.registrationURL} target="_blank" rel="noreferrer">
                               <Button variant="primary" size="sm" className="text-xs">Register to Attend</Button>

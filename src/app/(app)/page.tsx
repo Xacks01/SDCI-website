@@ -509,13 +509,16 @@ We look forward to welcoming you.`,
                 <div className="pt-2 flex flex-wrap gap-4">
                   {mainEvent.registrationURL ? (
                     mainEventLumaId ? (
-                      <button
-                        className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg"
+                      <a
+                        href={mainEvent.registrationURL}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg inline-flex items-center justify-center animate-pulse hover:animate-none"
                         data-luma-action="checkout"
                         data-luma-event-id={mainEventLumaId}
                       >
                         Register to Attend
-                      </button>
+                      </a>
                     ) : (
                       <a href={mainEvent.registrationURL} target="_blank" rel="noreferrer">
                         <button className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg">
