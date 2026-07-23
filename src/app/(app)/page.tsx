@@ -518,6 +518,7 @@ We look forward to welcoming you.`,
                       href={mainEvent.registrationURL}
                       target="_blank"
                       rel="noreferrer"
+                      className="luma-checkout--button inline-block"
                       data-luma-action="checkout"
                       data-luma-event-id={mainEventLumaId}
                     >

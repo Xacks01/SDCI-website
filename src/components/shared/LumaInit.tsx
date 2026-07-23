@@ -19,7 +19,7 @@ export function LumaInit() {
     <Script
       id="luma-checkout"
       src="https://embed.lu.ma/checkout-button.js"
-      strategy="lazyOnload"
+      strategy="afterInteractive"
       onLoad={() => {
         if (typeof window !== "undefined" && (window as any).luma) {
           try {

@@ -158,6 +158,7 @@ We look forward to welcoming you.`,
                         href={featuredEvent.registrationURL}
                         target="_blank"
                         rel="noreferrer"
+                        className="luma-checkout--button inline-block"
                         data-luma-action="checkout"
                         data-luma-event-id={lumaId}
                       >
@@ -259,6 +260,7 @@ We look forward to welcoming you.`,
                               href={evt.registrationURL}
                               target="_blank"
                               rel="noreferrer"
+                              className="luma-checkout--button inline-block"
                               data-luma-action="checkout"
                               data-luma-event-id={lumaId}
                             >
