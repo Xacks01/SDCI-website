@@ -466,49 +466,42 @@ We look forward to welcoming you.`,
       </div>
     </section>
 
-      {/* 1.5. SDCI Launch Event Spotlight Section */}
+      {/* 1.5. SDCI Launch Event Hero Section (Full-bleed Zero-padding like Research Hero) */}
       {mainEvent && (
-        <section className="max-w-7xl mx-auto py-12 px-6 md:px-8">
-          <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-neutral-300 dark:border-petrol-800 text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 bg-transparent w-fit mb-6 font-sans">
-            Featured Event
-          </span>
-          <Card variant="default" padding="none" className="overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none shadow-md">
-            {/* Featured Image */}
-            <div className="lg:col-span-6 relative aspect-[4/3] lg:aspect-auto lg:h-full min-h-[350px] bg-neutral-900 border-r border-neutral-100 dark:border-petrol-900/40">
-              <img
-                src={mainEventImageUrl}
-                alt={mainEvent.title}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Details & CTA (Combined in 50% split) */}
-            <div className="lg:col-span-6 p-8 md:p-12 space-y-6 flex flex-col justify-center bg-white dark:bg-transparent">
-              <div className="flex items-center space-x-2">
-                <Tag variant="lime">{mainEvent.type || "Launch"}</Tag>
-                <span className="text-xs text-neutral-500 dark:text-neutral-400 font-semibold uppercase tracking-wider flex items-center gap-1.5">
-                  <Users className="w-3 h-3 text-neutral-400" />
+        <section className="w-full grid grid-cols-1 lg:grid-cols-2 gap-0 bg-petrol-950 min-h-[500px] lg:h-[550px]">
+          {/* Left half: Text content & CTAs */}
+          <div className="w-full bg-petrol-950 text-white flex justify-end p-8 sm:p-12 md:p-16 lg:p-20 lg:h-full lg:items-center">
+            <div className="w-full max-w-[616px] space-y-6 flex flex-col justify-center">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-lime-400/40 text-xs font-semibold uppercase tracking-wider text-lime-300 bg-lime-400/10 font-sans">
+                  {mainEvent.type || "Launch"}
+                </span>
+                <span className="text-xs text-petrol-200 font-semibold uppercase tracking-wider flex items-center gap-1.5 font-sans">
+                  <Users className="w-3.5 h-3.5 text-lime-300" />
                   In-Person
                 </span>
               </div>
-              <h3 className="text-2xl md:text-4xl font-extrabold font-serif text-petrol-950 dark:text-white leading-tight uppercase tracking-tight">
+
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold font-serif tracking-tight leading-[1.15] text-white uppercase">
                 {mainEvent.title}
-              </h3>
-              <div className="space-y-2 text-xs md:text-sm text-neutral-600 dark:text-neutral-400 font-medium font-sans">
+              </h2>
+
+              <div className="space-y-2 text-xs md:text-sm text-petrol-200 font-medium font-sans">
                 <p className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-green-750 dark:text-lime-300 shrink-0" />
+                  <Calendar className="w-4 h-4 text-lime-300 shrink-0" />
                   <span>{mainEventDateFormatted} &middot; {mainEventTimeFormatted}</span>
                 </p>
                 <p className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-green-750 dark:text-lime-300 shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-lime-300 shrink-0 mt-0.5" />
                   <span>{displayLocationTitle} &ndash; {displayLocationSubtitle}</span>
                 </p>
               </div>
-              <p className="text-xs md:text-sm text-neutral-700 dark:text-neutral-350 leading-relaxed font-sans whitespace-pre-line">
-                {mainEventDescription}
+
+              <p className="text-petrol-100 text-sm md:text-base leading-relaxed font-sans line-clamp-3">
+                Join us as the Sustainable Development Conversations Initiative (SDCI) officially launches its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
               </p>
-              
-              <div className="pt-4 flex flex-wrap gap-4">
+
+              <div className="flex flex-wrap gap-4 pt-2">
                 {mainEventRegistrationURL ? (
                   mainEventLumaId ? (
                     <a
@@ -520,8 +513,8 @@ We look forward to welcoming you.`,
                       data-luma-event-id={mainEventLumaId}
                     >
                       <Button
-                        variant="primary"
-                        className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-petrol-950 hover:bg-petrol-900 text-white dark:bg-lime-400 dark:text-petrol-950 dark:hover:bg-lime-300"
+                        variant="secondary"
+                        className="rounded-none font-bold tracking-wider px-8 py-3.5 text-xs uppercase cursor-pointer"
                       >
                         Register to Attend
                       </Button>
@@ -529,26 +522,37 @@ We look forward to welcoming you.`,
                   ) : (
                     <a href={mainEventRegistrationURL} target="_blank" rel="noreferrer">
                       <Button
-                        variant="primary"
-                        className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-petrol-950 hover:bg-petrol-900 text-white dark:bg-lime-400 dark:text-petrol-950 dark:hover:bg-lime-300"
+                        variant="secondary"
+                        className="rounded-none font-bold tracking-wider px-8 py-3.5 text-xs uppercase cursor-pointer"
                       >
                         Register to Attend
                       </Button>
                     </a>
                   )
                 ) : (
-                  <Button variant="primary" className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider" disabled>
+                  <Button variant="secondary" className="rounded-none font-bold tracking-wider px-8 py-3.5 text-xs uppercase cursor-not-allowed" disabled>
                     Registration Closed
                   </Button>
                 )}
                 <Link href="/events">
-                  <Button variant="outline" className="text-xs font-bold uppercase px-6 py-3.5 rounded-none border-neutral-300 dark:border-petrol-800 hover:bg-neutral-50 dark:hover:bg-petrol-900/40 text-neutral-800 dark:text-neutral-200">
+                  <Button variant="outline" className="border-white text-white hover:bg-white hover:text-petrol-950 rounded-none font-bold tracking-wider px-6 py-3.5 text-xs uppercase">
                     View Event Details
                   </Button>
                 </Link>
               </div>
             </div>
-          </Card>
+          </div>
+
+          {/* Right half: Full Bleed Cover Image */}
+          <div className="w-full min-h-[350px] lg:h-full overflow-hidden relative group">
+            <div 
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
+              style={{ 
+                backgroundImage: `url('${mainEventImageUrl}')` 
+              }}
+              aria-label={mainEvent.title}
+            />
+          </div>
         </section>
       )}
 
