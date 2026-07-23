@@ -22,16 +22,12 @@ const FORMAT_LABELS: Record<string, string> = {
 
 const getLumaEventId = (url: string | null | undefined): string | null => {
   if (!url) return null;
-  if (url.includes("jevfaqo0")) return "evt-N83vmSARXUOIJVE";
+  if (url.includes("jevfaqo0")) return "jevfaqo0";
   const isLuma = url.includes("lu.ma/") || url.includes("luma.com/");
   if (!isLuma) return null;
   const parts = url.split("/");
   const lastPart = parts[parts.length - 1];
-  if (lastPart.startsWith("evt-")) {
-    return lastPart;
-  }
-  const evtPart = parts.find(p => p.startsWith("evt-"));
-  return evtPart || "evt-N83vmSARXUOIJVE";
+  return lastPart || "jevfaqo0";
 };
 
 export default async function HomePage() {
@@ -141,7 +137,7 @@ We look forward to welcoming you.`,
   );
   const mainEvent = cmsLaunchEvent || mockEvents[0];
   const mainEventRegistrationURL = (mainEvent && mainEvent.registrationURL) || "https://lu.ma/jevfaqo0";
-  const mainEventLumaId = getLumaEventId(mainEventRegistrationURL) || "evt-N83vmSARXUOIJVE";
+  const mainEventLumaId = getLumaEventId(mainEventRegistrationURL) || "jevfaqo0";
   const mainEventImageUrl = mainEvent && mainEvent.image && typeof mainEvent.image === "object" && (mainEvent.image as any).url
     ? getMediaUrl((mainEvent.image as any).url)
     : "/assets/event-launch.jpg";

@@ -12,16 +12,12 @@ export const revalidate = 60;
 
 const getLumaEventId = (url: string | null | undefined): string | null => {
   if (!url) return null;
-  if (url.includes("jevfaqo0")) return "evt-N83vmSARXUOIJVE";
+  if (url.includes("jevfaqo0")) return "jevfaqo0";
   const isLuma = url.includes("lu.ma/") || url.includes("luma.com/");
   if (!isLuma) return null;
   const parts = url.split("/");
   const lastPart = parts[parts.length - 1];
-  if (lastPart.startsWith("evt-")) {
-    return lastPart;
-  }
-  const evtPart = parts.find(p => p.startsWith("evt-"));
-  return evtPart || "evt-N83vmSARXUOIJVE";
+  return lastPart || "jevfaqo0";
 };
 
 export default async function EventsPage() {
