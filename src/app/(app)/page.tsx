@@ -488,10 +488,10 @@ We look forward to welcoming you.`,
             {/* Details & CTA (Combined in 50% split) */}
             <div className="lg:col-span-6 p-8 md:p-12 space-y-6 flex flex-col justify-center bg-white dark:bg-transparent">
               <div className="flex items-center space-x-2">
-                <Tag variant="lime">{mainEvent.type}</Tag>
+                <Tag variant="lime">{mainEvent.type || "Launch"}</Tag>
                 <span className="text-xs text-neutral-500 dark:text-neutral-400 font-semibold uppercase tracking-wider flex items-center gap-1.5">
-                  {mainEvent.format === "online" ? <Globe className="w-3 h-3 text-neutral-400" /> : <Users className="w-3 h-3 text-neutral-400" />}
-                  {mainEvent.format === "online" ? "Online" : mainEvent.format === "in-person" ? "In-Person" : "Hybrid"}
+                  <Users className="w-3 h-3 text-neutral-400" />
+                  In-Person
                 </span>
               </div>
               <h3 className="text-2xl md:text-4xl font-extrabold font-serif text-petrol-950 dark:text-white leading-tight uppercase tracking-tight">
