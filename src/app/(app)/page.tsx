@@ -78,7 +78,7 @@ export default async function HomePage() {
       format: "hybrid",
       date: "2026-08-15",
       dateDisplay: "",
-      location: "Bauchi State Government House",
+      location: "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)",
       image: { url: "/assets/event-launch.jpg" },
       description: `Join us as the Sustainable Development Conversations Initiative (SDCI) officially launches its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
 
@@ -91,7 +91,7 @@ Whether you are a public servant, development practitioner, researcher, student,
 Attendance is free, but registration is required.
 
 We look forward to welcoming you.`,
-      registrationURL: "https://luma.com/event/evt-N83vmSARXUOlJVE",
+      registrationURL: "https://lu.ma/event/evt-N83vmSARXUOIJVE",
       isUpcoming: true,
     }
   ];
@@ -154,7 +154,15 @@ We look forward to welcoming you.`,
     : "Saturday, August 15, 2026";
   const mainEventTimeFormatted = "9:00 AM - 10:30 AM (GMT+1)";
   
-  const mainEventLocation = mainEvent ? mainEvent.location : "Bauchi State Government House";
+  const mainEventLocation = (mainEvent && mainEvent.location) || "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)";
+  
+  const displayLocationTitle = mainEventLocation.includes("Ahmadu Bello International Conference Center")
+    ? "Ahmadu Bello International Conference Center"
+    : mainEventLocation;
+    
+  const displayLocationSubtitle = mainEventLocation.includes("Ahmadu Bello International Conference Center")
+    ? "Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)"
+    : "Bauchi State Government House";
 
   return (
     <div className="font-sans text-petrol-950 dark:text-neutral-200 bg-petrol-50/10 dark:bg-transparent transition-colors duration-300">
@@ -500,8 +508,8 @@ We look forward to welcoming you.`,
                   <div className="flex items-start gap-2.5">
                     <MapPin className="w-4 h-4 text-lime-300 shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold text-white">{mainEventLocation}</p>
-                      <p className="text-[12px] opacity-80">Ahmadu Bello Way, Yelwa</p>
+                      <p className="font-semibold text-white">{displayLocationTitle}</p>
+                      <p className="text-[12px] opacity-80">{displayLocationSubtitle}</p>
                     </div>
                   </div>
                 </div>
