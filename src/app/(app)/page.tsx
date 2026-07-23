@@ -139,7 +139,8 @@ We look forward to welcoming you.`,
     doc.title?.toLowerCase().includes("sdci official launch") || doc.title?.toLowerCase().includes("sdci launch")
   );
   const mainEvent = cmsLaunchEvent || mockEvents[0];
-  const mainEventLumaId = mainEvent ? getLumaEventId(mainEvent.registrationURL) : null;
+  const mainEventRegistrationURL = (mainEvent && mainEvent.registrationURL) || "https://lu.ma/jevfaqo0";
+  const mainEventLumaId = getLumaEventId(mainEventRegistrationURL) || "evt-N83vmSARXUOIJVE";
   const mainEventImageUrl = mainEvent && mainEvent.image && typeof mainEvent.image === "object" && (mainEvent.image as any).url
     ? getMediaUrl((mainEvent.image as any).url)
     : "/assets/event-launch.jpg";
@@ -156,15 +157,9 @@ We look forward to welcoming you.`,
     : "Saturday, August 15, 2026";
   const mainEventTimeFormatted = "9:00 AM - 10:30 AM (GMT+1)";
   
-  const mainEventLocation = (mainEvent && mainEvent.location) || "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)";
-  
-  const displayLocationTitle = mainEventLocation.includes("Ahmadu Bello International Conference Center")
-    ? "Ahmadu Bello International Conference Center"
-    : mainEventLocation;
-    
-  const displayLocationSubtitle = mainEventLocation.includes("Ahmadu Bello International Conference Center")
-    ? "Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)"
-    : "Bauchi State Government House";
+  const mainEventLocation = "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)";
+  const displayLocationTitle = "Ahmadu Bello International Conference Center";
+  const displayLocationSubtitle = "Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)";
 
   return (
     <div className="font-sans text-petrol-950 dark:text-neutral-200 bg-petrol-50/10 dark:bg-transparent transition-colors duration-300">
@@ -514,10 +509,10 @@ We look forward to welcoming you.`,
               </p>
               
               <div className="pt-4 flex flex-wrap gap-4">
-                {mainEvent.registrationURL ? (
+                {mainEventRegistrationURL ? (
                   mainEventLumaId ? (
                     <a
-                      href={mainEvent.registrationURL}
+                      href={mainEventRegistrationURL}
                       target="_blank"
                       rel="noreferrer"
                       className="luma-checkout--button inline-block"
@@ -532,7 +527,7 @@ We look forward to welcoming you.`,
                       </Button>
                     </a>
                   ) : (
-                    <a href={mainEvent.registrationURL} target="_blank" rel="noreferrer">
+                    <a href={mainEventRegistrationURL} target="_blank" rel="noreferrer">
                       <Button
                         variant="primary"
                         className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-petrol-950 hover:bg-petrol-900 text-white dark:bg-lime-400 dark:text-petrol-950 dark:hover:bg-lime-300"
