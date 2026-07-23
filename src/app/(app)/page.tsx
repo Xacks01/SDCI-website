@@ -75,7 +75,7 @@ export default async function HomePage() {
       id: "launch-event",
       title: "SDCI Official Launch",
       type: "Launch",
-      format: "Conference",
+      format: "in-person",
       date: "2026-08-15",
       dateDisplay: "",
       location: "Bauchi State Government House",
@@ -161,98 +161,7 @@ We look forward to welcoming you.`,
       {/* 1. Hero Slider Section */}
       <HeroSlider />
 
-      {/* 1.5. SDCI Launch Event Spotlight Section */}
-      {mainEvent && (
-        <section className="max-w-7xl mx-auto pt-16 pb-6 px-6 md:px-8">
-          <div className="relative overflow-hidden bg-gradient-to-br from-petrol-950 via-petrol-900 to-green-950 border border-petrol-800 text-white rounded-none p-8 md:p-12 shadow-xl group">
-            {/* Decorative background grid/gradients */}
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-            <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-lime-500/10 blur-[120px] pointer-events-none" />
-            
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-              {/* Left: Content */}
-              <div className="lg:col-span-7 space-y-6">
-                <div className="flex flex-wrap gap-2 items-center">
-                  <span className="inline-flex items-center px-3 py-1 rounded-none border border-lime-400/30 text-[10px] font-bold uppercase tracking-wider text-lime-300 bg-lime-400/10">
-                    Inaugural Event
-                  </span>
-                  <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-petrol-200">
-                    {mainEvent.format === "online" ? "Online / Virtual" : mainEvent.format === "in-person" ? "In-Person" : "Hybrid"} · {mainEventLocation}
-                  </span>
-                </div>
-                
-                <h2 className="text-3xl md:text-5xl font-extrabold font-serif tracking-tight leading-tight text-white">
-                  {mainEvent.title}
-                </h2>
-                
-                <p className="text-petrol-100/90 text-sm md:text-base leading-relaxed max-w-2xl font-sans whitespace-pre-line">
-                  {mainEventDescription}
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-petrol-200 py-2">
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-lime-300 font-bold uppercase tracking-wider block text-[11px] mt-0.5">When:</span>
-                    <div>
-                      <p className="font-semibold text-white">{mainEventDateFormatted}</p>
-                      <p className="text-[12px] opacity-80">{mainEventTimeFormatted}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-lime-300 font-bold uppercase tracking-wider block text-[11px] mt-0.5">Where:</span>
-                    <div>
-                      <p className="font-semibold text-white">{mainEventLocation}</p>
-                      <p className="text-[12px] opacity-80">Ahmadu Bello Way, Yelwa</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="pt-2 flex flex-wrap gap-4">
-                  {mainEvent.registrationURL ? (
-                    mainEventLumaId ? (
-                      <button
-                        className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg"
-                        data-luma-action="checkout"
-                        data-luma-event-id={mainEventLumaId}
-                      >
-                        Register to Attend
-                      </button>
-                    ) : (
-                      <a href={mainEvent.registrationURL} target="_blank" rel="noreferrer">
-                        <button className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg">
-                          Register to Attend
-                        </button>
-                      </a>
-                    )
-                  ) : (
-                    <button className="border border-neutral-700 bg-transparent text-neutral-500 font-sans font-bold text-xs uppercase px-8 py-3.5 rounded-none cursor-not-allowed" disabled>
-                      Registration Closed
-                    </button>
-                  )}
-                  <Link href="/events">
-                    <button className="border border-white/20 hover:border-white text-white hover:bg-white/10 font-sans font-bold text-xs uppercase px-6 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider">
-                      View Event Details
-                    </button>
-                  </Link>
-                </div>
-              </div>
-              
-              {/* Right: Cover Visual */}
-              <div className="lg:col-span-5 relative w-full aspect-[4/3] lg:aspect-square bg-petrol-950/80 border border-white/10 overflow-hidden group shadow-lg">
-                <img
-                  src={mainEventImageUrl}
-                  alt={mainEvent.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-petrol-950/60 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-4 left-4 right-4 bg-petrol-950/80 backdrop-blur-md border border-white/10 p-4 text-xs">
-                  <p className="text-white font-bold mb-0.5">{mainEvent.title}</p>
-                  <p className="text-lime-300">August 15, 2026 · Bauchi</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+
 
       {/* 2. The Four Ways Section */}
       <section className="max-w-7xl mx-auto py-24 px-6 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -551,6 +460,99 @@ We look forward to welcoming you.`,
         </div>
       </div>
     </section>
+
+      {/* 1.5. SDCI Launch Event Spotlight Section (Moved below Focus Areas) */}
+      {mainEvent && (
+        <section className="max-w-7xl mx-auto pt-8 pb-16 px-6 md:px-8">
+          <div className="relative overflow-hidden bg-gradient-to-br from-petrol-950 via-petrol-900 to-green-950 border border-petrol-800 text-white rounded-none p-8 md:p-12 shadow-xl group">
+            {/* Decorative background grid/gradients */}
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+            <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-lime-500/10 blur-[120px] pointer-events-none" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+              {/* Left: Content */}
+              <div className="lg:col-span-7 space-y-6">
+                <div className="flex flex-wrap gap-2 items-center">
+                  <span className="inline-flex items-center px-3 py-1 rounded-none border border-lime-400/30 text-[10px] font-bold uppercase tracking-wider text-lime-300 bg-lime-400/10">
+                    Inaugural Event
+                  </span>
+                  <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-petrol-200">
+                    {mainEvent.format === "online" ? "Online / Virtual" : mainEvent.format === "in-person" ? "In-Person" : "Hybrid"} · {mainEventLocation}
+                  </span>
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl font-extrabold font-serif tracking-tight leading-tight text-white">
+                  {mainEvent.title}
+                </h2>
+                
+                <p className="text-petrol-100/90 text-sm md:text-base leading-relaxed max-w-2xl font-sans whitespace-pre-line">
+                  {mainEventDescription}
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-petrol-200 py-2">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-lime-300 font-bold uppercase tracking-wider block text-[11px] mt-0.5">When:</span>
+                    <div>
+                      <p className="font-semibold text-white">{mainEventDateFormatted}</p>
+                      <p className="text-[12px] opacity-80">{mainEventTimeFormatted}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-lime-300 font-bold uppercase tracking-wider block text-[11px] mt-0.5">Where:</span>
+                    <div>
+                      <p className="font-semibold text-white">{mainEventLocation}</p>
+                      <p className="text-[12px] opacity-80">Ahmadu Bello Way, Yelwa</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="pt-2 flex flex-wrap gap-4">
+                  {mainEvent.registrationURL ? (
+                    mainEventLumaId ? (
+                      <button
+                        className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg"
+                        data-luma-action="checkout"
+                        data-luma-event-id={mainEventLumaId}
+                      >
+                        Register to Attend
+                      </button>
+                    ) : (
+                      <a href={mainEvent.registrationURL} target="_blank" rel="noreferrer">
+                        <button className="bg-lime-400 text-petrol-950 hover:bg-lime-300 font-sans font-bold text-xs uppercase px-8 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider shadow-md hover:shadow-lg">
+                          Register to Attend
+                        </button>
+                      </a>
+                    )
+                  ) : (
+                    <button className="border border-neutral-700 bg-transparent text-neutral-500 font-sans font-bold text-xs uppercase px-8 py-3.5 rounded-none cursor-not-allowed" disabled>
+                      Registration Closed
+                    </button>
+                  )}
+                  <Link href="/events">
+                    <button className="border border-white/20 hover:border-white text-white hover:bg-white/10 font-sans font-bold text-xs uppercase px-6 py-3.5 transition-colors rounded-none cursor-pointer tracking-wider">
+                      View Event Details
+                    </button>
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Right: Cover Visual */}
+              <div className="lg:col-span-5 relative w-full aspect-[4/3] lg:aspect-square bg-petrol-950/80 border border-white/10 overflow-hidden group shadow-lg">
+                <img
+                  src={mainEventImageUrl}
+                  alt={mainEvent.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-petrol-950/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 bg-petrol-950/80 backdrop-blur-md border border-white/10 p-4 text-xs">
+                  <p className="text-white font-bold mb-0.5">{mainEvent.title}</p>
+                  <p className="text-lime-300">August 15, 2026 · Bauchi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 2.5. Video Showcase Section */}
       <section className="bg-petrol-50/50 dark:bg-petrol-900/10 border-t border-b border-neutral-200/40 dark:border-petrol-900/60 py-20 transition-colors duration-300">

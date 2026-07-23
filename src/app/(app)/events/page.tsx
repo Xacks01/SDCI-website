@@ -39,7 +39,7 @@ export default async function EventsPage() {
       id: "launch-event",
       title: "SDCI Official Launch",
       type: "Launch",
-      format: "Conference",
+      format: "in-person",
       date: "2026-08-15",
       dateDisplay: "",
       location: "Bauchi State Government House",
