@@ -76,7 +76,7 @@ export default async function HomePage() {
       date: "2026-08-15",
       dateDisplay: "",
       location: "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)",
-      image: { url: "/assets/event-launch.jpg" },
+      image: { url: "/assets/launch-thumbnail.png" },
       description: `Join us as the Sustainable Development Conversations Initiative (SDCI) officially launches its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
 
 The event will feature an inaugural address, a panel discussion with distinguished speakers, and the official ribbon-cutting ceremony, bringing together policymakers, development partners, civil society organizations, academia, the private sector, youth leaders, and engaged citizens.
@@ -140,7 +140,7 @@ We look forward to welcoming you.`,
   const mainEventLumaId = getLumaEventId(mainEventRegistrationURL) || "jevfaqo0";
   const mainEventImageUrl = mainEvent && mainEvent.image && typeof mainEvent.image === "object" && (mainEvent.image as any).url
     ? getMediaUrl((mainEvent.image as any).url)
-    : "/assets/event-launch.jpg";
+    : "/assets/launch-thumbnail.png";
 
   const mainEventDescription = mainEvent 
     ? (typeof mainEvent.description === "string" 
@@ -540,14 +540,12 @@ We look forward to welcoming you.`,
             </div>
           </div>
 
-          {/* Right half: Full Bleed Cover Image */}
-          <div className="w-full min-h-[350px] lg:h-full overflow-hidden relative group">
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
-              style={{ 
-                backgroundImage: `url('${mainEventImageUrl}')` 
-              }}
-              aria-label={mainEvent.title}
+          {/* Right half: Full Cover Image */}
+          <div className="w-full min-h-[350px] lg:h-full overflow-hidden relative group bg-petrol-950/90 flex items-center justify-center p-4 sm:p-6">
+            <img 
+              src={mainEventImageUrl} 
+              alt={mainEvent.title}
+              className="w-full h-full max-h-[500px] object-contain object-center transition-transform duration-700 group-hover:scale-102"
             />
           </div>
         </section>
