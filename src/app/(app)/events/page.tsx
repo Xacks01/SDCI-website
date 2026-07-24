@@ -40,7 +40,7 @@ export default async function EventsPage() {
       format: "in-person",
       date: "2026-08-15",
       dateDisplay: "",
-      location: "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)",
+      location: "Bauchi, Nigeria · Venue: Coming Soon",
       image: { url: "/assets/launch-thumbnail.png" },
       description: `Join us as the Sustainable Development Conversations Initiative (SDCI) officially launches its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
 

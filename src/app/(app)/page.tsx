@@ -154,9 +154,9 @@ We look forward to welcoming you.`,
     : "Saturday, August 15, 2026";
   const mainEventTimeFormatted = "9:00 AM - 10:30 AM (GMT+1)";
   
-  const mainEventLocation = "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)";
-  const displayLocationTitle = "Ahmadu Bello International Conference Center";
-  const displayLocationSubtitle = "Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)";
+  const mainEventLocation = "Bauchi, Nigeria · Venue: Coming Soon";
+  const displayLocationTitle = "Bauchi, Nigeria";
+  const displayLocationSubtitle = "Venue: Coming Soon";
 
   return (
     <div className="font-sans text-petrol-950 dark:text-neutral-200 bg-petrol-50/10 dark:bg-transparent transition-colors duration-300">
@@ -490,7 +490,7 @@ We look forward to welcoming you.`,
                 </p>
                 <p className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-lime-300 shrink-0 mt-0.5" />
-                  <span>{displayLocationTitle} &ndash; {displayLocationSubtitle}</span>
+                  <span>Bauchi, Nigeria &bull; Venue: Coming Soon</span>
                 </p>
               </div>
 
