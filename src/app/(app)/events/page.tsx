@@ -204,17 +204,17 @@ We look forward to welcoming you.`,
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
             {upcomingEvents.map((evt: any) => {
               const evtImgUrl = evt.image && typeof evt.image === "object"
-                ? getMediaUrl(evt.image.sizes?.card?.url || evt.image.sizes?.thumbnail?.url || evt.image.url)
+                ? getMediaUrl(evt.image.url || evt.image.sizes?.card?.url || evt.image.sizes?.thumbnail?.url)
                 : null;
               return (
                 <Card key={evt.id} variant="default" padding="none" className="flex flex-col justify-between h-full bg-white dark:bg-petrol-900/40 border border-neutral-200 dark:border-petrol-800 overflow-hidden group shadow-sm hover:shadow-md transition-all rounded-none">
                   {/* Thumbnail */}
-                  <div className="relative w-full aspect-[16/9] bg-neutral-100 dark:bg-petrol-950/60 overflow-hidden border-b border-neutral-200 dark:border-petrol-800">
+                  <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-petrol-950/90 overflow-hidden border-b border-neutral-200 dark:border-petrol-800 flex items-center justify-center p-3 sm:p-4">
                     {evtImgUrl ? (
                       <img
                         src={evtImgUrl}
                         alt={evt.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-102"
                       />
                     ) : (
                       /* Fallback gradient */
