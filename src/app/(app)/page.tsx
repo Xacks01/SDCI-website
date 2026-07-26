@@ -541,11 +541,11 @@ We look forward to welcoming you.`,
           </div>
 
           {/* Right half: Full Cover Image */}
-          <div className="w-full min-h-[350px] lg:h-full overflow-hidden relative group bg-petrol-950/90 flex items-center justify-center p-4 sm:p-6">
+          <div className="w-full min-h-[350px] lg:h-full overflow-hidden relative group">
             <img 
               src={mainEventImageUrl} 
               alt={mainEvent.title}
-              className="w-full h-full max-h-[500px] object-contain object-center transition-transform duration-700 group-hover:scale-102"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
         </section>

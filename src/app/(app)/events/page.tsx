@@ -100,12 +100,12 @@ We look forward to welcoming you.`,
           </span>
           <Card variant="default" padding="none" className="overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white dark:bg-petrol-950/40 border border-neutral-200 dark:border-petrol-900 rounded-none shadow-md">
             {/* Featured Image */}
-            <div className="lg:col-span-6 relative aspect-[4/3] lg:aspect-auto lg:h-full min-h-[350px] bg-neutral-900 border-r border-neutral-100 dark:border-petrol-900/40">
+            <div className="lg:col-span-6 relative aspect-[4/5] lg:aspect-auto lg:h-full min-h-[350px] bg-petrol-950 border-r border-neutral-100 dark:border-petrol-900/40">
               {featuredImgUrl ? (
                 <img
                   src={featuredImgUrl}
                   alt={featuredEvent.title}
-                  className="w-full h-full object-contain object-center p-4 bg-petrol-950/90"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-102"
                 />
               ) : (
                 /* Fallback gradient */
@@ -209,12 +209,12 @@ We look forward to welcoming you.`,
               return (
                 <Card key={evt.id} variant="default" padding="none" className="flex flex-col justify-between h-full bg-white dark:bg-petrol-900/40 border border-neutral-200 dark:border-petrol-800 overflow-hidden group shadow-sm hover:shadow-md transition-all rounded-none">
                   {/* Thumbnail */}
-                  <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-petrol-950/90 overflow-hidden border-b border-neutral-200 dark:border-petrol-800 flex items-center justify-center p-3 sm:p-4">
+                  <div className="relative w-full aspect-[4/5] overflow-hidden border-b border-neutral-200 dark:border-petrol-800">
                     {evtImgUrl ? (
                       <img
                         src={evtImgUrl}
                         alt={evt.title}
-                        className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-102"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       /* Fallback gradient */
