@@ -551,6 +551,64 @@ We look forward to welcoming you.`,
         </section>
       )}
 
+      {/* 2. Featured Publication Section (Placed right after Event Section, Image on Left) */}
+      {featuredPub ? (
+        <section className="w-full grid grid-cols-1 lg:grid-cols-2 gap-0 bg-petrol-950 min-h-[500px] lg:h-[550px]">
+          {/* Left half: Publication Cover Image */}
+          <div className="w-full min-h-[350px] lg:h-full overflow-hidden relative group border-r border-neutral-100/10 dark:border-petrol-900/40">
+            <div 
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
+              style={{ 
+                backgroundImage: `url('${(featuredPub.cover && typeof featuredPub.cover === "object" && featuredPub.cover.url) ? getMediaUrl(featuredPub.cover.url) : "/assets/thumbnail-trap.png"}')` 
+              }}
+              aria-label={featuredPub.title}
+            />
+          </div>
+
+          {/* Right half: Text content & CTA */}
+          <div className="w-full bg-petrol-950 text-white flex justify-start p-8 sm:p-12 md:p-16 lg:p-20 lg:h-full lg:items-center">
+            <div className="w-full max-w-[616px] space-y-6 flex flex-col justify-center">
+              <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-white/20 text-xs font-semibold uppercase tracking-wider text-lime-300 bg-transparent w-fit font-sans">
+                Featured Publication
+              </span>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold font-serif tracking-tight leading-[1.15] text-white uppercase">
+                {featuredPub.title.includes(":") ? (
+                  <>
+                    <span>{featuredPub.title.split(":")[0]}</span>
+                    <span className="block text-lg md:text-xl lg:text-2xl font-normal normal-case mt-2 text-petrol-200">
+                      {featuredPub.title.split(":")[1].trim()}
+                    </span>
+                  </>
+                ) : (
+                  featuredPub.title
+                )}
+              </h2>
+              <p className="text-petrol-100 text-sm md:text-base leading-relaxed font-sans line-clamp-4">
+                {featuredPub.excerpt}
+              </p>
+              <div className="flex flex-wrap gap-4 pt-2">
+                <Link href={`/research/${featuredPub.slug}`}>
+                  <Button variant="secondary" className="rounded-none font-bold tracking-wider px-8 py-3.5 text-xs uppercase cursor-pointer">
+                    Read More
+                  </Button>
+                </Link>
+                <Link href="/research">
+                  <Button variant="outline" className="border-white text-white hover:bg-white hover:text-petrol-950 rounded-none font-bold tracking-wider px-6 py-3.5 text-xs uppercase">
+                    Explore More
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className="w-full py-20 px-6 bg-white dark:bg-petrol-950/20">
+          <div className="max-w-7xl mx-auto p-8 border-2 border-dashed border-neutral-200 dark:border-petrol-900 rounded-none text-center text-neutral-500 dark:text-neutral-400 py-16 bg-white dark:bg-petrol-900/40">
+            Our first publications are on the way. Join the newsletter to get them first.
+          </div>
+        </section>
+      )}
+
       {/* 2.5. Video Showcase Section */}
       <section className="bg-petrol-50/50 dark:bg-petrol-900/10 border-t border-b border-neutral-200/40 dark:border-petrol-900/60 py-20 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6 md:px-8 text-center space-y-8">
@@ -575,64 +633,6 @@ We look forward to welcoming you.`,
           </div>
         </div>
       </section>
-
-      {/* 3. Featured Publication Section */}
-      {featuredPub ? (
-        <section className="w-full grid grid-cols-1 lg:grid-cols-2 gap-0 bg-petrol-950 lg:h-[calc(100vh-4rem)]">
-          {/* Left half: Text content & CTA */}
-          <div className="w-full bg-petrol-950 text-white flex justify-end p-8 sm:p-12 md:p-16 lg:p-20 xl:py-24 xl:pr-16 lg:h-full lg:items-center">
-            <div className="w-full max-w-[616px] space-y-6 flex flex-col justify-center">
-              <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-white/20 text-xs font-semibold uppercase tracking-wider text-lime-300 bg-transparent w-fit">
-                {FORMAT_LABELS[featuredPub.format] || "Featured Publication"}
-              </span>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold font-serif tracking-tight leading-[1.15] text-white uppercase">
-                {featuredPub.title.includes(":") ? (
-                  <>
-                    <span>{featuredPub.title.split(":")[0]}</span>
-                    <span className="block text-lg md:text-xl lg:text-2xl font-normal normal-case mt-2 text-petrol-200">
-                      {featuredPub.title.split(":")[1].trim()}
-                    </span>
-                  </>
-                ) : (
-                  featuredPub.title
-                )}
-              </h2>
-              <p className="text-petrol-100 text-sm md:text-base leading-relaxed">
-                {featuredPub.excerpt}
-              </p>
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Link href={`/research/${featuredPub.slug}`}>
-                  <Button variant="secondary" className="rounded-none font-bold tracking-wider px-6 py-2.5 uppercase">
-                    Read More
-                  </Button>
-                </Link>
-                <Link href="/research">
-                  <Button variant="outline" className="border-white text-white hover:bg-white hover:text-petrol-950 rounded-none font-bold tracking-wider px-6 py-2.5 uppercase">
-                    Explore More
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Right half: Publication Cover Image */}
-          <div className="w-full min-h-[350px] lg:h-full overflow-hidden relative group">
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
-              style={{ 
-                backgroundImage: `url('${(featuredPub.cover && typeof featuredPub.cover === "object" && featuredPub.cover.url) ? getMediaUrl(featuredPub.cover.url) : "/assets/thumbnail-trap.png"}')` 
-              }}
-              aria-label={featuredPub.title}
-            />
-          </div>
-        </section>
-      ) : (
-        <section className="w-full py-20 px-6 bg-white dark:bg-petrol-950/20">
-          <div className="max-w-7xl mx-auto p-8 border-2 border-dashed border-neutral-200 dark:border-petrol-900 rounded-none text-center text-neutral-500 dark:text-neutral-400 py-16 bg-white dark:bg-petrol-900/40">
-            Our first publications are on the way. Join the newsletter to get them first.
-          </div>
-        </section>
-      )}
 
       {/* 4. Podcast Highlight */}
       {featuredPodcast ? (
