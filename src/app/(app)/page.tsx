@@ -75,7 +75,7 @@ export default async function HomePage() {
       format: "in-person",
       date: "2026-08-15",
       dateDisplay: "",
-      location: "Ahmadu Bello International Conference Center, Bauchi State Government House (Ahmadu Bello Way, Yelwa 740102, Bauchi, Nigeria)",
+      location: "Ahmadu Bello International Conference Centre (ICC), Bauchi State",
       image: { url: "/assets/launch-thumbnail.png" },
       description: `Join us as the Sustainable Development Conversations Initiative (SDCI) officially launches its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
 
@@ -154,9 +154,9 @@ We look forward to welcoming you.`,
     : "Saturday, August 15, 2026";
   const mainEventTimeFormatted = "9:00 AM - 10:30 AM (GMT+1)";
   
-  const mainEventLocation = "Bauchi, Nigeria · Venue: Coming Soon";
-  const displayLocationTitle = "Bauchi, Nigeria";
-  const displayLocationSubtitle = "Venue: Coming Soon";
+  const mainEventLocation = "Ahmadu Bello International Conference Centre (ICC), Bauchi State";
+  const displayLocationTitle = "Ahmadu Bello International Conference Centre (ICC)";
+  const displayLocationSubtitle = "Bauchi State";
 
   return (
     <div className="font-sans text-petrol-950 dark:text-neutral-200 bg-petrol-50/10 dark:bg-transparent transition-colors duration-300">
@@ -490,7 +490,7 @@ We look forward to welcoming you.`,
                 </p>
                 <p className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-lime-300 shrink-0 mt-0.5" />
-                  <span>Bauchi, Nigeria &bull; Venue: Coming Soon</span>
+                  <span>{mainEvent.location || "Ahmadu Bello International Conference Centre (ICC), Bauchi State"}</span>
                 </p>
               </div>
 

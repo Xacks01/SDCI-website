@@ -35,7 +35,7 @@ export const Events: CollectionConfig = {
       name: "location",
       type: "text",
       admin: {
-        description: "Venue name (e.g. Bauchi Conference Hall) or online platform (e.g. Zoom).",
+        description: "Venue name (e.g. Ahmadu Bello International Conference Centre (ICC), Bauchi State) or online platform (e.g. Zoom).",
       },
     },
     {

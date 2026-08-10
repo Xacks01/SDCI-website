@@ -611,6 +611,19 @@ export async function seed(payload: Payload) {
     },
   });
 
+  // Seed Event 4: SDCI Official Launch
+  await payload.create({
+    collection: "events",
+    data: {
+      title: "SDCI Official Launch",
+      type: "launch",
+      date: new Date("2026-08-15T09:00:00Z").toISOString(),
+      format: "in-person",
+      location: "Ahmadu Bello International Conference Centre (ICC), Bauchi State",
+      registrationURL: "https://lu.ma/jevfaqo0",
+    },
+  });
+
   // 9. Seed Gallery
   payload.logger.info("Seeding gallery...");
   await payload.create({
