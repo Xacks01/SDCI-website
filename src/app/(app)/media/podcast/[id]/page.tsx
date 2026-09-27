@@ -14,15 +14,19 @@ interface PodcastDetailPageProps {
   }>;
 }
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function PodcastDetailPage({ params }: PodcastDetailPageProps) {
   const { id } = await params;
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // Fetch the episode by ID
-  let ep = await payload.findByID({
-    collection: "podcast-episodes",
-    id: id,
-  }).catch(() => null) as any;
+  let ep = payload
+    ? await payload.findByID({
+        collection: "podcast-episodes",
+        id: id,
+      }).catch(() => null) as any
+    : null;
 
   if (!ep) {
     if (id === "37" || id === "ep-37") {

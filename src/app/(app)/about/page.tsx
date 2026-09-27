@@ -95,18 +95,22 @@ function getZoomClass(member: any) {
   return "object-cover scale-[1.15] origin-[50%_30%]";
 }
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function AboutPage({ searchParams }: AboutPageProps) {
   const params = await searchParams;
   const activeProfileId = params.profile;
 
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // Fetch team members sorted by order
-  const teamResult = await payload.find({
-    collection: "team",
-    sort: "order",
-    limit: 100,
-  }).catch(() => ({ docs: [] }));
+  const teamResult = payload
+    ? await payload.find({
+        collection: "team",
+        sort: "order",
+        limit: 100,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
 
   const team = teamResult.docs;
 

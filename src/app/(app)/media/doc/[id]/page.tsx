@@ -15,15 +15,19 @@ interface DocDetailPageProps {
   }>;
 }
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function DocDetailPage({ params }: DocDetailPageProps) {
   const { id } = await params;
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // Fetch the documentary by ID
-  let doc = await payload.findByID({
-    collection: "documentaries",
-    id: id,
-  }).catch(() => null) as any;
+  let doc = payload
+    ? await payload.findByID({
+        collection: "documentaries",
+        id: id,
+      }).catch(() => null) as any
+    : null;
 
   if (!doc) {
     doc = {

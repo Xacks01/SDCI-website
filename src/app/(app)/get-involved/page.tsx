@@ -6,14 +6,18 @@ import { GetInvolvedClient } from "@/components/shared/GetInvolvedClient";
 
 export const revalidate = 60;
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function GetInvolvedPage() {
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // Fetch membership tiers
-  const tiersResult = await payload.find({
-    collection: "membership-tiers",
-    limit: 20,
-  }).catch(() => ({ docs: [] }));
+  const tiersResult = payload
+    ? await payload.find({
+        collection: "membership-tiers",
+        limit: 20,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
 
   return (
     <div className="font-sans text-petrol-950 dark:text-neutral-200 bg-neutral-50/10 dark:bg-petrol-950/20 min-h-screen">

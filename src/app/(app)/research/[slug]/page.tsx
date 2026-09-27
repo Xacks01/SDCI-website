@@ -17,18 +17,22 @@ interface PublicationDetailPageProps {
   }>;
 }
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function PublicationDetailPage({ params }: PublicationDetailPageProps) {
   const { slug } = await params;
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // Fetch the publication matching the slug
-  const result = await payload.find({
-    collection: "publications",
-    where: {
-      slug: { equals: slug },
-    },
-    limit: 1,
-  });
+  const result = payload
+    ? await payload.find({
+        collection: "publications",
+        where: {
+          slug: { equals: slug },
+        },
+        limit: 1,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
 
   let pub = result.docs[0] as any;
   if (!pub) {
@@ -79,7 +83,7 @@ export default async function PublicationDetailPage({ params }: PublicationDetai
   let isUnlocked = !pub.gated;
   let userEmail = "";
 
-  if (pub.gated) {
+  if (pub.gated && payload) {
     const cookieStore = await cookies();
     const token = cookieStore.get("payload-token")?.value;
     if (token) {
@@ -110,16 +114,18 @@ export default async function PublicationDetailPage({ params }: PublicationDetai
   }
 
   // Fetch related publications (same format or theme)
-  const relatedResult = await payload.find({
-    collection: "publications",
-    where: {
-      and: [
-        { slug: { not_equals: slug } },
-        { format: { equals: pub.format } },
-      ],
-    },
-    limit: 3,
-  }).catch(() => ({ docs: [] }));
+  const relatedResult = payload
+    ? await payload.find({
+        collection: "publications",
+        where: {
+          and: [
+            { slug: { not_equals: slug } },
+            { format: { equals: pub.format } },
+          ],
+        },
+        limit: 3,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
   const related = relatedResult.docs;
 
   return (

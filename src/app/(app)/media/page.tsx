@@ -16,19 +16,23 @@ interface MediaPageProps {
   }>;
 }
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function MediaPage({ searchParams }: MediaPageProps) {
   const params = await searchParams;
   const activeTab = params.tab || "podcast";
   const activeFilter = params.filter || "all";
 
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // 1. Fetch Podcast Episodes
-  const episodesResult = await payload.find({
-    collection: "podcast-episodes",
-    sort: "-publishDate",
-    limit: 20,
-  }).catch(() => ({ docs: [] }));
+  const episodesResult = payload
+    ? await payload.find({
+        collection: "podcast-episodes",
+        sort: "-publishDate",
+        limit: 20,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
   
   const mockEpisodes = [
     {
@@ -80,11 +84,13 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
   const episodes = episodesResult.docs.length > 0 ? episodesResult.docs : mockEpisodes;
 
   // 2. Fetch Documentaries
-  const docsResult = await payload.find({
-    collection: "documentaries",
-    sort: "-year",
-    limit: 20,
-  }).catch(() => ({ docs: [] }));
+  const docsResult = payload
+    ? await payload.find({
+        collection: "documentaries",
+        sort: "-year",
+        limit: 20,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
 
   const mockDocs = [
     {
@@ -106,11 +112,13 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
   const docs = docsResult.docs.length > 0 ? docsResult.docs : mockDocs;
 
   // 3. Fetch Gallery Items
-  const galleryResult = await payload.find({
-    collection: "gallery",
-    sort: "-publishDate",
-    limit: 50,
-  }).catch(() => ({ docs: [] }));
+  const galleryResult = payload
+    ? await payload.find({
+        collection: "gallery",
+        sort: "-publishDate",
+        limit: 50,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
 
   const mockGalleryItems = [
     {

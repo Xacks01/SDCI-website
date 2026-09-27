@@ -9,17 +9,21 @@ import Link from "next/link";
 
 export const revalidate = 60;
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function CareersPage() {
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // Fetch open roles
-  const rolesResult = await payload.find({
-    collection: "open-roles",
-    where: {
-      deadline: { greater_than: new Date().toISOString() },
-    },
-    limit: 20,
-  }).catch(() => ({ docs: [] }));
+  const rolesResult = payload
+    ? await payload.find({
+        collection: "open-roles",
+        where: {
+          deadline: { greater_than: new Date().toISOString() },
+        },
+        limit: 20,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
 
   const roles = rolesResult.docs;
 

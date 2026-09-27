@@ -30,45 +30,49 @@ const getLumaEventId = (url: string | null | undefined): string | null => {
   return lastPart || "jevfaqo0";
 };
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function HomePage() {
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // Fetch data from CMS collections & globals in parallel
-  const [publicationsResult, policyBriefsResult, eventsResult, podcastResult, faqsResult, teamResult] = await Promise.all([
-    payload.find({
-      collection: "publications",
-      sort: "-publishDate",
-      limit: 1,
-    }).catch(() => ({ docs: [] })),
-    payload.find({
-      collection: "publications",
-      where: { format: { equals: "brief" } },
-      sort: "-publishDate",
-      limit: 3,
-    }).catch(() => ({ docs: [] })),
-    payload.find({
-      collection: "events",
-      sort: "date",
-      limit: 3,
-      where: {
-        date: { greater_than: new Date().toISOString() },
-      },
-    }).catch(() => ({ docs: [] })),
-    payload.find({
-      collection: "podcast-episodes",
-      sort: "-publishDate",
-      limit: 1,
-    }).catch(() => ({ docs: [] })),
-    payload.find({
-      collection: "faqs",
-      sort: "order",
-      limit: 100,
-    }).catch(() => ({ docs: [] })),
-    payload.find({
-      collection: "team",
-      limit: 100,
-    }).catch(() => ({ docs: [] })),
-  ]);
+  const [publicationsResult, policyBriefsResult, eventsResult, podcastResult, faqsResult, teamResult] = payload
+    ? await Promise.all([
+        payload.find({
+          collection: "publications",
+          sort: "-publishDate",
+          limit: 1,
+        }).catch(() => ({ docs: [] })),
+        payload.find({
+          collection: "publications",
+          where: { format: { equals: "brief" } },
+          sort: "-publishDate",
+          limit: 3,
+        }).catch(() => ({ docs: [] })),
+        payload.find({
+          collection: "events",
+          sort: "date",
+          limit: 3,
+          where: {
+            date: { greater_than: new Date().toISOString() },
+          },
+        }).catch(() => ({ docs: [] })),
+        payload.find({
+          collection: "podcast-episodes",
+          sort: "-publishDate",
+          limit: 1,
+        }).catch(() => ({ docs: [] })),
+        payload.find({
+          collection: "faqs",
+          sort: "order",
+          limit: 100,
+        }).catch(() => ({ docs: [] })),
+        payload.find({
+          collection: "team",
+          limit: 100,
+        }).catch(() => ({ docs: [] })),
+      ])
+    : [{ docs: [] }, { docs: [] }, { docs: [] }, { docs: [] }, { docs: [] }, { docs: [] }];
 
   const mockFeaturedPub = {
     id: "pub-multipolar-crossroads",

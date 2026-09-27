@@ -18,6 +18,8 @@ interface ResearchPageProps {
   }>;
 }
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function ResearchPage({ searchParams }: ResearchPageProps) {
   const params = await searchParams;
   const activeFormat = params.format || "";
@@ -25,14 +27,16 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
   const query = params.q || "";
   const page = parseInt(params.page || "1", 10);
 
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // 1. Fetch Focus Areas for filter menu
-  const themesResult = await payload.find({
-    collection: "focus-areas",
-    sort: "order",
-    limit: 100,
-  }).catch(() => ({ docs: [] }));
+  const themesResult = payload
+    ? await payload.find({
+        collection: "focus-areas",
+        sort: "order",
+        limit: 100,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
   const themes = themesResult.docs;
 
   // 2. Fetch data based on activeFormat parameter
@@ -56,12 +60,14 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
         }] : []),
       ]
     };
-    const pubsResult = await payload.find({
-      collection: "publications",
-      where: finalWhere.and.length > 0 ? finalWhere : undefined,
-      limit: 100,
-      sort: "-publishDate",
-    }).catch(() => ({ docs: [] }));
+    const pubsResult = payload
+      ? await payload.find({
+          collection: "publications",
+          where: finalWhere.and.length > 0 ? finalWhere : undefined,
+          limit: 100,
+          sort: "-publishDate",
+        }).catch(() => ({ docs: [] }))
+      : { docs: [] };
     publications = pubsResult.docs.filter((p: any) => p && !p.slug?.includes("rentier") && !p.title?.toLowerCase().includes("rentier"));
 
     if (publications.length === 0) {
@@ -121,11 +127,13 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
         }] : []),
       ]
     };
-    const infocusResult = await payload.find({
-      collection: "in-focus",
-      where: finalWhere.and.length > 0 ? finalWhere : undefined,
-      limit: 100,
-    }).catch(() => ({ docs: [] }));
+    const infocusResult = payload
+      ? await payload.find({
+          collection: "in-focus",
+          where: finalWhere.and.length > 0 ? finalWhere : undefined,
+          limit: 100,
+        }).catch(() => ({ docs: [] }))
+      : { docs: [] };
     infocus = infocusResult.docs;
   }
 
@@ -141,12 +149,14 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
         }] : []),
       ]
     };
-    const digestResult = await payload.find({
-      collection: "magazine-issues",
-      where: finalWhere.and.length > 0 ? finalWhere : undefined,
-      limit: 100,
-      sort: "-publishDate",
-    }).catch(() => ({ docs: [] }));
+    const digestResult = payload
+      ? await payload.find({
+          collection: "magazine-issues",
+          where: finalWhere.and.length > 0 ? finalWhere : undefined,
+          limit: 100,
+          sort: "-publishDate",
+        }).catch(() => ({ docs: [] }))
+      : { docs: [] };
     magazineIssues = digestResult.docs;
   }
 

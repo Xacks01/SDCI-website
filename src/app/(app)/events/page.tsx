@@ -20,15 +20,19 @@ const getLumaEventId = (url: string | null | undefined): string | null => {
   return lastPart || "jevfaqo0";
 };
 
+import { getSafePayload } from "@/lib/payload";
+
 export default async function EventsPage() {
-  const payload = await getPayload({ config });
+  const payload = await getSafePayload();
 
   // Fetch all events
-  const eventsResult = await payload.find({
-    collection: "events",
-    sort: "date",
-    limit: 100,
-  }).catch(() => ({ docs: [] }));
+  const eventsResult = payload
+    ? await payload.find({
+        collection: "events",
+        sort: "date",
+        limit: 100,
+      }).catch(() => ({ docs: [] }))
+    : { docs: [] };
 
   const cmsEvents = eventsResult.docs;
 
