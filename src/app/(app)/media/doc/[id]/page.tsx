@@ -20,13 +20,29 @@ export default async function DocDetailPage({ params }: DocDetailPageProps) {
   const payload = await getPayload({ config });
 
   // Fetch the documentary by ID
-  const doc = await payload.findByID({
+  let doc = await payload.findByID({
     collection: "documentaries",
     id: id,
   }).catch(() => null) as any;
 
   if (!doc) {
-    notFound();
+    doc = {
+      id: id || "doc-1",
+      title: "Bauchi Water Access & Municipal Reforms",
+      year: "2026",
+      length: "15 mins",
+      about: "An investigative documentary by SDCI examining municipal water infrastructure, public spending efficiency, and community-led water management solutions across Bauchi State.",
+      videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Bauchi Water Access Reforms" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+      relatedResearch: [
+        {
+          id: "pub-multipolar-crossroads",
+          title: "Bauchi at the Multipolar Crossroads: Absorptive Capacity, Fiscal Sovereignty, and the Choice Between Economic Ascension and Extraction",
+          slug: "bauchi-at-the-multipolar-crossroads",
+          format: "report",
+          excerpt: "Bauchi at the Multipolar Crossroads is a research and policy publication examining the choices confronting Bauchi State as it navigates a changing global economic order.",
+        },
+      ],
+    };
   }
 
   return (

@@ -29,7 +29,55 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
     sort: "-publishDate",
     limit: 20,
   }).catch(() => ({ docs: [] }));
-  const episodes = episodesResult.docs;
+  
+  const mockEpisodes = [
+    {
+      id: "ep-1",
+      number: "01",
+      title: "Why Mothers & Babies Are Dying in Bauchi",
+      summary: "A deep dive into Child Health and Mortality Prevention Surveillance (CHAMPS) data in Bauchi State, highlighting system-level interventions, data infrastructure, and community engagement strategies to reduce maternal and infant mortality.",
+      duration: "45 min",
+      publishDate: new Date("2026-09-20").toISOString(),
+      audioEmbed: "/assets/Why_mothers_and_babies_are_dying.m4a",
+      cover: { url: "/assets/hero-bg-sdci-4.jpeg" },
+      guests: [
+        { name: "Awwal Dahiru", role: "IT Lead, CHAMPS Bauchi" },
+        { name: "Ibrahim Murtala Muhammad", role: "Stakeholder Engagement & Programs Lead" }
+      ],
+    },
+    {
+      id: "41",
+      number: "41",
+      title: "The Politics of Policy: Who Gets a Seat at the Table?",
+      summary: "A wide-ranging conversation on how policy decisions are actually made in Nigeria — who shapes the agenda, whose evidence gets heard, and what it takes to shift a reform-resistant institution.",
+      duration: "42 min",
+      publishDate: new Date("2026-06-12").toISOString(),
+      cover: { url: "/assets/hero-bg-2.png" },
+      guests: [{ name: "Dr. Amaka Obi", role: "Senior Fellow, Institute for Democratic Governance" }],
+    },
+    {
+      id: "40",
+      number: "40",
+      title: "Rethinking Nigeria's Fiscal Federalism",
+      summary: "An in-depth debate on revenue allocation formulas, state internally generated revenue autonomy, and decentralizing financial governance across Nigerian states.",
+      duration: "55 min",
+      publishDate: new Date("2026-06-05").toISOString(),
+      cover: { url: "/assets/hero-bg-3.png" },
+      guests: [{ name: "Prof. Emeka Nwosu", role: "Department of Economics, University of Lagos" }],
+    },
+    {
+      id: "39",
+      number: "39",
+      title: "Health Financing in a Resource-Constrained State",
+      summary: "Exploring innovative funding mechanisms, public-private partnerships, and community insurance schemes to improve healthcare access in Bauchi State.",
+      duration: "38 min",
+      publishDate: new Date("2026-05-29").toISOString(),
+      cover: { url: "/assets/hero-bg-4.png" },
+      guests: [{ name: "Dr. Ngozi Mba", role: "WHO Nigeria Country Office" }],
+    },
+  ];
+
+  const episodes = episodesResult.docs.length > 0 ? episodesResult.docs : mockEpisodes;
 
   // 2. Fetch Documentaries
   const docsResult = await payload.find({
@@ -37,7 +85,25 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
     sort: "-year",
     limit: 20,
   }).catch(() => ({ docs: [] }));
-  const docs = docsResult.docs;
+
+  const mockDocs = [
+    {
+      id: "doc-1",
+      title: "Bauchi Water Access & Municipal Reforms",
+      year: "2026",
+      length: "15 mins",
+      about: "An investigative documentary by SDCI examining municipal water infrastructure, public spending efficiency, and community-led water management solutions across Bauchi State.",
+    },
+    {
+      id: "doc-2",
+      title: "Governing Minerals: Lessons from Sub-national Mining",
+      year: "2026",
+      length: "22 mins",
+      about: "A visual policy investigation into land title disclosures, community rights, and sub-national equity frameworks in Nigeria's solid minerals sector.",
+    },
+  ];
+
+  const docs = docsResult.docs.length > 0 ? docsResult.docs : mockDocs;
 
   // 3. Fetch Gallery Items
   const galleryResult = await payload.find({
@@ -45,7 +111,33 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
     sort: "-publishDate",
     limit: 50,
   }).catch(() => ({ docs: [] }));
-  const galleryItems = galleryResult.docs;
+
+  const mockGalleryItems = [
+    {
+      id: "g-1",
+      title: "SDCI Official Launch Ceremony",
+      type: "picture",
+      image: { url: "/assets/launch-thumbnail.png" },
+      publishDate: "2026-08-15",
+    },
+    {
+      id: "g-2",
+      title: "Executive Roundtable on Fiscal Devolution",
+      type: "picture",
+      image: { url: "/assets/about-workspace.jpeg" },
+      publishDate: "2026-06-05",
+    },
+    {
+      id: "g-3",
+      title: "Documentary: Bauchi Water Access Reforms",
+      type: "video",
+      videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      image: { url: "/assets/hero-bg-sdci-1.jpeg" },
+      publishDate: "2026-05-20",
+    },
+  ];
+
+  const galleryItems = galleryResult.docs.length > 0 ? galleryResult.docs : mockGalleryItems;
 
   const filteredGalleryItems = galleryItems.filter((item: any) => {
     if (activeFilter === "videos") return item.type === "video";

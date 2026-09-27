@@ -85,7 +85,21 @@ export default async function HomePage() {
   const validPubDocs = publicationsResult.docs.filter((p: any) => p && !p.slug?.includes("rentier") && !p.title?.toLowerCase().includes("rentier"));
   const featuredPub = validPubDocs[0] || mockFeaturedPub;
   const cmsPolicyBriefs = policyBriefsResult.docs;
-  const featuredPodcast = podcastResult.docs[0];
+  const mockFeaturedPodcast = {
+    id: "ep-1",
+    number: "01",
+    title: "Why Mothers & Babies Are Dying in Bauchi",
+    summary: "A deep dive into Child Health and Mortality Prevention Surveillance (CHAMPS) data in Bauchi State, highlighting system-level interventions, data infrastructure, and community engagement strategies to reduce maternal and infant mortality.",
+    duration: "45 min",
+    guests: [
+      { name: "Awwal Dahiru", role: "IT Lead, CHAMPS Bauchi" },
+      { name: "Ibrahim Murtala Muhammad", role: "Stakeholder Engagement & Programs Lead" }
+    ],
+    audioEmbed: "/assets/Why_mothers_and_babies_are_dying.m4a",
+    cover: { url: "/assets/hero-bg-sdci-4.jpeg" }
+  };
+
+  const featuredPodcast = podcastResult.docs[0] || mockFeaturedPodcast;
 
   const mockPolicyBriefs: any[] = [];
 
