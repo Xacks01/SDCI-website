@@ -23,16 +23,19 @@ export const metadata: Metadata = {
   },
 };
 
+import { getSafePayload } from "@/lib/payload";
+
 // Check and seed the database on initial start (skip during production build phase)
-if (process.env.NEXT_PHASE !== "phase-production-build") {
-  getPayload({ config })
+if (process.env.NEXT_PHASE !== "phase-production-build" && typeof window === "undefined") {
+  getSafePayload()
     .then(async (payload) => {
+      if (!payload) return;
       const result = await payload.find({
         collection: "membership-tiers",
         limit: 1,
-      });
-      if (result.totalDocs === 0) {
-        payload.logger.info("Empty database detected. Triggering auto-seed...");
+      }).catch(() => null);
+      if (result && result.totalDocs === 0) {
+        payload.logger?.info("Empty database detected. Triggering auto-seed...");
         const { seed } = await import("@/payload/seed");
         await seed(payload);
       }
