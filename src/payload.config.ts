@@ -36,8 +36,32 @@ import { ImpactStats } from "./payload/globals/ImpactStats";
 // Import custom styles for Admin UI
 import "./payload/styles/admin.css";
 
+import fs from "fs";
+
 const databaseUri = process.env.DATABASE_URI || "file:./payload.db";
 const isPostgres = databaseUri.startsWith("postgres://") || databaseUri.startsWith("postgresql://");
+
+function getSqliteUrl() {
+  if (isPostgres) return databaseUri;
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    const tmpPath = "/tmp/payload.db";
+    try {
+      if (!fs.existsSync(tmpPath)) {
+        const srcPath = path.resolve(process.cwd(), "payload.db");
+        if (fs.existsSync(srcPath)) {
+          fs.copyFileSync(srcPath, tmpPath);
+        }
+      }
+      return `file:${tmpPath}`;
+    } catch (err) {
+      console.error("Failed to copy payload.db to /tmp:", err);
+      return ":memory:";
+    }
+  }
+  return databaseUri;
+}
+
+const activeDbUrl = isPostgres ? databaseUri : getSqliteUrl();
 
 export default buildConfig({
   admin: {
@@ -71,7 +95,7 @@ export default buildConfig({
       })
     : sqliteAdapter({
         client: {
-          url: databaseUri,
+          url: activeDbUrl,
         },
       }),
   collections: [
