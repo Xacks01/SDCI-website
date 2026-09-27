@@ -78,7 +78,7 @@ export default async function DocDetailPage({ params }: DocDetailPageProps) {
                     <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">{res.excerpt}</p>
                   </div>
                   <Link href={`/research/${res.slug}`} className="shrink-0">
-                    <Button variant="outline" size="sm">Read Research Brief</Button>
+                    <Button variant="outline" size="sm">Read Whitepaper</Button>
                   </Link>
                 </Card>
               ))}

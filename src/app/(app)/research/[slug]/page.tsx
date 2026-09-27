@@ -30,7 +30,47 @@ export default async function PublicationDetailPage({ params }: PublicationDetai
     limit: 1,
   });
 
-  const pub = result.docs[0] as any;
+  let pub = result.docs[0] as any;
+  if (!pub) {
+    if (slug === "bauchi-at-the-multipolar-crossroads") {
+      pub = {
+        id: "pub-multipolar-crossroads",
+        title: "Bauchi at the Multipolar Crossroads: Absorptive Capacity, Fiscal Sovereignty, and the Choice Between Economic Ascension and Extraction",
+        slug: "bauchi-at-the-multipolar-crossroads",
+        format: "report",
+        excerpt: "Bauchi at the Multipolar Crossroads is a research and policy publication examining the choices confronting Bauchi State as it navigates a changing global economic order. It explores the relationship between absorptive capacity, fiscal sovereignty, natural-resource extraction, institutional strength, and economic transformation.",
+        publishDate: new Date("2026-09-20").toISOString(),
+        gated: false,
+        cover: { url: "/assets/report-cover.png" },
+        attachment: { url: "/assets/bauchi-at-the-multipolar-crossroads.pdf" },
+      };
+    } else if (slug === "governing-the-ground-bmcc-case-and-land-framework") {
+      pub = {
+        id: "brief-1",
+        title: "Governing the Ground: The BMCC Case and a Land Framework for Bauchi's Minerals",
+        slug: "governing-the-ground-bmcc-case-and-land-framework",
+        format: "brief",
+        excerpt: "Examining subnational equity, community land access, and public title disclosures across Bauchi's emerging minerals sector.",
+        publishDate: new Date("2026-09-22").toISOString(),
+        gated: false,
+        cover: { url: "/assets/policy-brief-1-cover.png" },
+        attachment: { url: "/assets/sdci-policy-brief-1.pdf" },
+      };
+    } else if (slug === "building-in-not-bolting-on-minerals-security") {
+      pub = {
+        id: "brief-2",
+        title: "Building In, Not Bolting On: A Minerals Security Function for Bauchi's Future State Police Service",
+        slug: "building-in-not-bolting-on-minerals-security",
+        format: "brief",
+        excerpt: "Analyzing the Sixth Alteration Bill and outlining institutional requirements for a specialized minerals security function within Bauchi's future state policing architecture.",
+        publishDate: new Date("2026-09-25").toISOString(),
+        gated: false,
+        cover: { url: "/assets/policy-brief-2-cover.png" },
+        attachment: { url: "/assets/sdci-policy-brief-2.pdf" },
+      };
+    }
+  }
+
   if (!pub) {
     notFound();
   }
@@ -102,16 +142,17 @@ export default async function PublicationDetailPage({ params }: PublicationDetai
             <div>
               <span>Published: {new Date(pub.publishDate).toLocaleDateString("en-NG", { dateStyle: "long" })}</span>
             </div>
-            {pub.authors && pub.authors.length > 0 && (
-              <div className="flex items-center space-x-1">
-                <span>By:</span>
-                <span className="font-semibold text-neutral-700 dark:text-neutral-300">
-                  {pub.authors.map((auth: any) => auth.name).join(", ")}
-                </span>
-              </div>
-            )}
           </div>
         </header>
+
+        {/* Publication Cover Image Showcase */}
+        <div className="w-full overflow-hidden rounded-none shadow-lg border border-neutral-200 dark:border-petrol-800">
+          <img
+            src={(pub.cover && typeof pub.cover === "object" && pub.cover.url) ? getMediaUrl(pub.cover.url) : "/assets/report-cover.png"}
+            alt={pub.title}
+            className="w-full h-auto object-cover"
+          />
+        </div>
 
         {/* Excerpt Summary */}
         {pub.excerpt && (
@@ -123,97 +164,20 @@ export default async function PublicationDetailPage({ params }: PublicationDetai
         {/* Gated Body Content */}
         {isUnlocked ? (
           <div className="space-y-6 text-neutral-800 dark:text-neutral-300 leading-relaxed text-sm md:text-base prose dark:prose-invert max-w-none">
-            {slug === "the-rentier-trap-bauchis-fiscal-model-and-its-development-ceiling" ? (
-              <div className="space-y-8 not-prose">
-                {/* Core Argument Callout */}
-                <div className="bg-petrol-50/50 dark:bg-petrol-900/10 border border-petrol-200/50 dark:border-petrol-800/40 p-6 rounded-none space-y-3">
-                  <h3 className="text-xs font-bold font-sans text-petrol-950 dark:text-white uppercase tracking-wider">The Core Argument</h3>
-                  <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
-                    Bauchi&apos;s development failures aren&apos;t primarily about capacity, corruption, or effort &mdash; they&apos;re about <strong>how the state is financed</strong>. Roughly six naira in every seven of its revenue arrive as a federal FAAC transfer (~86%) rather than as tax raised from its own citizens (~14% IGR). That single fact reorganizes everything downstream: what the government spends on, who it answers to, and what it can invest in the human capital that will decide Bauchi&apos;s 2035 outcome.
-                  </p>
-                </div>
-
-                {/* Four Claims Grid */}
-                <div className="space-y-4">
-                  <h3 className="text-xs font-bold font-sans uppercase tracking-wider text-neutral-900 dark:text-white border-b pb-2 border-neutral-100 dark:border-petrol-800/60">The Four Claims</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <h4 className="text-xs font-bold font-sans uppercase text-green-700 dark:text-green-400">1. Rentier Classification</h4>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                        By the standard four-part test (rent &gt;40% of revenue, effort-independence, concentrated receipt, thin tax base), Bauchi is unambiguously rentier.
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="text-xs font-bold font-sans uppercase text-green-700 dark:text-green-400">2. Resource Misallocation</h4>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                        Bauchi is one of only six states spending &gt;60% of its budget on salaries and overheads; debt service (~₦37bn) is deducted at source; a ~₦59bn deficit is borrowed. This leaves little for schools, clinics, and irrigation.
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="text-xs font-bold font-sans uppercase text-green-700 dark:text-green-400">3. Proven Agility</h4>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                        The rentier equilibrium is a <em>tendency, not a trap</em>: Bauchi grew IGR &gt;500% (2015&ndash;24), the fastest in the North-East.
-                      </p>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="text-xs font-bold font-sans uppercase text-green-700 dark:text-green-400">4. The Strategic Window</h4>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                        A narrow reform window exists now: the 2025 national tax reform + temporary post-subsidy FAAC windfall + a second-term governor with a fixed horizon. It closes at the 2027 cycle.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Why the Model Caps Development */}
-                <div className="space-y-3">
-                  <h3 className="text-xs font-bold font-sans uppercase tracking-wider text-neutral-900 dark:text-white border-b pb-2 border-neutral-100 dark:border-petrol-800/60">Why the Model Caps Development</h3>
-                  <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-350">
-                    Rentier financing runs accountability <em>upward</em> (to Abuja and the FAAC formula) instead of <em>downward</em> to a taxpaying citizenry &mdash; short-circuiting the &ldquo;tax bargain&rdquo; that built accountable states elsewhere. Its deepest bias: human-capital and climate investments deliver <em>diffuse, deferred, unattributable</em> benefits, which reliably lose the budget battle to concentrated, visible, creditable spending. So the 61% out-of-school rate, worst-in-zone maternal mortality, and ~10.9% of facilities with a doctor aren&apos;t anomalies &mdash; they&apos;re what the system, as financed, is structurally built to produce.
-                  </p>
-                </div>
-
-                {/* The Prescription */}
-                <div className="space-y-3">
-                  <h3 className="text-xs font-bold font-sans uppercase tracking-wider text-neutral-900 dark:text-white border-b pb-2 border-neutral-100 dark:border-petrol-800/60">The Prescription: Different Financing, Not More Spending</h3>
-                  <ul className="list-decimal pl-5 space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
-                    <li>
-                      <strong className="text-neutral-800 dark:text-neutral-350">Deepen IGR reform into a genuine tax bargain</strong>: broaden to property, presumptive, and informal-sector taxes, digitize collection, and publish collections &mdash; targeting FAAC dependence below 60%.
-                    </li>
-                    <li>
-                      <strong className="text-neutral-800 dark:text-neutral-350">Use the FAAC windfall for balance-sheet repair</strong>: retire debt and ring-fence capex rather than expanding recurrent overheads.
-                    </li>
-                    <li>
-                      <strong className="text-neutral-800 dark:text-neutral-350">Treat human capital as the return on fiscal reform</strong>: invest directly in girl-child schooling, the Primary Health Care (PHC) workforce, and climate-resilient agriculture.
-                    </li>
-                  </ul>
-                </div>
-
-                {/* The Bottom Line */}
-                <div className="bg-neutral-50 dark:bg-petrol-900/20 border border-neutral-200 dark:border-petrol-800 p-6 rounded-none space-y-2">
-                  <h3 className="text-xs font-bold uppercase text-neutral-800 dark:text-white tracking-wider">The Bottom Line</h3>
-                  <p className="text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
-                    Two futures exist: drift (dependence stays &gt;80%, windfall absorbed into recurrent) or reform (IGR builds a taxpayer constituency, debt restructured, capex space deployed against the human-capital deficit leading to measurable convergence with Kaduna and pulling clear of Gombe and Jigawa by the early 2030s). The difference will be decided in the next 12&ndash;24 months. As the paper closes: <strong className="italic text-neutral-900 dark:text-white">&ldquo;The rent will not save Bauchi. The tax bargain might.&rdquo;</strong>
-                  </p>
-                </div>
-              </div>
-            ) : pub.body ? (
-              <div className="space-y-4">
-                <p>This research paper examines the policy frameworks, MDA directory statistics, and governance alignments in Bauchi State, Nigeria. Our empirical analysis indicates significant scope for internally generated revenue optimization and budgetary reforms.</p>
-                <p>We advocate for open dialogue tables connecting local communities, public administrators, and private sector reformers. Actionable directives include administrative audit, capacity mentoring workshops, and transparent accounting lines for federal allocations.</p>
-              </div>
-            ) : (
-              <p>No document body text is currently defined. Please refer to the attached PDF brief.</p>
-            )}
+            <div className="space-y-4">
+              <p>Bauchi at the Multipolar Crossroads is a research and policy publication examining the choices confronting Bauchi State as it navigates a changing global economic order. It explores the relationship between absorptive capacity, fiscal sovereignty, natural-resource extraction, institutional strength, and economic transformation, asking a central question: can Bauchi convert its resources, strategic position, and emerging opportunities into sustained, broad-based prosperity rather than remain primarily a site of extraction?</p>
+              <p>The report frames Bauchi’s challenge not simply as attracting capital or exploiting natural resources, but as developing the institutions, fiscal capacity, infrastructure, productive systems, and policy discipline required to retain and multiply the value generated within the state. Through this lens, it considers the choices that will shape Bauchi’s trajectory between economic ascension and extraction.</p>
+            </div>
 
             {/* Document Download Link */}
             {pub.attachment && (
               <div className="mt-12 p-6 border border-green-500/30 dark:border-green-500/20 rounded-none bg-green-50/50 dark:bg-green-950/20 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="space-y-1 text-center md:text-left">
-                  <h4 className="font-bold text-petrol-950 dark:text-white text-sm font-serif">Full Publication Briefing (PDF)</h4>
+                  <h4 className="font-bold text-petrol-950 dark:text-white text-sm font-serif">Full Whitepaper (PDF)</h4>
                   <p className="text-xs text-neutral-500 dark:text-neutral-400">Includes complete methodology data, frameworks, and footnotes.</p>
                 </div>
                 <a 
-                  href={typeof pub.attachment === "object" && pub.attachment && pub.attachment.url ? getMediaUrl(pub.attachment.url) : "/uploads/placeholder.pdf"} 
+                  href={typeof pub.attachment === "object" && pub.attachment && pub.attachment.url ? getMediaUrl(pub.attachment.url) : "/assets/bauchi-at-the-multipolar-crossroads.pdf"} 
                   download 
                   className="shrink-0"
                 >
@@ -243,28 +207,6 @@ export default async function PublicationDetailPage({ params }: PublicationDetai
               <Link href="/get-involved#membership">
                 <Button variant="outline" size="sm">Log In</Button>
               </Link>
-            </div>
-          </div>
-        )}
-
-        {/* Related Section */}
-        {related.length > 0 && (
-          <div className="pt-16 border-t border-neutral-200 dark:border-petrol-800 space-y-6">
-            <h3 className="text-xl font-bold font-serif dark:text-white">Related publications</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {related.map((r: any) => (
-                <Card key={r.id} variant="default" className="p-4 flex flex-col justify-between h-full space-y-3 rounded-none">
-                  <div className="space-y-2">
-                    <Tag variant="outline" className="text-[10px]">{r.format}</Tag>
-                    <h4 className="font-bold font-serif text-sm text-petrol-950 dark:text-white line-clamp-2 hover:text-green-700 dark:hover:text-green-400 transition-colors">
-                      <Link href={`/research/${r.slug}`}>{r.title}</Link>
-                    </h4>
-                  </div>
-                  <Link href={`/research/${r.slug}`} className="text-xs font-semibold text-green-700 dark:text-green-400 hover:underline">
-                    Read brief &rarr;
-                  </Link>
-                </Card>
-              ))}
             </div>
           </div>
         )}

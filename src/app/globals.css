@@ -38,8 +38,8 @@
   --color-petrol-750: #12334e;
   --color-petrol-850: #0b2234;
 
-  --font-sans: freight-sans-pro, var(--font-ibm-sans), system-ui, sans-serif;
-  --font-serif: freight-sans-pro, var(--font-ibm-sans), system-ui, sans-serif;
+  --font-sans: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
+  --font-serif: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
 }
 
 :root {

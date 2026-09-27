@@ -39,22 +39,14 @@ export default async function EventsPage() {
       type: "Launch",
       format: "in-person",
       date: "2026-08-15",
-      dateDisplay: "",
+      dateDisplay: "August 15, 2026",
       location: "Ahmadu Bello International Conference Centre (ICC), Bauchi State",
       image: { url: "/assets/launch-thumbnail.png" },
-      description: `Join us as the Sustainable Development Conversations Initiative (SDCI) officially launches its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
+      description: `The Sustainable Development Conversations Initiative (SDCI) officially launched its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
 
-The event will feature an inaugural address, a panel discussion with distinguished speakers, and the official ribbon-cutting ceremony, bringing together policymakers, development partners, civil society organizations, academia, the private sector, youth leaders, and engaged citizens.
-
-This launch marks the beginning of a platform dedicated to making public policy more accessible, encouraging meaningful dialogue, and building partnerships that drive sustainable development and democratic governance.
-
-Whether you are a public servant, development practitioner, researcher, student, entrepreneur, or an active citizen, we invite you to be part of this milestone as we shape a future where informed citizens and responsive institutions work together for lasting impact.
-
-Attendance is free, but registration is required.
-
-We look forward to welcoming you.`,
+The inaugural event featured distinguished keynotes, panel discussions, and the official unveiling of SDCI's core research agendas and policy initiatives.`,
       registrationURL: "https://lu.ma/jevfaqo0",
-      isUpcoming: true,
+      isUpcoming: false,
     }
   ];
 
@@ -123,7 +115,7 @@ We look forward to welcoming you.`,
             {/* Details & CTA (Combined in 50% split) */}
             <div className="lg:col-span-6 p-8 md:p-12 space-y-6 flex flex-col justify-center bg-white dark:bg-transparent">
               <div className="flex items-center space-x-2">
-                <Tag variant="lime">{featuredEvent.type || "Launch"}</Tag>
+                <Tag variant="petrol">{featuredEvent.isUpcoming ? (featuredEvent.type || "Launch") : "Concluded Launch Event"}</Tag>
                 <span className="text-xs text-neutral-500 dark:text-neutral-400 font-semibold uppercase tracking-wider flex items-center gap-1.5">
                   <Users className="w-3 h-3 text-neutral-400" />
                   In-Person
@@ -135,7 +127,7 @@ We look forward to welcoming you.`,
               <div className="space-y-2 text-xs md:text-sm text-neutral-600 dark:text-neutral-400 font-medium font-sans">
                 <p className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-green-750 dark:text-lime-300 shrink-0" />
-                  <span>{featuredEvent.dateDisplay || (featuredEvent.date ? new Date(featuredEvent.date).toLocaleDateString("en-NG", { dateStyle: "full" }) : "")}</span>
+                  <span>{featuredEvent.dateDisplay || (featuredEvent.date ? new Date(featuredEvent.date).toLocaleDateString("en-NG", { dateStyle: "full" }) : "")} &middot; Concluded</span>
                 </p>
                 <p className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-green-750 dark:text-lime-300 shrink-0" />
@@ -147,43 +139,17 @@ We look forward to welcoming you.`,
               </p>
               
               <div className="pt-4 flex flex-wrap gap-4">
-                {featuredEvent.registrationURL ? (
-                  (() => {
-                    const lumaId = getLumaEventId(featuredEvent.registrationURL);
-                    return lumaId ? (
-                      <a
-                        href={featuredEvent.registrationURL || "https://lu.ma/jevfaqo0"}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-block"
-                        data-luma-action="checkout"
-                        data-luma-event-id={lumaId}
-                      >
-                        <Button
-                          variant="primary"
-                          className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-petrol-950 hover:bg-petrol-900 text-white dark:bg-lime-400 dark:text-petrol-950 dark:hover:bg-lime-300"
-                        >
-                          Register to Attend
-                        </Button>
-                      </a>
-                    ) : (
-                      <a href={featuredEvent.registrationURL} target="_blank" rel="noreferrer">
-                        <Button
-                          variant="primary"
-                          className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-petrol-950 hover:bg-petrol-900 text-white dark:bg-lime-400 dark:text-petrol-950 dark:hover:bg-lime-300"
-                        >
-                          Register to Attend
-                        </Button>
-                      </a>
-                    );
-                  })()
-                ) : (
-                  <Button variant="primary" className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider" disabled>Free Access</Button>
-                )}
+                <Button
+                  variant="secondary"
+                  className="font-bold text-xs uppercase px-8 py-3.5 rounded-none tracking-wider bg-neutral-200 dark:bg-petrol-800 text-neutral-700 dark:text-neutral-200 cursor-default"
+                  disabled
+                >
+                  Event Concluded
+                </Button>
                 
                 <Link href="/get-involved#partner">
                   <Button variant="outline" className="text-xs font-bold uppercase px-6 py-3.5 rounded-none border-neutral-300 dark:border-petrol-800 hover:bg-neutral-50 dark:hover:bg-petrol-900/40 text-neutral-800 dark:text-neutral-200">
-                    Become a Sponsor
+                    Partner for Future Events
                   </Button>
                 </Link>
               </div>

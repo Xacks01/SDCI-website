@@ -114,7 +114,7 @@ export default function StyleGuidePage() {
       {activeTab === "typography" && (
         <section className="space-y-8">
           <div>
-            <h2 className="text-2xl font-semibold font-serif text-petrol-950 mb-4">Serif Type (Newsreader)</h2>
+            <h2 className="text-2xl font-semibold font-serif text-petrol-950 mb-4">Display & Serif Type (Bricolage Grotesque)</h2>
             <div className="space-y-4 border-l-4 border-petrol-950 pl-6">
               <div>
                 <span className="text-xs text-neutral-500 font-mono">.font-serif.text-4xl.font-bold</span>
@@ -134,7 +134,7 @@ export default function StyleGuidePage() {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold font-serif text-petrol-950 mb-4">Sans Type (Inter)</h2>
+            <h2 className="text-2xl font-semibold font-serif text-petrol-950 mb-4">Body Sans Type (Bricolage Grotesque)</h2>
             <div className="space-y-4 border-l-4 border-green-800 pl-6">
               <div>
                 <span className="text-xs text-neutral-500 font-mono">.font-sans.text-base</span>
@@ -171,9 +171,9 @@ export default function StyleGuidePage() {
           <div>
             <h2 className="text-2xl font-semibold font-serif text-petrol-950 mb-4">Tags</h2>
             <div className="flex flex-wrap gap-2">
-              <Tag variant="petrol">Policy Brief</Tag>
+              <Tag variant="petrol">White Paper</Tag>
               <Tag variant="green">Working Paper</Tag>
-              <Tag variant="lime">White Paper</Tag>
+              <Tag variant="lime">Thematic Report</Tag>
               <Tag variant="gray">The Sustainable Digest</Tag>
               <Tag variant="outline">SDG 16</Tag>
             </div>

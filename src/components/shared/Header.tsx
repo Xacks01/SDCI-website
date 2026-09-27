@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
     { label: "Research & Insights", url: "/research" },
     { label: "Media", url: "/media" },
     { label: "Events", url: "/events" },
-    { label: "Programmes", url: "/programmes" },
+    // { label: "Programmes", url: "/programmes" },
     { label: "Careers", url: "/careers" },
   ];
 

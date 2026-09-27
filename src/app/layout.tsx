@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import { LumaInit } from "@/components/shared/LumaInit";
 
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-ibm-sans",
+const bricolageGrotesque = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -64,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmPlexSans.variable} h-full antialiased`}
+      className={`${bricolageGrotesque.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

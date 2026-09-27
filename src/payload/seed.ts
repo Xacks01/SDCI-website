@@ -148,7 +148,7 @@ export async function seed(payload: Payload) {
     },
     {
       question: "Is your research free?",
-      answer: "Most of it, yes. Policy briefs, thematic reports, working papers, and our InFocus graphics are free to read. White papers and the full Sustainable Digest are reserved for members and subscribers — that revenue is part of what keeps the rest free and independent.",
+      answer: "Most of it, yes. White papers, thematic reports, working papers, and our InFocus graphics are free to read. Flagship white papers and the full Sustainable Digest are reserved for members and subscribers — that revenue is part of what keeps the rest free and independent.",
       order: 4,
     },
     {
@@ -352,7 +352,7 @@ export async function seed(payload: Payload) {
         { label: "Research & Insights", url: "/research" },
         { label: "Media", url: "/media" },
         { label: "Events", url: "/events" },
-        { label: "Programmes", url: "/programmes" },
+        // { label: "Programmes", url: "/programmes" },
         { label: "Careers", url: "/careers" },
       ],
     },
@@ -376,11 +376,8 @@ export async function seed(payload: Payload) {
           title: "Insights",
           links: [
             { label: "Policy Briefs", url: "/research?format=brief" },
-            { label: "Thematic Reports", url: "/research?format=report" },
-            { label: "Working Papers", url: "/research?format=working-paper" },
             { label: "White Papers", url: "/research?format=white-paper" },
-            { label: "InFocus Infographics", url: "/research#infocus" },
-            { label: "The Sustainable Digest", url: "/research#digest" },
+            { label: "Thematic Reports", url: "/research?format=report" },
           ],
         },
         {
@@ -415,13 +412,78 @@ export async function seed(payload: Payload) {
   await payload.create({
     collection: "publications",
     data: {
-      title: "The Rentier Trap: Bauchi's Fiscal Model and Its Development Ceiling",
-      slug: "the-rentier-trap-bauchis-fiscal-model-and-its-development-ceiling",
-      format: "brief",
+      title: "Bauchi at the Multipolar Crossroads: Absorptive Capacity, Fiscal Sovereignty, and the Choice Between Economic Ascension and Extraction",
+      slug: "bauchi-at-the-multipolar-crossroads",
+      format: "report",
       themes: [financeArea.id],
-      excerpt: "An independent analysis of public finance structures, resource leaks, and capacity recommendations for Bauchi State MDAs.",
+      excerpt: "Bauchi at the Multipolar Crossroads is a research and policy publication examining the choices confronting Bauchi State as it navigates a changing global economic order. It explores the relationship between absorptive capacity, fiscal sovereignty, natural-resource extraction, institutional strength, and economic transformation.",
+      body: {
+        root: {
+          type: "root",
+          children: [
+            {
+              type: "paragraph",
+              version: 1,
+              children: [
+                {
+                  type: "text",
+                  text: "Bauchi at the Multipolar Crossroads is a research and policy publication examining the choices confronting Bauchi State as it navigates a changing global economic order. It explores the relationship between absorptive capacity, fiscal sovereignty, natural-resource extraction, institutional strength, and economic transformation, asking a central question: can Bauchi convert its resources, strategic position, and emerging opportunities into sustained, broad-based prosperity rather than remain primarily a site of extraction?",
+                  version: 1,
+                },
+              ],
+              direction: "ltr",
+              format: "",
+              indent: 0,
+            },
+            {
+              type: "paragraph",
+              version: 1,
+              children: [
+                {
+                  type: "text",
+                  text: "The report frames Bauchi’s challenge not simply as attracting capital or exploiting natural resources, but as developing the institutions, fiscal capacity, infrastructure, productive systems, and policy discipline required to retain and multiply the value generated within the state. Through this lens, it considers the choices that will shape Bauchi’s trajectory between economic ascension and extraction.",
+                  version: 1,
+                },
+              ],
+              direction: "ltr",
+              format: "",
+              indent: 0,
+            },
+          ],
+          direction: "ltr",
+          format: "",
+          indent: 0,
+          version: 1,
+        },
+      } as any,
       publishDate: new Date().toISOString(),
       authors: [leadResearch.id, analyst1.id],
+      gated: false,
+    },
+  });
+
+  await payload.create({
+    collection: "publications",
+    data: {
+      title: "Governing the Ground: The BMCC Case and a Land Framework for Bauchi's Minerals",
+      slug: "governing-the-ground-bmcc-case-and-land-framework",
+      format: "brief",
+      themes: [financeArea.id],
+      excerpt: "Examining subnational equity, community land access, and public title disclosures across Bauchi's emerging minerals sector.",
+      publishDate: new Date("2026-09-22").toISOString(),
+      gated: false,
+    },
+  });
+
+  await payload.create({
+    collection: "publications",
+    data: {
+      title: "Building In, Not Bolting On: A Minerals Security Function for Bauchi's Future State Police Service",
+      slug: "building-in-not-bolting-on-minerals-security",
+      format: "brief",
+      themes: [governanceArea.id],
+      excerpt: "Analyzing the Sixth Alteration Bill and outlining institutional requirements for a specialized minerals security function within Bauchi's future state policing architecture.",
+      publishDate: new Date("2026-09-25").toISOString(),
       gated: false,
     },
   });

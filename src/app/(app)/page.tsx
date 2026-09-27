@@ -14,10 +14,10 @@ import { Users, Shield, Share2, FileText, Mail, Heart, Info, Scale, Coins, Heart
 export const revalidate = 60; // Revalidate every 60 seconds
 
 const FORMAT_LABELS: Record<string, string> = {
-  brief: "Featured Policy Brief",
+  brief: "Featured White Paper",
   report: "Featured Thematic Report",
   "working-paper": "Featured Working Paper",
-  "white-paper": "Featured White Paper (Gated)",
+  "white-paper": "Featured White Paper",
 };
 
 const getLumaEventId = (url: string | null | undefined): string | null => {
@@ -34,11 +34,17 @@ export default async function HomePage() {
   const payload = await getPayload({ config });
 
   // Fetch data from CMS collections & globals in parallel
-  const [publicationsResult, eventsResult, podcastResult, faqsResult, teamResult] = await Promise.all([
+  const [publicationsResult, policyBriefsResult, eventsResult, podcastResult, faqsResult, teamResult] = await Promise.all([
     payload.find({
       collection: "publications",
       sort: "-publishDate",
       limit: 1,
+    }).catch(() => ({ docs: [] })),
+    payload.find({
+      collection: "publications",
+      where: { format: { equals: "brief" } },
+      sort: "-publishDate",
+      limit: 3,
     }).catch(() => ({ docs: [] })),
     payload.find({
       collection: "events",
@@ -64,8 +70,26 @@ export default async function HomePage() {
     }).catch(() => ({ docs: [] })),
   ]);
 
-  const featuredPub = publicationsResult.docs[0];
+  const mockFeaturedPub = {
+    id: "pub-multipolar-crossroads",
+    title: "Bauchi at the Multipolar Crossroads: Absorptive Capacity, Fiscal Sovereignty, and the Choice Between Economic Ascension and Extraction",
+    slug: "bauchi-at-the-multipolar-crossroads",
+    format: "report",
+    excerpt: "Bauchi at the Multipolar Crossroads is a research and policy publication examining the choices confronting Bauchi State as it navigates a changing global economic order. It explores the relationship between absorptive capacity, fiscal sovereignty, natural-resource extraction, institutional strength, and economic transformation.",
+    cover: { url: "/assets/report-cover.png" },
+    attachment: { url: "/assets/bauchi-at-the-multipolar-crossroads.pdf" },
+    publishDate: new Date().toISOString(),
+    gated: false,
+  };
+
+  const validPubDocs = publicationsResult.docs.filter((p: any) => p && !p.slug?.includes("rentier") && !p.title?.toLowerCase().includes("rentier"));
+  const featuredPub = validPubDocs[0] || mockFeaturedPub;
+  const cmsPolicyBriefs = policyBriefsResult.docs;
   const featuredPodcast = podcastResult.docs[0];
+
+  const mockPolicyBriefs: any[] = [];
+
+  const displayPolicyBriefs = cmsPolicyBriefs;
   
   const mockEvents = [
     {
@@ -89,7 +113,7 @@ Attendance is free, but registration is required.
 
 We look forward to welcoming you.`,
       registrationURL: "https://lu.ma/jevfaqo0",
-      isUpcoming: true,
+      isUpcoming: false,
     }
   ];
 
@@ -471,11 +495,11 @@ We look forward to welcoming you.`,
             <div className="w-full max-w-[616px] space-y-6 flex flex-col justify-center">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-lime-400/40 text-xs font-semibold uppercase tracking-wider text-lime-300 bg-lime-400/10 font-sans">
-                  {mainEvent.type || "Launch"}
+                  Concluded Launch Event
                 </span>
                 <span className="text-xs text-petrol-200 font-semibold uppercase tracking-wider flex items-center gap-1.5 font-sans">
                   <Users className="w-3.5 h-3.5 text-lime-300" />
-                  In-Person
+                  In-Person &middot; Bauchi State
                 </span>
               </div>
 
@@ -486,7 +510,7 @@ We look forward to welcoming you.`,
               <div className="space-y-2 text-xs md:text-sm text-petrol-200 font-medium font-sans">
                 <p className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-lime-300 shrink-0" />
-                  <span>{mainEventDateFormatted} &middot; {mainEventTimeFormatted}</span>
+                  <span>August 15, 2026 &middot; Concluded Milestone</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-lime-300 shrink-0 mt-0.5" />
@@ -495,45 +519,21 @@ We look forward to welcoming you.`,
               </div>
 
               <p className="text-petrol-100 text-sm md:text-base leading-relaxed font-sans line-clamp-3">
-                Join us as the Sustainable Development Conversations Initiative (SDCI) officially launches its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance through citizen engagement.
+                The Sustainable Development Conversations Initiative (SDCI) officially launched its mission to strengthen civic participation, promote evidence-based policymaking, and foster accountable governance across Nigeria.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
-                {mainEventRegistrationURL ? (
-                  mainEventLumaId ? (
-                    <a
-                      href={mainEventRegistrationURL}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-block"
-                      data-luma-action="checkout"
-                      data-luma-event-id={mainEventLumaId}
-                    >
-                      <Button
-                        variant="secondary"
-                        className="rounded-none font-bold tracking-wider px-8 py-3.5 text-xs uppercase cursor-pointer"
-                      >
-                        Register to Attend
-                      </Button>
-                    </a>
-                  ) : (
-                    <a href={mainEventRegistrationURL} target="_blank" rel="noreferrer">
-                      <Button
-                        variant="secondary"
-                        className="rounded-none font-bold tracking-wider px-8 py-3.5 text-xs uppercase cursor-pointer"
-                      >
-                        Register to Attend
-                      </Button>
-                    </a>
-                  )
-                ) : (
-                  <Button variant="secondary" className="rounded-none font-bold tracking-wider px-8 py-3.5 text-xs uppercase cursor-not-allowed" disabled>
-                    Registration Closed
+                <Link href="/events">
+                  <Button
+                    variant="secondary"
+                    className="rounded-none font-bold tracking-wider px-8 py-3.5 text-xs uppercase cursor-pointer"
+                  >
+                    Event Concluded &mdash; View Archive
                   </Button>
-                )}
+                </Link>
                 <Link href="/events">
                   <Button variant="outline" className="border-white text-white hover:bg-white hover:text-petrol-950 rounded-none font-bold tracking-wider px-6 py-3.5 text-xs uppercase">
-                    View Event Details
+                    Past Events & Recordings
                   </Button>
                 </Link>
               </div>
@@ -553,15 +553,13 @@ We look forward to welcoming you.`,
 
       {/* 2. Featured Publication Section (Placed right after Event Section, Image on Left) */}
       {featuredPub ? (
-        <section className="w-full grid grid-cols-1 lg:grid-cols-2 gap-0 bg-petrol-950 min-h-[500px] lg:h-[550px]">
-          {/* Left half: Publication Cover Image */}
-          <div className="w-full min-h-[350px] lg:h-full overflow-hidden relative group border-r border-neutral-100/10 dark:border-petrol-900/40">
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
-              style={{ 
-                backgroundImage: `url('${(featuredPub.cover && typeof featuredPub.cover === "object" && featuredPub.cover.url) ? getMediaUrl(featuredPub.cover.url) : "/assets/thumbnail-trap.png"}')` 
-              }}
-              aria-label={featuredPub.title}
+        <section className="w-full grid grid-cols-1 lg:grid-cols-2 gap-0 bg-petrol-950 min-h-[480px] lg:min-h-[520px]">
+          {/* Left half: Publication Cover Image Container */}
+          <div className="w-full min-h-[350px] lg:h-full relative group overflow-hidden border-r border-neutral-100/10 dark:border-petrol-900/40">
+            <img 
+              src={(featuredPub.cover && typeof featuredPub.cover === "object" && featuredPub.cover.url) ? getMediaUrl(featuredPub.cover.url) : "/assets/report-cover.png"} 
+              alt={featuredPub.title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
 
@@ -608,6 +606,8 @@ We look forward to welcoming you.`,
           </div>
         </section>
       )}
+
+
 
       {/* 2.5. Video Showcase Section */}
       <section className="bg-petrol-50/50 dark:bg-petrol-900/10 border-t border-b border-neutral-200/40 dark:border-petrol-900/60 py-20 transition-colors duration-300">

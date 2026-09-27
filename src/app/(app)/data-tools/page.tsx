@@ -24,7 +24,7 @@ export default function DataToolsPage() {
             <Button variant="primary">Notify Me on Launch</Button>
           </Link>
           <Link href="/research">
-            <Button variant="outline">Browse Research Briefs</Button>
+            <Button variant="outline">Browse Whitepapers</Button>
           </Link>
         </div>
       </section>

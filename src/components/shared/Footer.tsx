@@ -47,9 +47,9 @@ export const Footer: React.FC = () => {
       title: "Insights",
       links: [
         { label: "Policy Briefs", url: "/research?format=brief" },
+        { label: "White Papers", url: "/research?format=white-paper" },
         { label: "Thematic Reports", url: "/research?format=report" },
         { label: "Working Papers", url: "/research?format=working-paper" },
-        { label: "White Papers", url: "/research?format=white-paper" },
         { label: "InFocus Infographics", url: "/research#infocus" },
         { label: "The Sustainable Digest", url: "/research#digest" },
       ],

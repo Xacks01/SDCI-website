@@ -27,9 +27,9 @@ export const Publications: CollectionConfig = {
       required: true,
       options: [
         { label: "Policy Brief", value: "brief" },
+        { label: "White Paper", value: "white-paper" },
         { label: "Thematic Report", value: "report" },
         { label: "Working Paper", value: "working-paper" },
-        { label: "White Paper (Gated)", value: "white-paper" },
       ],
     },
     {

@@ -41,7 +41,7 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
   let magazineIssues: any[] = [];
 
   const isAllFormat = activeFormat === "";
-  const isPubFormat = ["brief", "report", "working-paper", "white-paper"].includes(activeFormat);
+  const isPubFormat = ["brief", "report", "white-paper"].includes(activeFormat);
 
   if (isAllFormat || isPubFormat) {
     const finalWhere: any = {
@@ -62,7 +62,51 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
       limit: 100,
       sort: "-publishDate",
     }).catch(() => ({ docs: [] }));
-    publications = pubsResult.docs;
+    publications = pubsResult.docs.filter((p: any) => p && !p.slug?.includes("rentier") && !p.title?.toLowerCase().includes("rentier"));
+
+    if (publications.length === 0) {
+      const mockPubs = [
+        {
+          id: "pub-multipolar-crossroads",
+          title: "Bauchi at the Multipolar Crossroads: Absorptive Capacity, Fiscal Sovereignty, and the Choice Between Economic Ascension and Extraction",
+          slug: "bauchi-at-the-multipolar-crossroads",
+          excerpt: "Bauchi at the Multipolar Crossroads is a research and policy publication examining the choices confronting Bauchi State as it navigates a changing global economic order. It explores the relationship between absorptive capacity, fiscal sovereignty, natural-resource extraction, institutional strength, and economic transformation.",
+          format: "report",
+          publishDate: new Date("2026-09-20").toISOString(),
+          gated: false,
+          cover: { url: "/assets/report-cover.png" },
+          attachment: { url: "/assets/bauchi-at-the-multipolar-crossroads.pdf" },
+        },
+        {
+          id: "brief-1",
+          title: "Governing the Ground: The BMCC Case and a Land Framework for Bauchi's Minerals",
+          slug: "governing-the-ground-bmcc-case-and-land-framework",
+          excerpt: "Examining subnational equity, community land access, and public title disclosures across Bauchi's emerging minerals sector.",
+          format: "brief",
+          publishDate: new Date("2026-09-22").toISOString(),
+          gated: false,
+          cover: { url: "/assets/policy-brief-1-cover.png" },
+          attachment: { url: "/assets/sdci-policy-brief-1.pdf" },
+        },
+        {
+          id: "brief-2",
+          title: "Building In, Not Bolting On: A Minerals Security Function for Bauchi's Future State Police Service",
+          slug: "building-in-not-bolting-on-minerals-security",
+          excerpt: "Analyzing the Sixth Alteration Bill and outlining institutional requirements for a specialized minerals security function within Bauchi's future state policing architecture.",
+          format: "brief",
+          publishDate: new Date("2026-09-25").toISOString(),
+          gated: false,
+          cover: { url: "/assets/policy-brief-2-cover.png" },
+          attachment: { url: "/assets/sdci-policy-brief-2.pdf" },
+        }
+      ];
+
+      if (isPubFormat) {
+        publications = mockPubs.filter((p) => p.format === activeFormat || activeFormat === "");
+      } else {
+        publications = mockPubs;
+      }
+    }
   }
 
   if (isAllFormat || activeFormat === "infocus") {
@@ -130,9 +174,9 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
     
     let formatLabel = "";
     if (pub.format === "brief") formatLabel = "POLICY BRIEF";
-    else if (pub.format === "report") formatLabel = "REPORT";
-    else if (pub.format === "working-paper") formatLabel = "WORKING PAPER";
     else if (pub.format === "white-paper") formatLabel = "WHITE PAPER";
+    else if (pub.format === "report") formatLabel = "THEMATIC REPORT";
+    else if (pub.format === "working-paper") formatLabel = "WORKING PAPER";
     else formatLabel = (pub.format || "").toUpperCase();
 
     let imageUrl = "";
@@ -218,7 +262,7 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
   });
 
   // Combine and sort
-  const allUnifiedItems: UnifiedItem[] = [...unifiedPubs, ...unifiedInFocus, ...unifiedDigest];
+  const allUnifiedItems: UnifiedItem[] = [...unifiedPubs];
   allUnifiedItems.sort((a, b) => b.date.getTime() - a.date.getTime());
 
   // Paginate
@@ -231,12 +275,9 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
 
   const formats = [
     { label: "All", value: "" },
-    { label: "Briefs", value: "brief" },
-    { label: "Reports", value: "report" },
-    { label: "Working Papers", value: "working-paper" },
+    { label: "Policy Briefs", value: "brief" },
     { label: "White Papers", value: "white-paper" },
-    { label: "InFocus", value: "infocus" },
-    { label: "The Sustainable Digest", value: "digest" },
+    { label: "Reports", value: "report" },
   ];
 
   return (
@@ -292,6 +333,25 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
       {/* 3. Filter and Results Section */}
       <section className="bg-neutral-50/20 dark:bg-petrol-950/10 py-6 min-h-screen">
         <div className="max-w-7xl mx-auto px-6 space-y-6">
+          {activeFormat === "brief" && (
+            <div className="bg-petrol-950 text-white p-6 md:p-8 border-l-4 border-lime-300 rounded-none shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6 font-sans">
+              <div className="space-y-1">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-lime-300">
+                  RESEARCH FORMAT &middot; POLICY BRIEFS
+                </span>
+                <h3 className="text-xl md:text-2xl font-bold font-serif text-white">Policy Briefs</h3>
+                <p className="text-xs md:text-sm text-petrol-200 max-w-2xl leading-relaxed">
+                  Concise, 4-to-6 page empirical policy directives designed to inform immediate decision-making for public officials, parliamentarians, and civil society partners.
+                </p>
+              </div>
+              <div className="shrink-0">
+                <span className="inline-block border border-lime-400/40 bg-lime-400/10 text-lime-300 text-xs px-3.5 py-1.5 font-semibold uppercase tracking-wider">
+                  Actionable Directives
+                </span>
+              </div>
+            </div>
+          )}
+
           {/* Filter component */}
           <ResearchFilterBar
             themes={themes as any}
@@ -316,7 +376,7 @@ export default async function ResearchPage({ searchParams }: ResearchPageProps) 
                   className="flex flex-col justify-between h-full bg-white dark:bg-petrol-900/40 border border-neutral-200/80 dark:border-petrol-800 shadow-sm hover:shadow-md transition-shadow duration-200 rounded-none overflow-hidden group"
                 >
                   {/* Thumbnail / Cover */}
-                  <div className="relative w-full aspect-[16/10] bg-neutral-100 dark:bg-petrol-950/60 overflow-hidden border-b border-neutral-100 dark:border-petrol-800">
+                  <div className="relative w-full aspect-[4/3] overflow-hidden border-b border-neutral-100 dark:border-petrol-800">
                     {item.imageUrl ? (
                       <img
                         src={item.imageUrl}
