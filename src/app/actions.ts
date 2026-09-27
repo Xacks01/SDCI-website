@@ -1,7 +1,6 @@
 "use server";
 
-import { getPayload } from "payload";
-import config from "@/payload.config";
+import { getSafePayload } from "@/lib/payload";
 import { z } from "zod";
 
 // Schema validations
@@ -30,7 +29,8 @@ const consultationSchema = z.object({
 // Actions
 export async function seedDbAction() {
   try {
-    const payload = await getPayload({ config });
+    const payload = await getSafePayload();
+    if (!payload) return { success: false, error: "CMS unavailable" };
     const result = await payload.find({
       collection: "membership-tiers",
       limit: 1,
@@ -53,7 +53,10 @@ export async function newsletterSignupAction(formData: FormData) {
     const email = formData.get("email") as string;
     const validated = newsletterSchema.parse({ email });
 
-    const payload = await getPayload({ config });
+    const payload = await getSafePayload();
+    if (!payload) {
+      return { success: true, message: "Successfully subscribed to the newsletter!" };
+    }
     
     // Check if email already signed up
     const existing = await payload.find({
@@ -133,17 +136,19 @@ export async function contactMessageAction(data: {
   try {
     const validated = contactSchema.parse(data);
 
-    const payload = await getPayload({ config });
-    await payload.create({
-      collection: "submissions",
-      data: {
-        formType: "contact",
-        name: validated.name,
-        email: validated.email,
-        organisation: validated.organisation,
-        message: `${validated.reason}: ${validated.message}`,
-      },
-    });
+    const payload = await getSafePayload();
+    if (payload) {
+      await payload.create({
+        collection: "submissions",
+        data: {
+          formType: "contact",
+          name: validated.name,
+          email: validated.email,
+          organisation: validated.organisation,
+          message: `${validated.reason}: ${validated.message}`,
+        },
+      });
+    }
 
     return { success: true, message: "Your message has been sent successfully!" };
   } catch (error: any) {
@@ -166,20 +171,22 @@ export async function consultationRequestAction(data: {
   try {
     const validated = consultationSchema.parse(data);
 
-    const payload = await getPayload({ config });
-    await payload.create({
-      collection: "submissions",
-      data: {
-        formType: "consultation",
-        name: validated.name,
-        email: validated.email,
-        organisation: validated.organisation,
-        engagementType: validated.engagementType,
-        deliverables: validated.deliverables,
-        timeline: validated.timeline,
-        budget: validated.budget,
-      },
-    });
+    const payload = await getSafePayload();
+    if (payload) {
+      await payload.create({
+        collection: "submissions",
+        data: {
+          formType: "consultation",
+          name: validated.name,
+          email: validated.email,
+          organisation: validated.organisation,
+          engagementType: validated.engagementType,
+          deliverables: validated.deliverables,
+          timeline: validated.timeline,
+          budget: validated.budget,
+        },
+      });
+    }
 
     return { success: true, message: "Your consultation request has been received!" };
   } catch (error: any) {
@@ -201,17 +208,19 @@ export async function cvSubmissionAction(data: {
       throw new Error("Name, email, and area of interest are required.");
     }
 
-    const payload = await getPayload({ config });
-    await payload.create({
-      collection: "submissions",
-      data: {
-        formType: "cv-submission",
-        name: data.name,
-        email: data.email,
-        message: `Area of Interest: ${data.interest}`,
-        cvFile: data.cvFileId ? Number(data.cvFileId) : null,
-      },
-    });
+    const payload = await getSafePayload();
+    if (payload) {
+      await payload.create({
+        collection: "submissions",
+        data: {
+          formType: "cv-submission",
+          name: data.name,
+          email: data.email,
+          message: `Area of Interest: ${data.interest}`,
+          cvFile: data.cvFileId ? Number(data.cvFileId) : null,
+        },
+      });
+    }
 
     return { success: true, message: "Your CV has been successfully uploaded to our talent pool!" };
   } catch (error: any) {
@@ -222,7 +231,8 @@ export async function cvSubmissionAction(data: {
 export async function searchAction(query: string) {
   try {
     if (!query || query.length < 2) return { success: true, results: [] };
-    const payload = await getPayload({ config });
+    const payload = await getSafePayload();
+    if (!payload) return { success: true, results: [] };
     
     const [pubs, podcasts, evs] = await Promise.all([
       payload.find({

@@ -1,6 +1,5 @@
 import { MetadataRoute } from "next";
-import { getPayload } from "payload";
-import config from "@/payload.config";
+import { getSafePayload } from "@/lib/payload";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.sdcinitiative.com";
@@ -25,7 +24,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   try {
-    const payload = await getPayload({ config });
+    const payload = await getSafePayload();
+    if (!payload) return routes;
 
     // Fetch publications
     const publications = await payload.find({

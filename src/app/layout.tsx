@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
-import { getPayload } from "payload";
-import config from "@/payload.config";
 import { LumaInit } from "@/components/shared/LumaInit";
 
 const bricolageGrotesque = Bricolage_Grotesque({
