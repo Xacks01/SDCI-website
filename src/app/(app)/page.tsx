@@ -11,7 +11,7 @@ import { getMediaUrl } from "@/lib/utils";
 import { FeaturedPodcastPlayer } from "@/components/shared/FeaturedPodcastPlayer";
 import { Users, Shield, Share2, FileText, Mail, Heart, Info, Scale, Coins, HeartHandshake, GraduationCap, Leaf, Calendar, MapPin, Globe } from "lucide-react";
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const dynamic = "force-dynamic";
 
 const FORMAT_LABELS: Record<string, string> = {
   brief: "Featured White Paper",
