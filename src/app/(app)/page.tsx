@@ -135,13 +135,66 @@ We look forward to welcoming you.`,
     }
   ];
 
+  const mockFaqs = [
+    {
+      id: "faq-1",
+      question: "What is SDCI?",
+      answer: "The Sustainable Development Conversations Initiative is an independent think tank. We conduct rigorous research on social, economic, and political issues, and turn it into open conversations that improve decisions on sustainable development in Nigeria and across Africa.",
+    },
+    {
+      id: "faq-2",
+      question: "Are you independent? Who funds you?",
+      answer: "Yes — and structurally so. We're funded by a deliberate mix of grants, memberships, commissioned work, event revenue, and publication sales, so no single backer can set our agenda. We disclose our funders every year and publish our researchers' full credentials. If the evidence is inconvenient for a funder, we publish it anyway.",
+    },
+    {
+      id: "faq-3",
+      question: "Where do you work?",
+      answer: "We're based in Bauchi and focused on Bauchi State, with a remit that spans Nigeria and, over time, the wider region.",
+    },
+    {
+      id: "faq-4",
+      question: "Is your research free?",
+      answer: "Most of it, yes. White papers, thematic reports, working papers, and our InFocus graphics are free to read. Flagship white papers and the full Sustainable Digest are reserved for members and subscribers — that revenue is part of what keeps the rest free and independent.",
+    },
+    {
+      id: "faq-5",
+      question: "How do I become a member?",
+      answer: "Pick the tier that fits — there's a free Community tier and paid tiers for individuals, professionals, and organisations — on our Membership page. It takes a few minutes.",
+    },
+    {
+      id: "faq-6",
+      question: "Can I commission research or partner with you?",
+      answer: "Yes. We take on commissioned studies, advisory work, and joint projects with foundations, government bodies, businesses, and international organisations. Start at Partner with us.",
+    },
+    {
+      id: "faq-7",
+      question: "Can I suggest a podcast guest or topic?",
+      answer: "Please do. We're always looking for sharp voices and important questions — reach us through Contact.",
+    },
+    {
+      id: "faq-8",
+      question: "Can I republish or cite your work?",
+      answer: "You're welcome to cite and share our published work with attribution. For republishing in full, or for media use, contact media enquiries.",
+    },
+    {
+      id: "faq-9",
+      question: "How do I donate, and is it tax-deductible?",
+      answer: "You can give in Naira through Paystack on our Donate page. SDCI is registered under CAC Bauchi/Nigeria as a policy advocacy non-profit organization.",
+    },
+    {
+      id: "faq-10",
+      question: "Are you hiring? Do you offer internships?",
+      answer: "Open roles and research internships are listed on Careers when available. Even when nothing is posted, strong researchers are welcome to introduce themselves.",
+    },
+  ];
+
   const upcomingEvents: any[] = mockEvents;
-  const faqs = faqsResult.docs;
+  const faqs = faqsResult.docs && faqsResult.docs.length > 0 ? faqsResult.docs : mockFaqs;
 
   const faqItems = faqs.map((faq: any) => ({
     id: faq.id,
-    title: faq.question,
-    content: faq.answer,
+    title: faq.question || faq.title,
+    content: faq.answer || faq.content,
   }));
 
   const team = teamResult.docs;
