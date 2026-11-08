@@ -677,8 +677,8 @@ We look forward to welcoming you.`,
 
       {/* Ground Work Newsletter */}
       <section id="ground-work" aria-labelledby="ground-work-title" className="bg-[#edf2e8] dark:bg-[#17251f] border-y border-[#d4dfcd] dark:border-[#34483b]">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-stretch">
-          <div className="space-y-6 self-center px-6 py-12 md:px-8 md:py-14 lg:pr-16">
+        <div className="grid md:grid-cols-2 items-stretch">
+          <div className="space-y-6 self-center px-6 py-12 md:px-8 md:py-14 lg:pr-16 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-green-800 dark:text-green-400">The SDCI newsletter</p>
             <h2 id="ground-work-title" className="text-4xl md:text-5xl font-serif font-bold text-petrol-950 dark:text-white">Ground Work</h2>
             <p className="text-2xl md:text-3xl font-serif leading-snug text-petrol-950 dark:text-white">Evidence worth following.<br />Ideas worth acting on.</p>
