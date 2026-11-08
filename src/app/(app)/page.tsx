@@ -680,6 +680,25 @@ We look forward to welcoming you.`,
 
 
 
+      {/* Ground Work Newsletter */}
+      <section id="ground-work" aria-labelledby="ground-work-title" className="bg-white dark:bg-petrol-950 border-t border-neutral-200 dark:border-petrol-800">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 py-20 md:py-24 grid md:grid-cols-2 gap-10 lg:gap-20 items-center">
+          <Link href="/ground-work" aria-label="Discover Ground Work, the SDCI newsletter" className="block focus-visible:outline-2 focus-visible:outline-green-700 focus-visible:outline-offset-4">
+            <img src="/assets/gwork-hero.webp" alt="Ground Work logo on a textured black background" width={1400} height={1400} className="w-full h-auto" loading="lazy" />
+          </Link>
+          <div className="space-y-6">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-green-800 dark:text-green-400">The SDCI newsletter</p>
+            <h2 id="ground-work-title" className="text-4xl md:text-5xl font-serif font-bold text-petrol-950 dark:text-white">Ground Work</h2>
+            <p className="text-2xl md:text-3xl font-serif leading-snug text-petrol-950 dark:text-white">Evidence worth following.<br />Ideas worth acting on.</p>
+            <p className="text-base leading-relaxed text-neutral-700 dark:text-neutral-300">Go beyond the headlines with research updates, policy advocacy news, briefs and advisory notes from SDCI. Get new publication alerts and stay connected to the work shaping better decisions.</p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4 pt-2">
+              <Link href="/ground-work#subscribe" className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 text-sm font-bold transition-colors">Subscribe to Ground Work</Link>
+              <Link href="/ground-work" className="text-sm font-bold text-petrol-950 dark:text-white underline underline-offset-4 hover:text-green-800 dark:hover:text-green-400">Explore the newsletter &rarr;</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 2.5. Video Showcase Section */}
       <section className="bg-petrol-50/50 dark:bg-petrol-900/10 border-t border-b border-neutral-200/40 dark:border-petrol-900/60 py-20 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6 md:px-8 text-center space-y-8">
@@ -823,25 +842,6 @@ We look forward to welcoming you.`,
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Ground Work Newsletter */}
-      <section id="ground-work" aria-labelledby="ground-work-title" className="bg-white dark:bg-petrol-950 border-t border-neutral-200 dark:border-petrol-800">
-        <div className="max-w-7xl mx-auto px-6 md:px-8 py-20 md:py-24 grid md:grid-cols-2 gap-10 lg:gap-20 items-center">
-          <Link href="/ground-work" aria-label="Discover Ground Work, the SDCI newsletter" className="block focus-visible:outline-2 focus-visible:outline-green-700 focus-visible:outline-offset-4">
-            <img src="/assets/gwork-hero.webp" alt="Ground Work logo on a textured black background" width={1400} height={1400} className="w-full h-auto" loading="lazy" />
-          </Link>
-          <div className="space-y-6">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-green-800 dark:text-green-400">The SDCI newsletter</p>
-            <h2 id="ground-work-title" className="text-4xl md:text-5xl font-serif font-bold text-petrol-950 dark:text-white">Ground Work</h2>
-            <p className="text-2xl md:text-3xl font-serif leading-snug text-petrol-950 dark:text-white">Evidence worth following.<br />Ideas worth acting on.</p>
-            <p className="text-base leading-relaxed text-neutral-700 dark:text-neutral-300">Go beyond the headlines with research updates, policy advocacy news, briefs and advisory notes from SDCI. Get new publication alerts and stay connected to the work shaping better decisions.</p>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-4 pt-2">
-              <Link href="/ground-work#subscribe" className="bg-green-800 hover:bg-green-900 text-white px-6 py-3 text-sm font-bold transition-colors">Subscribe to Ground Work</Link>
-              <Link href="/ground-work" className="text-sm font-bold text-petrol-950 dark:text-white underline underline-offset-4 hover:text-green-800 dark:hover:text-green-400">Explore the newsletter &rarr;</Link>
             </div>
           </div>
         </div>
