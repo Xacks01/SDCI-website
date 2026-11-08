@@ -681,7 +681,7 @@ We look forward to welcoming you.`,
 
 
       {/* Ground Work Newsletter */}
-      <section id="ground-work" aria-labelledby="ground-work-title" className="bg-white dark:bg-petrol-950 border-t border-neutral-200 dark:border-petrol-800">
+      <section id="ground-work" aria-labelledby="ground-work-title" className="bg-[#edf2e8] dark:bg-[#17251f] border-y border-[#d4dfcd] dark:border-[#34483b]">
         <div className="max-w-7xl mx-auto px-6 md:px-8 py-20 md:py-24 grid md:grid-cols-2 gap-10 lg:gap-20 items-center">
           <Link href="/ground-work" aria-label="Discover Ground Work, the SDCI newsletter" className="block focus-visible:outline-2 focus-visible:outline-green-700 focus-visible:outline-offset-4">
             <img src="/assets/gwork-hero.webp" alt="Ground Work logo on a textured black background" width={1400} height={1400} className="w-full h-auto" loading="lazy" />
