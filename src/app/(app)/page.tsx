@@ -348,25 +348,20 @@ We look forward to welcoming you.`,
       </section>
 
       {/* A Quote from the CEO Section */}
-      <section className="bg-petrol-900 dark:bg-petrol-950/60 py-20 border-b border-neutral-200/50 dark:border-petrol-850/60 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left Column: Image with double borders & styling */}
-            <div className="lg:col-span-5 flex justify-center lg:justify-start">
-              <div className="relative group max-w-sm w-full aspect-square border border-neutral-300/35 dark:border-petrol-800 p-3 bg-white/5 dark:bg-petrol-900/40">
-                <img
-                  src="/assets/quote-from-ceo.jpeg"
-                  alt={`${ceoName} - CEO of SDCI`}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 shadow-lg"
-                />
-                {/* Accent line decoration */}
-                <div className="absolute -bottom-2 -right-2 w-12 h-12 border-b-2 border-r-2 border-lime-400 pointer-events-none" />
-                <div className="absolute -top-2 -left-2 w-12 h-12 border-t-2 border-l-2 border-lime-400 pointer-events-none" />
-              </div>
+      <section className="bg-petrol-900 dark:bg-petrol-950/60 border-b border-neutral-200/50 dark:border-petrol-850/60 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+            {/* Left Column: Full-height image */}
+            <div className="lg:col-span-5 min-h-0 overflow-hidden">
+              <img
+                src="/assets/quote-from-ceo.jpeg"
+                alt={`${ceoName} - CEO of SDCI`}
+                className="w-full h-full aspect-square lg:aspect-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              />
             </div>
 
             {/* Right Column: Quote content */}
-            <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="lg:col-span-7 space-y-6 text-left self-center px-6 py-12 md:px-8 md:py-14 lg:px-16">
               <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-green-500/20 text-xs font-semibold uppercase tracking-wider text-green-400 bg-green-950/15 w-fit">
                 CEO's Vision
               </span>
