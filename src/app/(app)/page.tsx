@@ -349,19 +349,19 @@ We look forward to welcoming you.`,
 
       {/* A Quote from the CEO Section */}
       <section className="bg-petrol-900 dark:bg-petrol-950/60 border-b border-neutral-200/50 dark:border-petrol-850/60 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full max-w-none">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
             {/* Left Column: Full-height image */}
-            <div className="lg:col-span-5 min-h-0 overflow-hidden">
+            <div className="lg:col-span-5 relative min-w-0 aspect-square lg:aspect-auto overflow-hidden">
               <img
                 src="/assets/quote-from-ceo.jpeg"
                 alt={`${ceoName} - CEO of SDCI`}
-                className="w-full h-full aspect-square lg:aspect-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                className="absolute inset-0 block w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
               />
             </div>
 
             {/* Right Column: Quote content */}
-            <div className="lg:col-span-7 space-y-6 text-left self-center px-6 py-12 md:px-8 md:py-14 lg:px-16">
+            <div className="lg:col-span-7 min-w-0 space-y-6 text-left self-center px-6 py-12 md:px-8 md:py-14 lg:px-16 xl:pr-[max(4rem,calc((100vw-80rem)/2+2rem))]">
               <span className="inline-flex items-center px-4 py-1.5 rounded-none border border-green-500/20 text-xs font-semibold uppercase tracking-wider text-green-400 bg-green-950/15 w-fit">
                 CEO's Vision
               </span>
@@ -677,8 +677,8 @@ We look forward to welcoming you.`,
 
       {/* Ground Work Newsletter */}
       <section id="ground-work" aria-labelledby="ground-work-title" className="bg-[#edf2e8] dark:bg-[#17251f] border-y border-[#d4dfcd] dark:border-[#34483b]">
-        <div className="grid md:grid-cols-2 items-stretch">
-          <div className="space-y-6 self-center px-6 py-12 md:px-8 md:py-14 lg:pr-16 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
+        <div className="grid w-full max-w-none md:grid-cols-2 items-stretch">
+          <div className="min-w-0 space-y-6 self-center px-6 py-12 md:px-8 md:py-14 lg:pr-16 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-green-800 dark:text-green-400">The SDCI newsletter</p>
             <h2 id="ground-work-title" className="text-4xl md:text-5xl font-serif font-bold text-petrol-950 dark:text-white">Ground Work</h2>
             <p className="text-2xl md:text-3xl font-serif leading-snug text-petrol-950 dark:text-white">Evidence worth following.<br />Ideas worth acting on.</p>
@@ -688,8 +688,8 @@ We look forward to welcoming you.`,
               <Link href="/ground-work" className="text-sm font-bold text-petrol-950 dark:text-white underline underline-offset-4 hover:text-green-800 dark:hover:text-green-400">Explore the newsletter &rarr;</Link>
             </div>
           </div>
-          <Link href="/ground-work" aria-label="Discover Ground Work, the SDCI newsletter" className="block min-h-0 bg-black focus-visible:outline-2 focus-visible:outline-green-700 focus-visible:outline-offset-4">
-            <img src="/assets/gwork-hero.webp" alt="Ground Work logo on a textured black background" width={1400} height={1400} className="w-full h-full object-cover aspect-square md:aspect-auto" loading="lazy" />
+          <Link href="/ground-work" aria-label="Discover Ground Work, the SDCI newsletter" className="relative block min-w-0 aspect-square md:aspect-auto overflow-hidden bg-black focus-visible:outline-2 focus-visible:outline-green-700 focus-visible:outline-offset-4">
+            <img src="/assets/gwork-hero.webp" alt="Ground Work logo on a textured black background" width={1400} height={1400} className="absolute inset-0 block w-full h-full object-cover" loading="lazy" />
           </Link>
         </div>
       </section>
