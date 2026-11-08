@@ -55,7 +55,7 @@ export async function newsletterSignupAction(formData: FormData) {
 
     const payload = await getSafePayload();
     if (!payload) {
-      return { success: true, message: "Successfully subscribed to the newsletter!" };
+      return { success: false, error: "Subscriptions are temporarily unavailable. Please try again later." };
     }
     
     // Check if email already signed up

@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPayload } from "payload";
-import config from "@/payload.config";
 import { Tag } from "@/components/ui/Tag";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -29,25 +27,7 @@ export default async function DocDetailPage({ params }: DocDetailPageProps) {
       }).catch(() => null) as any
     : null;
 
-  if (!doc) {
-    doc = {
-      id: id || "doc-1",
-      title: "Bauchi Water Access & Municipal Reforms",
-      year: "2026",
-      length: "15 mins",
-      about: "An investigative documentary by SDCI examining municipal water infrastructure, public spending efficiency, and community-led water management solutions across Bauchi State.",
-      videoEmbed: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Bauchi Water Access Reforms" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-      relatedResearch: [
-        {
-          id: "pub-multipolar-crossroads",
-          title: "Bauchi at the Multipolar Crossroads: Absorptive Capacity, Fiscal Sovereignty, and the Choice Between Economic Ascension and Extraction",
-          slug: "bauchi-at-the-multipolar-crossroads",
-          format: "report",
-          excerpt: "Bauchi at the Multipolar Crossroads is a research and policy publication examining the choices confronting Bauchi State as it navigates a changing global economic order.",
-        },
-      ],
-    };
-  }
+  if (!doc) notFound();
 
   return (
     <div className="font-sans text-petrol-950 dark:text-neutral-200 bg-white dark:bg-petrol-950/20 min-h-screen">
@@ -58,7 +38,7 @@ export default async function DocDetailPage({ params }: DocDetailPageProps) {
           </Link>
           <div className="flex items-center space-x-2 pt-2">
             <Tag variant="petrol">Documentary</Tag>
-            <span className="text-xs text-neutral-500 dark:text-neutral-400 font-semibold uppercase">Length: {doc.length || "15 mins"}</span>
+            <span className="text-xs text-neutral-500 dark:text-neutral-400 font-semibold uppercase">Length: {doc.length || ""}</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-bold font-serif text-petrol-950 dark:text-white leading-tight">
             {doc.title}

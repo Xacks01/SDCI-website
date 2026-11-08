@@ -1,10 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { getPayload } from "payload";
-import config from "@/payload.config";
-import { Tag } from "@/components/ui/Tag";
 import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
 import { getMediaUrl } from "@/lib/utils";
 
 export const revalidate = 60;
@@ -34,7 +30,7 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
       }).catch(() => ({ docs: [] }))
     : { docs: [] };
   
-  const mockEpisodes = [
+  const publishedEpisodes = [
     {
       id: "ep-1",
       number: "01",
@@ -48,40 +44,10 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
         { name: "Awwal Dahiru", role: "IT Lead, CHAMPS Bauchi" },
         { name: "Ibrahim Murtala Muhammad", role: "Stakeholder Engagement & Programs Lead" }
       ],
-    },
-    {
-      id: "41",
-      number: "41",
-      title: "The Politics of Policy: Who Gets a Seat at the Table?",
-      summary: "A wide-ranging conversation on how policy decisions are actually made in Nigeria — who shapes the agenda, whose evidence gets heard, and what it takes to shift a reform-resistant institution.",
-      duration: "42 min",
-      publishDate: new Date("2026-06-12").toISOString(),
-      cover: { url: "/assets/hero-bg-2.png" },
-      guests: [{ name: "Dr. Amaka Obi", role: "Senior Fellow, Institute for Democratic Governance" }],
-    },
-    {
-      id: "40",
-      number: "40",
-      title: "Rethinking Nigeria's Fiscal Federalism",
-      summary: "An in-depth debate on revenue allocation formulas, state internally generated revenue autonomy, and decentralizing financial governance across Nigerian states.",
-      duration: "55 min",
-      publishDate: new Date("2026-06-05").toISOString(),
-      cover: { url: "/assets/hero-bg-3.png" },
-      guests: [{ name: "Prof. Emeka Nwosu", role: "Department of Economics, University of Lagos" }],
-    },
-    {
-      id: "39",
-      number: "39",
-      title: "Health Financing in a Resource-Constrained State",
-      summary: "Exploring innovative funding mechanisms, public-private partnerships, and community insurance schemes to improve healthcare access in Bauchi State.",
-      duration: "38 min",
-      publishDate: new Date("2026-05-29").toISOString(),
-      cover: { url: "/assets/hero-bg-4.png" },
-      guests: [{ name: "Dr. Ngozi Mba", role: "WHO Nigeria Country Office" }],
-    },
+    }
   ];
 
-  const episodes = episodesResult.docs.length > 0 ? episodesResult.docs : mockEpisodes;
+  const episodes = episodesResult.docs.length > 0 ? episodesResult.docs : publishedEpisodes;
 
   // 2. Fetch Documentaries
   const docsResult = payload
@@ -92,60 +58,28 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
       }).catch(() => ({ docs: [] }))
     : { docs: [] };
 
-  const mockDocs = [
-    {
-      id: "doc-1",
-      title: "Bauchi Water Access & Municipal Reforms",
-      year: "2026",
-      length: "15 mins",
-      about: "An investigative documentary by SDCI examining municipal water infrastructure, public spending efficiency, and community-led water management solutions across Bauchi State.",
-    },
-    {
-      id: "doc-2",
-      title: "Governing Minerals: Lessons from Sub-national Mining",
-      year: "2026",
-      length: "22 mins",
-      about: "A visual policy investigation into land title disclosures, community rights, and sub-national equity frameworks in Nigeria's solid minerals sector.",
-    },
-  ];
-
-  const docs = docsResult.docs.length > 0 ? docsResult.docs : mockDocs;
+  const docs = docsResult.docs;
 
   // 3. Fetch Gallery Items
   const galleryResult = payload
     ? await payload.find({
         collection: "gallery",
-        sort: "-publishDate",
-        limit: 50,
+        sort: "id",
+        limit: 1000,
       }).catch(() => ({ docs: [] }))
     : { docs: [] };
 
-  const mockGalleryItems = [
-    {
-      id: "g-1",
-      title: "SDCI Official Launch Ceremony",
-      type: "picture",
-      image: { url: "/assets/launch-thumbnail.png" },
-      publishDate: "2026-08-15",
-    },
-    {
-      id: "g-2",
-      title: "Executive Roundtable on Fiscal Devolution",
-      type: "picture",
-      image: { url: "/assets/about-workspace.jpeg" },
-      publishDate: "2026-06-05",
-    },
-    {
-      id: "g-3",
-      title: "Documentary: Bauchi Water Access Reforms",
-      type: "video",
-      videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      image: { url: "/assets/hero-bg-sdci-1.jpeg" },
-      publishDate: "2026-05-20",
-    },
-  ];
-
-  const galleryItems = galleryResult.docs.length > 0 ? galleryResult.docs : mockGalleryItems;
+  // Show only records with their own media; never substitute unrelated stock imagery.
+  const galleryItems = galleryResult.docs.filter((item: any) =>
+    item.type === "video"
+      ? Boolean(item.videoUrl) && !item.videoUrl.includes("dQw4w9WgXcQ")
+      : item.type === "picture" && typeof item.image === "object" && Boolean(item.image?.url)
+  );
+  const galleryFilters = ["all", ...(
+    galleryItems.some((item: any) => item.type === "video") ? ["videos"] : []
+  ), ...(
+    galleryItems.some((item: any) => item.type === "picture") ? ["pictures"] : []
+  )];
 
   const filteredGalleryItems = galleryItems.filter((item: any) => {
     if (activeFilter === "videos") return item.type === "video";
@@ -191,7 +125,7 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
             {episodes.length > 0 ? (
               <div className="divide-y divide-neutral-200 dark:divide-petrol-800/60">
                 {episodes.map((ep: any) => {
-                  const epCover = getMediaUrl(ep.cover && typeof ep.cover === "object" && ep.cover.url ? ep.cover.url : "/assets/hero-bg-4.png");
+                  const epCover = getMediaUrl(ep.cover && typeof ep.cover === "object" && ep.cover.url ? ep.cover.url : "");
                   const epGuests = ep.guests && Array.isArray(ep.guests)
                     ? ep.guests
                         .map((g: any) => {
@@ -237,7 +171,7 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
                       {/* Right: Duration, Play, Link */}
                       <div className="flex items-center gap-6 shrink-0 justify-between md:justify-end border-t md:border-t-0 border-neutral-100 dark:border-petrol-800/40 pt-4 md:pt-0">
                         <span className="text-xs md:text-sm font-semibold text-neutral-400 dark:text-neutral-400">
-                          {ep.duration || "42 min"}
+                          {ep.duration || ""}
                         </span>
                         
                         {/* Circular Play Button */}
@@ -268,25 +202,7 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
               </div>
             )}
 
-            {/* Listen On Platforms Footer */}
-            <div className="flex flex-wrap items-center gap-2 pt-8 border-t border-neutral-200 dark:border-petrol-800 text-xs font-semibold text-neutral-500 dark:text-neutral-400">
-              <span className="uppercase tracking-wider text-[10px] font-bold text-neutral-400 mr-2">Listen On</span>
-              <a href="https://spotify.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-none bg-neutral-50 dark:bg-petrol-900/40 hover:bg-neutral-100 dark:hover:bg-petrol-800 border border-neutral-200 dark:border-petrol-800 text-neutral-700 dark:text-neutral-300 transition-colors">
-                Spotify
-              </a>
-              <a href="https://apple.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-none bg-neutral-50 dark:bg-petrol-900/40 hover:bg-neutral-100 dark:hover:bg-petrol-800 border border-neutral-200 dark:border-petrol-800 text-neutral-700 dark:text-neutral-300 transition-colors">
-                Apple Podcasts
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-none bg-neutral-50 dark:bg-petrol-900/40 hover:bg-neutral-100 dark:hover:bg-petrol-800 border border-neutral-200 dark:border-petrol-800 text-neutral-700 dark:text-neutral-300 transition-colors">
-                YouTube
-              </a>
-              <a href="https://audiomack.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-none bg-neutral-50 dark:bg-petrol-900/40 hover:bg-neutral-100 dark:hover:bg-petrol-800 border border-neutral-200 dark:border-petrol-800 text-neutral-700 dark:text-neutral-300 transition-colors">
-                Audiomack
-              </a>
-              <a href="https://rss.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-none bg-neutral-50 dark:bg-petrol-900/40 hover:bg-neutral-100 dark:hover:bg-petrol-800 border border-neutral-200 dark:border-petrol-800 text-neutral-700 dark:text-neutral-300 transition-colors">
-                RSS
-              </a>
-            </div>
+
           </div>
         )}
 
@@ -299,10 +215,10 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
                   <Card key={d.id} variant="default" className="p-6 flex flex-col justify-between h-full space-y-4">
                     <div className="space-y-3">
                       <div className="aspect-video w-full bg-neutral-950 rounded-none flex items-center justify-center text-xs text-neutral-400 font-semibold border border-neutral-800">
-                        [Video Embed Player Fallback]
+                        Documentary
                       </div>
                       <div className="flex items-center space-x-2 text-[10px] font-semibold text-neutral-400">
-                        <span>{d.length || "12 mins"}</span>
+                        <span>{d.length || ""}</span>
                         <span>&bull;</span>
                         <span>Year: {d.year}</span>
                       </div>
@@ -334,7 +250,7 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
           <div className="space-y-8">
             {/* Gallery Sub-filters */}
             <div className="flex gap-3 mb-6">
-              {["all", "videos", "pictures"].map((f) => {
+              {galleryFilters.map((f) => {
                 const isActive = activeFilter === f;
                 return (
                   <Link
@@ -357,7 +273,7 @@ export default async function MediaPage({ searchParams }: MediaPageProps) {
                 {filteredGalleryItems.map((item: any) => {
                   const coverImg = getMediaUrl(item.image && typeof item.image === "object" && item.image.url 
                     ? item.image.url 
-                    : "/assets/hero-bg-4.png");
+                    : "");
                   
                   return (
                     <div key={item.id} className="space-y-3 group text-left">
